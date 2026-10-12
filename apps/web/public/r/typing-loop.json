@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typing-loop",
+  "title": "TypingLoop",
+  "description": "Types, pauses, and erases a set of phrases with clean timer teardown.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/typing-loop.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useMemo, useState } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface TypingLoopProps {\n  words: string[];\n  typeSpeed?: number;\n  deleteSpeed?: number;\n  pause?: number;\n  loop?: boolean;\n  cursor?: boolean;\n  className?: string;\n}\n\nexport function TypingLoop({\n  words,\n  typeSpeed = 75,\n  deleteSpeed = 38,\n  pause = 900,\n  loop = true,\n  cursor = true,\n  className,\n}: TypingLoopProps) {\n  const [wordIndex, setWordIndex] = useState(0);\n  const [length, setLength] = useState(0);\n  const [deleting, setDeleting] = useState(false);\n  const reduceMotion = useReducedMotion();\n  const safeWords = useMemo(() => words.filter((item) => item.length > 0), [words]);\n  const word = safeWords[wordIndex] ?? \"\";\n\n  useEffect(() => {\n    if (!safeWords.length) return;\n    if (reduceMotion) {\n      const timeout = window.setTimeout(() => setLength(word.length), 0);\n      return () => window.clearTimeout(timeout);\n    }\n    if (!deleting && length === word.length) {\n      if (!loop && wordIndex === safeWords.length - 1) return;\n      const timeout = window.setTimeout(() => setDeleting(true), pause);\n      return () => window.clearTimeout(timeout);\n    }\n    if (deleting && length === 0) {\n      const timeout = window.setTimeout(() => {\n        setDeleting(false);\n        setWordIndex((current) => (current + 1) % safeWords.length);\n      }, 0);\n      return () => window.clearTimeout(timeout);\n    }\n    const timeout = window.setTimeout(\n      () => {\n        setLength((current) => current + (deleting ? -1 : 1));\n      },\n      deleting ? deleteSpeed : typeSpeed,\n    );\n    return () => window.clearTimeout(timeout);\n  }, [\n    deleteSpeed,\n    deleting,\n    length,\n    loop,\n    pause,\n    reduceMotion,\n    safeWords,\n    typeSpeed,\n    word.length,\n    wordIndex,\n  ]);\n\n  const shown = word.slice(0, length);\n  return (\n    <span className={className}>\n      <span className=\"sr-only\" aria-live=\"polite\">\n        {word}\n      </span>\n      <span aria-hidden=\"true\">\n        {shown}\n        {cursor && <span aria-hidden=\"true\">▍</span>}\n      </span>\n    </span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/typing-loop.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

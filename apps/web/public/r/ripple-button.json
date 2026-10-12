@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ripple-button",
+  "title": "RippleButton",
+  "description": "A bounded interaction wave that cleans up completed ripples.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/ripple-button.tsx",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport type { ButtonHTMLAttributes, PointerEvent } from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\n\ninterface Ripple {\n  id: number;\n  x: number;\n  y: number;\n  size: number;\n}\n\nexport interface RippleButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {\n  rippleColor?: string;\n}\n\nexport function RippleButton({\n  rippleColor = \"rgba(255,255,255,.45)\",\n  children,\n  onPointerDown,\n  style,\n  ...props\n}: RippleButtonProps) {\n  const [ripples, setRipples] = useState<Ripple[]>([]);\n  const reduceMotion = useReducedMotion();\n  const createRipple = (event: PointerEvent<HTMLButtonElement>) => {\n    onPointerDown?.(event);\n    if (reduceMotion) return;\n    const rect = event.currentTarget.getBoundingClientRect();\n    const size = Math.max(rect.width, rect.height) * 2;\n    const ripple = {\n      id: Date.now() + Math.random(),\n      x: event.clientX - rect.left - size / 2,\n      y: event.clientY - rect.top - size / 2,\n      size,\n    };\n    setRipples((items) => [...items.slice(-2), ripple]);\n  };\n  return (\n    <button\n      {...props}\n      type={props.type ?? \"button\"}\n      onPointerDown={createRipple}\n      style={{\n        position: \"relative\",\n        overflow: \"hidden\",\n        isolation: \"isolate\",\n        border: 0,\n        padding: \"14px 20px\",\n        background: \"#5038ff\",\n        color: \"white\",\n        fontWeight: 800,\n        cursor: \"pointer\",\n        ...style,\n      }}\n    >\n      <span style={{ position: \"relative\", zIndex: 1 }}>{children}</span>\n      {ripples.map((ripple) => (\n        <motion.span\n          key={ripple.id}\n          aria-hidden=\"true\"\n          initial={{ opacity: 0.7, scale: 0 }}\n          animate={{ opacity: 0, scale: 1 }}\n          transition={{ duration: 0.65, ease: \"easeOut\" }}\n          onAnimationComplete={() =>\n            setRipples((items) => items.filter((item) => item.id !== ripple.id))\n          }\n          style={{\n            position: \"absolute\",\n            zIndex: 0,\n            left: ripple.x,\n            top: ripple.y,\n            width: ripple.size,\n            height: ripple.size,\n            borderRadius: \"50%\",\n            background: rippleColor,\n            pointerEvents: \"none\",\n          }}\n        />\n      ))}\n    </button>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/ripple-button.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

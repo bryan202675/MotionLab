@@ -1,0 +1,25 @@
+name: Bug report
+description: Report a reproducible issue in MotionLab.
+labels: [bug]
+body:
+  - type: input
+    id: component
+    attributes:
+      label: Component or page
+      placeholder: MagneticButton
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Include the expected behavior and concise steps to reproduce.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, OS, React version, and relevant MotionLab commit/version.
+    validations:
+      required: true

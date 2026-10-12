@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "infinite-marquee",
+  "title": "InfiniteMarquee",
+  "description": "A continuous ticker with duplicated content and a reduced-motion fallback.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/infinite-marquee.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\nimport { useState } from \"react\";\nimport type { FocusEvent, ReactNode } from \"react\";\n\nexport interface InfiniteMarqueeProps {\n  children: ReactNode;\n  duration?: number;\n  direction?: \"left\" | \"right\";\n  gap?: number;\n  pauseOnHover?: boolean;\n  className?: string;\n}\n\nexport function InfiniteMarquee({\n  children,\n  duration = 22,\n  direction = \"left\",\n  gap = 48,\n  pauseOnHover = true,\n  className,\n}: InfiniteMarqueeProps) {\n  const reduceMotion = useReducedMotion();\n  const [paused, setPaused] = useState(false);\n  const toggleFocus = (event: FocusEvent<HTMLDivElement>, value: boolean) => {\n    if (pauseOnHover && !event.currentTarget.contains(event.relatedTarget as Node | null))\n      setPaused(value);\n  };\n  return (\n    <div\n      className={className}\n      style={{ overflow: \"hidden\" }}\n      onMouseEnter={() => pauseOnHover && setPaused(true)}\n      onMouseLeave={() => pauseOnHover && setPaused(false)}\n      onFocusCapture={(event) => toggleFocus(event, true)}\n      onBlurCapture={(event) => toggleFocus(event, false)}\n    >\n      <motion.div\n        animate={\n          reduceMotion || paused\n            ? undefined\n            : { x: direction === \"left\" ? [\"0%\", \"-50%\"] : [\"-50%\", \"0%\"] }\n        }\n        transition={{ duration, ease: \"linear\", repeat: Infinity }}\n        style={{ display: \"flex\", width: \"max-content\", gap, willChange: \"transform\" }}\n      >\n        {[0, 1].map((copy) => (\n          <span\n            key={copy}\n            aria-hidden={copy > 0}\n            inert={copy > 0}\n            style={{ display: \"flex\", gap, flexShrink: 0 }}\n          >\n            {children}\n          </span>\n        ))}\n      </motion.div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/infinite-marquee.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

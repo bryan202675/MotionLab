@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pressable-button",
+  "title": "PressableButton",
+  "description": "A tactile button with hover, press, loading, disabled, size, and tone states.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/pressable-button.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\nimport type { HTMLMotionProps } from \"motion/react\";\n\nexport interface PressableButtonProps extends HTMLMotionProps<\"button\"> {\n  variant?: \"ink\" | \"acid\" | \"outline\";\n  size?: \"sm\" | \"md\" | \"lg\";\n  loading?: boolean;\n}\n\nconst palette = {\n  ink: { background: \"#101010\", color: \"#f4f2ec\" },\n  acid: { background: \"#dfff00\", color: \"#101010\" },\n  outline: { background: \"transparent\", color: \"inherit\" },\n} as const;\n\nconst spacing = {\n  sm: { padding: \"8px 12px\", fontSize: 12 },\n  md: { padding: \"12px 18px\", fontSize: 14 },\n  lg: { padding: \"16px 24px\", fontSize: 16 },\n} as const;\n\nexport function PressableButton({\n  variant = \"ink\",\n  size = \"md\",\n  loading = false,\n  disabled,\n  style,\n  children,\n  ...props\n}: PressableButtonProps) {\n  const reduceMotion = useReducedMotion();\n  return (\n    <motion.button\n      {...props}\n      type={props.type ?? \"button\"}\n      disabled={disabled || loading}\n      aria-busy={loading || undefined}\n      style={{\n        ...palette[variant],\n        ...spacing[size],\n        border: \"2px solid currentColor\",\n        fontWeight: 800,\n        cursor: disabled || loading ? \"not-allowed\" : \"pointer\",\n        ...style,\n      }}\n      whileHover={{ y: -2, x: -2, boxShadow: \"4px 4px 0 currentColor\" }}\n      whileTap={{ y: 2, x: 2, boxShadow: \"0 0 0 currentColor\" }}\n      transition={reduceMotion ? { duration: 0 } : { type: \"spring\", stiffness: 520, damping: 30 }}\n    >\n      {loading ? <span role=\"status\">Working…</span> : children}\n    </motion.button>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/pressable-button.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

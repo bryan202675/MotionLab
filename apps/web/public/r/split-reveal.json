@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "split-reveal",
+  "title": "SplitReveal",
+  "description": "Line-by-line mask reveal that starts as the text enters view.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/split-reveal.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\n\nexport interface SplitRevealProps {\n  text: string;\n  stagger?: number;\n  once?: boolean;\n  className?: string;\n}\n\nexport function SplitReveal({ text, stagger = 0.12, once = true, className }: SplitRevealProps) {\n  const reduceMotion = useReducedMotion();\n  return (\n    <div aria-label={text.replaceAll(\"\\n\", \" \")} className={className}>\n      <span aria-hidden=\"true\">\n        {text.split(\"\\n\").map((line, index) => (\n          <span key={`${line}-${index}`} style={{ display: \"block\", overflow: \"hidden\" }}>\n            <motion.span\n              style={{ display: \"block\" }}\n              initial={{ y: \"110%\" }}\n              whileInView={{ y: 0 }}\n              viewport={{ once, amount: 0.4 }}\n              transition={{\n                duration: reduceMotion ? 0 : 0.65,\n                delay: reduceMotion ? 0 : index * stagger,\n                ease: [0.22, 1, 0.36, 1],\n              }}\n            >\n              {line}\n            </motion.span>\n          </span>\n        ))}\n      </span>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/split-reveal.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

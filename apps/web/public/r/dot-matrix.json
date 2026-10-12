@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dot-matrix",
+  "title": "DotMatrix",
+  "description": "A lightweight, static dot field for editorial surfaces.",
+  "files": [
+    {
+      "path": "packages/ui/src/components/dot-matrix.tsx",
+      "content": "import type { CSSProperties, HTMLAttributes } from \"react\";\n\nexport interface DotMatrixProps extends HTMLAttributes<HTMLDivElement> {\n  color?: string;\n  spacing?: number;\n  size?: number;\n  opacity?: number;\n}\n\nexport function DotMatrix({\n  color = \"currentColor\",\n  spacing = 18,\n  size = 1.5,\n  opacity = 0.35,\n  style,\n  ...props\n}: DotMatrixProps) {\n  const matrixStyle: CSSProperties = {\n    backgroundImage: `radial-gradient(${color} ${size}px, transparent ${size}px)`,\n    backgroundSize: `${spacing}px ${spacing}px`,\n    opacity,\n    pointerEvents: \"none\",\n    ...style,\n  };\n  return <div aria-hidden=\"true\" {...props} style={matrixStyle} />;\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/dot-matrix.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

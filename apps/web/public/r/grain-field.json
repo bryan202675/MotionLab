@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "grain-field",
+  "title": "GrainField",
+  "description": "A static SVG turbulence overlay that adds a quiet print texture without an animation loop.",
+  "files": [
+    {
+      "path": "packages/ui/src/components/grain-field.tsx",
+      "content": "import { useId } from \"react\";\nimport type { CSSProperties, HTMLAttributes } from \"react\";\n\nexport interface GrainFieldProps extends HTMLAttributes<HTMLDivElement> {\n  opacity?: number;\n  blendMode?: CSSProperties[\"mixBlendMode\"];\n}\n\nexport function GrainField({\n  opacity = 0.1,\n  blendMode = \"multiply\",\n  style,\n  ...props\n}: GrainFieldProps) {\n  const id = useId().replaceAll(\":\", \"\");\n  return (\n    <div\n      {...props}\n      aria-hidden=\"true\"\n      style={{\n        position: \"absolute\",\n        inset: 0,\n        pointerEvents: \"none\",\n        opacity,\n        mixBlendMode: blendMode,\n        ...style,\n      }}\n    >\n      <svg width=\"100%\" height=\"100%\" preserveAspectRatio=\"none\">\n        <filter id={`motionlab-grain-${id}`}>\n          <feTurbulence\n            type=\"fractalNoise\"\n            baseFrequency=\"0.82\"\n            numOctaves=\"3\"\n            stitchTiles=\"stitch\"\n          />\n          <feColorMatrix type=\"saturate\" values=\"0\" />\n        </filter>\n        <rect width=\"100%\" height=\"100%\" filter={`url(#motionlab-grain-${id})`} opacity=\"0.7\" />\n      </svg>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/grain-field.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

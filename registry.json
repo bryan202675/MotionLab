@@ -1,0 +1,385 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "motionlab",
+  "homepage": "http://localhost:3000",
+  "items": [
+    {
+      "name": "kinetic-headline",
+      "title": "KineticHeadline",
+      "description": "A word-by-word headline with a spring-set entrance.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/kinetic-headline.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/kinetic-headline.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "split-reveal",
+      "title": "SplitReveal",
+      "description": "Line-by-line mask reveal that starts as the text enters view.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/split-reveal.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/split-reveal.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "scramble-text",
+      "title": "ScrambleText",
+      "description": "Letters resolve from a configurable alphabet into a final phrase.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/scramble-text.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/scramble-text.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "typing-loop",
+      "title": "TypingLoop",
+      "description": "Types, pauses, and erases a set of phrases with clean timer teardown.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/typing-loop.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/typing-loop.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "letter-cascade",
+      "title": "LetterCascade",
+      "description": "Individual glyphs settle into place with a measured spring cascade.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/letter-cascade.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/letter-cascade.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "infinite-marquee",
+      "title": "InfiniteMarquee",
+      "description": "A continuous ticker with duplicated content and a reduced-motion fallback.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/infinite-marquee.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/infinite-marquee.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "magnetic-button",
+      "title": "MagneticButton",
+      "description": "A spring-driven cursor pull that never intercepts keyboard or touch behavior.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/magnetic-button.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/magnetic-button.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "pressable-button",
+      "title": "PressableButton",
+      "description": "A tactile button with hover, press, loading, disabled, size, and tone states.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/pressable-button.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/pressable-button.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "glitch-button",
+      "title": "GlitchButton",
+      "description": "A short, restrained type distortion on hover.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/glitch-button.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/glitch-button.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "ripple-button",
+      "title": "RippleButton",
+      "description": "A bounded interaction wave that cleans up completed ripples.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ripple-button.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/ripple-button.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "morphing-toggle",
+      "title": "MorphingToggle",
+      "description": "A controlled or uncontrolled switch with a geometric thumb transition.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/morphing-toggle.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/morphing-toggle.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "elastic-switch",
+      "title": "ElasticSwitch",
+      "description": "An accessible switch with a fast, elastic thumb response.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/elastic-switch.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/elastic-switch.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "tilt-card",
+      "title": "TiltCard",
+      "description": "An imperative pointer tilt with bounded transforms and a stable React render count.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/tilt-card.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/tilt-card.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "spotlight-card",
+      "title": "SpotlightCard",
+      "description": "A radial light follows the pointer through CSS variables without React state updates.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/spotlight-card.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/spotlight-card.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "expandable-card",
+      "title": "ExpandableCard",
+      "description": "A content card that expands from its own semantic button trigger.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/expandable-card.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/expandable-card.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "draggable-card",
+      "title": "DraggableCard",
+      "description": "A pointer and touch draggable surface with elastic bounds and arrow-key movement.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/draggable-card.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/draggable-card.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "sliding-tabs",
+      "title": "SlidingTabs",
+      "description": "A keyboard-operable tab list with a shared animated active marker.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/sliding-tabs.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/sliding-tabs.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "brutalist-accordion",
+      "title": "BrutalistAccordion",
+      "description": "A numbered disclosure list with single or multiple open panels.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/brutalist-accordion.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/brutalist-accordion.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "motion-dock",
+      "title": "MotionDock",
+      "description": "A proximity-scaled action dock with native buttons and links.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/motion-dock.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/motion-dock.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "reveal-menu",
+      "title": "RevealMenu",
+      "description": "An animated full-screen navigation with Escape, focus loop, and scroll lock.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/reveal-menu.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/reveal-menu.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "dot-matrix",
+      "title": "DotMatrix",
+      "description": "A lightweight, static dot field for editorial surfaces.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/dot-matrix.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/dot-matrix.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "grid-warp",
+      "title": "GridWarp",
+      "description": "A CSS grid plane that leans subtly toward a fine pointer.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/grid-warp.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/grid-warp.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "cursor-trail",
+      "title": "CursorTrail",
+      "description": "An intersection-aware Canvas 2D pointer trail with capped particles and cleanup.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/cursor-trail.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/cursor-trail.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "grain-field",
+      "title": "GrainField",
+      "description": "A static SVG turbulence overlay that adds a quiet print texture without an animation loop.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/grain-field.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/grain-field.tsx"
+        }
+      ],
+      "type": "registry:component"
+    }
+  ]
+}

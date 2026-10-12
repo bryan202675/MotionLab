@@ -1,0 +1,116 @@
+@import "tailwindcss";
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/inter";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "./site.css";
+
+:root {
+  --paper: #f4f2ec;
+  --ink: #101010;
+  --acid: #dfff00;
+  --electric: #5038ff;
+  --signal: #ff5638;
+  --white: #fff;
+  --muted: #6c6b65;
+  --line: 2px solid var(--ink);
+  --font-display: "Space Grotesk Variable", "Arial Black", sans-serif;
+  --font-interface: "Inter Variable", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --space-page: clamp(1.25rem, 4vw, 4rem);
+  --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-interface);
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+a {
+  color: inherit;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--electric);
+  outline-offset: 3px;
+}
+::selection {
+  background: var(--acid);
+  color: var(--ink);
+}
+[data-theme="dark"] {
+  --paper: #11110f;
+  --ink: #f4f2ec;
+  --white: #1b1b18;
+  --muted: #aaa9a1;
+  --line: 2px solid var(--ink);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.085em;
+  line-height: 0.79;
+}
+.page-wrap {
+  padding-inline: var(--space-page);
+}
+.rule {
+  height: 2px;
+  border: 0;
+  background: var(--ink);
+  margin: 0;
+}
+.hard-shadow {
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.section-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font: 700 11px var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.section-kicker::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  background: var(--acid);
+  border: 1px solid var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

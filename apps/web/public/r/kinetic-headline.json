@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kinetic-headline",
+  "title": "KineticHeadline",
+  "description": "A word-by-word headline with a spring-set entrance.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/kinetic-headline.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\n\nexport interface KineticHeadlineProps {\n  text: string;\n  stagger?: number;\n  duration?: number;\n  distance?: number;\n  className?: string;\n}\n\nexport function KineticHeadline({\n  text,\n  stagger = 0.08,\n  duration = 0.55,\n  distance = 24,\n  className,\n}: KineticHeadlineProps) {\n  const reduceMotion = useReducedMotion();\n  return (\n    <div role=\"heading\" aria-level={2} aria-label={text} className={className}>\n      <span aria-hidden=\"true\">\n        {text.split(/\\s+/).map((word, index) => (\n          <motion.span\n            key={`${word}-${index}`}\n            initial={{ opacity: 0, y: distance, rotate: -3 }}\n            animate={{ opacity: 1, y: 0, rotate: 0 }}\n            transition={{\n              type: \"spring\",\n              stiffness: 420,\n              damping: 30,\n              delay: reduceMotion ? 0 : index * stagger,\n              duration: reduceMotion ? 0 : duration,\n            }}\n            style={{ display: \"inline-block\", marginInlineEnd: \".22em\" }}\n          >\n            {word}\n          </motion.span>\n        ))}\n      </span>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/kinetic-headline.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

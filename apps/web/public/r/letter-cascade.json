@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "letter-cascade",
+  "title": "LetterCascade",
+  "description": "Individual glyphs settle into place with a measured spring cascade.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/letter-cascade.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\n\nexport interface LetterCascadeProps {\n  text: string;\n  stagger?: number;\n  direction?: \"up\" | \"down\";\n  className?: string;\n}\n\nexport function LetterCascade({\n  text,\n  stagger = 0.025,\n  direction = \"up\",\n  className,\n}: LetterCascadeProps) {\n  const reduceMotion = useReducedMotion();\n  return (\n    <span className={className} role=\"img\" aria-label={text}>\n      <span aria-hidden=\"true\">\n        {[...text].map((letter, index) => (\n          <motion.span\n            key={`${letter}-${index}`}\n            initial={{\n              y: direction === \"up\" ? 18 : -18,\n              rotate: direction === \"up\" ? 8 : -8,\n              opacity: 0,\n            }}\n            animate={{ y: 0, rotate: 0, opacity: 1 }}\n            transition={{\n              type: \"spring\",\n              stiffness: 480,\n              damping: 24,\n              delay: reduceMotion ? 0 : index * stagger,\n              duration: reduceMotion ? 0 : undefined,\n            }}\n            style={{ display: \"inline-block\", whiteSpace: letter === \" \" ? \"pre\" : undefined }}\n          >\n            {letter === \" \" ? \" \" : letter}\n          </motion.span>\n        ))}\n      </span>\n    </span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/letter-cascade.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

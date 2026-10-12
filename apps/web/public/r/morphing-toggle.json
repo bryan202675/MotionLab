@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "morphing-toggle",
+  "title": "MorphingToggle",
+  "description": "A controlled or uncontrolled switch with a geometric thumb transition.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/morphing-toggle.tsx",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\n\nexport interface MorphingToggleProps {\n  checked?: boolean;\n  defaultChecked?: boolean;\n  onCheckedChange?: (checked: boolean) => void;\n  disabled?: boolean;\n  label: string;\n}\n\nexport function MorphingToggle({\n  checked,\n  defaultChecked = false,\n  onCheckedChange,\n  disabled = false,\n  label,\n}: MorphingToggleProps) {\n  const [internalChecked, setInternalChecked] = useState(defaultChecked);\n  const reduceMotion = useReducedMotion();\n  const isChecked = checked ?? internalChecked;\n  const toggle = () => {\n    if (disabled) return;\n    const next = !isChecked;\n    if (checked === undefined) setInternalChecked(next);\n    onCheckedChange?.(next);\n  };\n  return (\n    <button\n      type=\"button\"\n      role=\"switch\"\n      aria-checked={isChecked}\n      aria-label={label}\n      disabled={disabled}\n      onClick={toggle}\n      style={{\n        width: 64,\n        height: 36,\n        padding: 4,\n        border: \"2px solid #101010\",\n        borderRadius: 999,\n        background: isChecked ? \"#dfff00\" : \"#aaa9a1\",\n        cursor: disabled ? \"not-allowed\" : \"pointer\",\n        opacity: disabled ? 0.55 : 1,\n      }}\n    >\n      <motion.span\n        animate={{ x: isChecked ? 28 : 0, borderRadius: isChecked ? \"50% 50% 38% 50%\" : \"50%\" }}\n        transition={\n          reduceMotion ? { duration: 0 } : { type: \"spring\", stiffness: 480, damping: 20 }\n        }\n        style={{ display: \"block\", width: 24, height: 24, background: \"#101010\" }}\n      />\n    </button>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/morphing-toggle.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "motion-dock",
+  "title": "MotionDock",
+  "description": "A proximity-scaled action dock with native buttons and links.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/motion-dock.tsx",
+      "content": "\"use client\";\n\nimport { useRef } from \"react\";\nimport type { PointerEvent, ReactNode } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface DockItem {\n  id: string;\n  label: string;\n  icon: ReactNode;\n  href?: string;\n  onSelect?: () => void;\n}\n\nexport interface MotionDockProps {\n  items: DockItem[];\n  label: string;\n  className?: string;\n  magnification?: number;\n}\n\nexport function MotionDock({ items, label, className, magnification = 0.4 }: MotionDockProps) {\n  const ref = useRef<HTMLElement>(null);\n  const reduceMotion = useReducedMotion();\n  const move = (event: PointerEvent<HTMLElement>) => {\n    if (reduceMotion || event.pointerType !== \"mouse\" || !ref.current) return;\n    const nodes = ref.current.querySelectorAll<HTMLElement>(\"[data-dock-item]\");\n    nodes.forEach((node) => {\n      const rect = node.getBoundingClientRect();\n      const distance = Math.abs(event.clientX - (rect.left + rect.width / 2));\n      const proximity = Math.max(0, 1 - distance / 110);\n      node.style.transform = `translateY(${-proximity * magnification * 18}px) scale(${1 + proximity * magnification})`;\n    });\n  };\n  const reset = () =>\n    ref.current?.querySelectorAll<HTMLElement>(\"[data-dock-item]\").forEach((node) => {\n      node.style.transform = \"translateY(0) scale(1)\";\n    });\n  return (\n    <nav\n      ref={ref}\n      aria-label={label}\n      onPointerMove={move}\n      onPointerLeave={reset}\n      className={className}\n      style={{\n        display: \"flex\",\n        alignItems: \"end\",\n        gap: 10,\n        padding: 12,\n        border: \"2px solid currentColor\",\n        width: \"fit-content\",\n      }}\n    >\n      {items.map((item) => {\n        const common = {\n          \"data-dock-item\": true,\n          title: item.label,\n          \"aria-label\": item.label,\n          style: {\n            width: 48,\n            height: 48,\n            display: \"grid\",\n            placeItems: \"center\",\n            border: \"1px solid currentColor\",\n            background: \"#dfff00\",\n            color: \"#101010\",\n            transition: \"transform 140ms ease-out\",\n            transformOrigin: \"bottom center\",\n          },\n        };\n        return item.href ? (\n          <a key={item.id} {...common} href={item.href}>\n            {item.icon}\n          </a>\n        ) : (\n          <button key={item.id} {...common} type=\"button\" onClick={item.onSelect}>\n            {item.icon}\n          </button>\n        );\n      })}\n    </nav>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/motion-dock.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

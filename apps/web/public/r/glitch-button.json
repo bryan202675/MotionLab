@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glitch-button",
+  "title": "GlitchButton",
+  "description": "A short, restrained type distortion on hover.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/glitch-button.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\nimport type { HTMLMotionProps } from \"motion/react\";\n\nexport interface GlitchButtonProps extends HTMLMotionProps<\"button\"> {\n  label: string;\n  color?: string;\n}\n\nexport function GlitchButton({ label, color = \"#dfff00\", style, ...props }: GlitchButtonProps) {\n  const reduceMotion = useReducedMotion();\n  return (\n    <motion.button\n      {...props}\n      type={props.type ?? \"button\"}\n      style={{\n        position: \"relative\",\n        border: \"2px solid currentColor\",\n        padding: \"14px 20px\",\n        fontFamily: \"monospace\",\n        fontWeight: 800,\n        background: \"transparent\",\n        color: \"inherit\",\n        cursor: \"pointer\",\n        ...style,\n      }}\n      whileHover={{ x: [0, -2, 2, -1, 0], skewX: [0, -3, 2, 0] }}\n      transition={{\n        duration: reduceMotion ? 0 : 0.26,\n        times: [0, 0.25, 0.5, 0.75, 1],\n      }}\n    >\n      <span>{label}</span>\n      <span\n        aria-hidden=\"true\"\n        style={{\n          position: \"absolute\",\n          inset: 0,\n          display: \"grid\",\n          placeItems: \"center\",\n          color,\n          opacity: 0,\n          pointerEvents: \"none\",\n        }}\n        className=\"ml-glitch-echo\"\n      >\n        {label}\n      </span>\n    </motion.button>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/glitch-button.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scramble-text",
+  "title": "ScrambleText",
+  "description": "Letters resolve from a configurable alphabet into a final phrase.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/scramble-text.tsx",
+      "content": "\"use client\";\n\nimport { useCallback, useEffect, useRef, useState } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface ScrambleTextProps {\n  text: string;\n  alphabet?: string;\n  duration?: number;\n  trigger?: \"mount\" | \"hover\";\n  onComplete?: () => void;\n  className?: string;\n}\n\nconst DEFAULT_ALPHABET = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\n\nexport function ScrambleText({\n  text,\n  alphabet = DEFAULT_ALPHABET,\n  duration = 800,\n  trigger = \"mount\",\n  onComplete,\n  className,\n}: ScrambleTextProps) {\n  const reduceMotion = useReducedMotion();\n  const [animation, setAnimation] = useState<{ text: string; visible: string } | null>(null);\n  const timerRef = useRef<number | null>(null);\n  const visible = animation?.text === text ? animation.visible : trigger === \"hover\" ? text : \"\";\n  const reveal = useCallback(() => {\n    if (timerRef.current !== null) window.clearInterval(timerRef.current);\n    if (reduceMotion) {\n      setAnimation({ text, visible: text });\n      onComplete?.();\n      return;\n    }\n    const started = Date.now();\n    let resolved = false;\n    timerRef.current = window.setInterval(() => {\n      const progress = Math.min((Date.now() - started) / Math.max(duration, 1), 1);\n      const stable = Math.floor(progress * text.length);\n      const output = [...text].map((char, index) => {\n        if (index < stable || char === \" \") return char;\n        return alphabet[Math.floor(Math.random() * alphabet.length)] ?? char;\n      });\n      setAnimation({ text, visible: output.join(\"\") });\n      if (progress === 1 && !resolved) {\n        resolved = true;\n        if (timerRef.current !== null) window.clearInterval(timerRef.current);\n        timerRef.current = null;\n        setAnimation({ text, visible: text });\n        onComplete?.();\n      }\n    }, 32);\n  }, [alphabet, duration, onComplete, reduceMotion, text]);\n\n  useEffect(() => {\n    if (trigger !== \"mount\") return;\n    const timeout = window.setTimeout(reveal, 0);\n    return () => {\n      window.clearTimeout(timeout);\n      if (timerRef.current !== null) window.clearInterval(timerRef.current);\n      timerRef.current = null;\n    };\n  }, [reveal, text, trigger]);\n\n  return (\n    <span className={className} onMouseEnter={trigger === \"hover\" ? reveal : undefined}>\n      <span className=\"sr-only\">{text}</span>\n      <span aria-hidden=\"true\">{visible || \" \"}</span>\n    </span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/scramble-text.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

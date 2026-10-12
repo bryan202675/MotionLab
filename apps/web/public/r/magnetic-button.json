@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "magnetic-button",
+  "title": "MagneticButton",
+  "description": "A spring-driven cursor pull that never intercepts keyboard or touch behavior.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/magnetic-button.tsx",
+      "content": "\"use client\";\n\nimport type { PointerEvent, PointerEventHandler } from \"react\";\nimport type { HTMLMotionProps } from \"motion/react\";\nimport { motion, useMotionValue, useReducedMotion, useSpring } from \"motion/react\";\n\nexport interface MagneticButtonProps extends Omit<\n  HTMLMotionProps<\"button\">,\n  \"onPointerMove\" | \"onPointerLeave\"\n> {\n  strength?: number;\n  radius?: number;\n  onPointerMove?: PointerEventHandler<HTMLButtonElement>;\n  onPointerLeave?: PointerEventHandler<HTMLButtonElement>;\n}\n\nexport function MagneticButton({\n  strength = 0.22,\n  radius = 120,\n  style,\n  onPointerMove,\n  onPointerLeave,\n  ...props\n}: MagneticButtonProps) {\n  const reduceMotion = useReducedMotion();\n  const x = useSpring(useMotionValue(0), { stiffness: 420, damping: 30 });\n  const y = useSpring(useMotionValue(0), { stiffness: 420, damping: 30 });\n  const move = (event: PointerEvent<HTMLButtonElement>) => {\n    onPointerMove?.(event);\n    if (reduceMotion || event.pointerType !== \"mouse\") return;\n    const rect = event.currentTarget.getBoundingClientRect();\n    const dx = event.clientX - rect.left - rect.width / 2;\n    const dy = event.clientY - rect.top - rect.height / 2;\n    const ratio = Math.min(1, radius / Math.max(Math.hypot(dx, dy), 1));\n    x.set(dx * strength * ratio);\n    y.set(dy * strength * ratio);\n  };\n  const leave = (event: PointerEvent<HTMLButtonElement>) => {\n    onPointerLeave?.(event);\n    x.set(0);\n    y.set(0);\n  };\n  return (\n    <motion.button\n      {...props}\n      onPointerMove={move}\n      onPointerLeave={leave}\n      style={{ ...style, x, y }}\n      whileTap={{ scale: 0.97 }}\n      transition={reduceMotion ? { duration: 0 } : undefined}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/magnetic-button.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

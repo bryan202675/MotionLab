@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "elastic-switch",
+  "title": "ElasticSwitch",
+  "description": "An accessible switch with a fast, elastic thumb response.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/elastic-switch.tsx",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\n\nexport interface ElasticSwitchProps {\n  checked?: boolean;\n  defaultChecked?: boolean;\n  onCheckedChange?: (checked: boolean) => void;\n  disabled?: boolean;\n  label: string;\n}\n\nexport function ElasticSwitch({\n  checked,\n  defaultChecked = false,\n  onCheckedChange,\n  disabled = false,\n  label,\n}: ElasticSwitchProps) {\n  const [local, setLocal] = useState(defaultChecked);\n  const reduceMotion = useReducedMotion();\n  const value = checked ?? local;\n  const handleClick = () => {\n    if (disabled) return;\n    const next = !value;\n    if (checked === undefined) setLocal(next);\n    onCheckedChange?.(next);\n  };\n  return (\n    <button\n      type=\"button\"\n      role=\"switch\"\n      aria-checked={value}\n      aria-label={label}\n      disabled={disabled}\n      onClick={handleClick}\n      style={{\n        width: 72,\n        height: 40,\n        border: \"2px solid #101010\",\n        borderRadius: 8,\n        padding: 4,\n        background: value ? \"#5038ff\" : \"#dedcd4\",\n        cursor: disabled ? \"not-allowed\" : \"pointer\",\n        opacity: disabled ? 0.5 : 1,\n      }}\n    >\n      <motion.span\n        animate={{ x: value ? 30 : 0, scaleX: value ? 1.15 : 1 }}\n        transition={\n          reduceMotion ? { duration: 0 } : { type: \"spring\", stiffness: 520, damping: 16 }\n        }\n        style={{\n          display: \"block\",\n          width: 30,\n          height: 28,\n          background: \"#fff\",\n          border: \"2px solid #101010\",\n          borderRadius: 5,\n        }}\n      />\n    </button>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/elastic-switch.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

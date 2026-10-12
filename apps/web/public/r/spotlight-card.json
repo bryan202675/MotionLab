@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spotlight-card",
+  "title": "SpotlightCard",
+  "description": "A radial light follows the pointer through CSS variables without React state updates.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/spotlight-card.tsx",
+      "content": "\"use client\";\n\nimport type { HTMLAttributes, PointerEvent, ReactNode } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface SpotlightCardProps extends HTMLAttributes<HTMLDivElement> {\n  children: ReactNode;\n  color?: string;\n  radius?: number;\n}\n\nexport function SpotlightCard({\n  children,\n  color = \"rgba(223,255,0,.2)\",\n  radius = 180,\n  onPointerMove,\n  style,\n  ...props\n}: SpotlightCardProps) {\n  const reduceMotion = useReducedMotion();\n  const move = (event: PointerEvent<HTMLDivElement>) => {\n    onPointerMove?.(event);\n    if (reduceMotion || event.pointerType !== \"mouse\") return;\n    const rect = event.currentTarget.getBoundingClientRect();\n    event.currentTarget.style.setProperty(\"--spot-x\", `${event.clientX - rect.left}px`);\n    event.currentTarget.style.setProperty(\"--spot-y\", `${event.clientY - rect.top}px`);\n  };\n  return (\n    <div\n      {...props}\n      onPointerMove={move}\n      style={{\n        position: \"relative\",\n        isolation: \"isolate\",\n        overflow: \"hidden\",\n        backgroundImage: `radial-gradient(${radius}px circle at var(--spot-x, 50%) var(--spot-y, 50%), ${color}, transparent 70%)`,\n        ...style,\n      }}\n    >\n      <span\n        aria-hidden=\"true\"\n        style={{ position: \"absolute\", inset: 0, zIndex: -1, background: \"#131313\" }}\n      />\n      {children}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/spotlight-card.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

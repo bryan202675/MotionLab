@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "expandable-card",
+  "title": "ExpandableCard",
+  "description": "A content card that expands from its own semantic button trigger.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/expandable-card.tsx",
+      "content": "\"use client\";\n\nimport { useId, useState } from \"react\";\nimport type { ReactNode } from \"react\";\nimport { AnimatePresence, motion, useReducedMotion } from \"motion/react\";\n\nexport interface ExpandableCardProps {\n  title: string;\n  summary?: ReactNode;\n  children: ReactNode;\n  defaultExpanded?: boolean;\n  expanded?: boolean;\n  onExpandedChange?: (expanded: boolean) => void;\n  className?: string;\n}\n\nexport function ExpandableCard({\n  title,\n  summary,\n  children,\n  defaultExpanded = false,\n  expanded,\n  onExpandedChange,\n  className,\n}: ExpandableCardProps) {\n  const [local, setLocal] = useState(defaultExpanded);\n  const id = useId();\n  const reduceMotion = useReducedMotion();\n  const isExpanded = expanded ?? local;\n  const toggle = () => {\n    const next = !isExpanded;\n    if (expanded === undefined) setLocal(next);\n    onExpandedChange?.(next);\n  };\n  return (\n    <article className={className} style={{ border: \"2px solid currentColor\" }}>\n      <button\n        type=\"button\"\n        aria-expanded={isExpanded}\n        aria-controls={id}\n        onClick={toggle}\n        style={{\n          width: \"100%\",\n          display: \"flex\",\n          justifyContent: \"space-between\",\n          alignItems: \"center\",\n          gap: 16,\n          padding: 20,\n          border: 0,\n          background: \"transparent\",\n          color: \"inherit\",\n          textAlign: \"left\",\n          cursor: \"pointer\",\n        }}\n      >\n        <span>\n          <strong>{title}</strong>\n          {summary && <span style={{ display: \"block\", marginTop: 6 }}>{summary}</span>}\n        </span>\n        <motion.span\n          animate={{ rotate: isExpanded ? 45 : 0 }}\n          transition={\n            reduceMotion ? { duration: 0 } : { type: \"spring\", stiffness: 420, damping: 28 }\n          }\n          aria-hidden=\"true\"\n        >\n          ＋\n        </motion.span>\n      </button>\n      <AnimatePresence initial={false}>\n        {isExpanded && (\n          <motion.div\n            id={id}\n            role=\"region\"\n            aria-label={`${title} details`}\n            initial={{ height: 0, opacity: 0 }}\n            animate={{ height: \"auto\", opacity: 1 }}\n            exit={{ height: 0, opacity: 0 }}\n            transition={{ duration: reduceMotion ? 0 : 0.28 }}\n            style={{ overflow: \"hidden\" }}\n          >\n            <div style={{ padding: \"0 20px 20px\" }}>{children}</div>\n          </motion.div>\n        )}\n      </AnimatePresence>\n    </article>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/expandable-card.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

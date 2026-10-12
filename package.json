@@ -1,0 +1,29 @@
+{
+  "name": "motionlab",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.18.0",
+  "scripts": {
+    "dev": "pnpm --filter @motionlab/web dev",
+    "build": "pnpm registry:build && pnpm --filter @motionlab/web build",
+    "start": "pnpm --filter @motionlab/web start",
+    "lint": "eslint .",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm --filter @motionlab/ui test",
+    "test:e2e": "playwright test",
+    "registry:build": "tsx scripts/build-registry.ts",
+    "registry:check": "tsx scripts/validate-registry.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.35.0",
+    "eslint-config-next": "^16.4.0",
+    "prettier": "^3.6.2",
+    "shadcn": "^4.21.4",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}

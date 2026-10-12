@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tilt-card",
+  "title": "TiltCard",
+  "description": "An imperative pointer tilt with bounded transforms and a stable React render count.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/tilt-card.tsx",
+      "content": "\"use client\";\n\nimport { useRef } from \"react\";\nimport type { HTMLAttributes, PointerEvent, ReactNode } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface TiltCardProps extends HTMLAttributes<HTMLDivElement> {\n  children: ReactNode;\n  intensity?: number;\n  scale?: number;\n  perspective?: number;\n  disabled?: boolean;\n}\n\nexport function TiltCard({\n  children,\n  intensity = 10,\n  scale = 1.02,\n  perspective = 900,\n  disabled = false,\n  onPointerMove,\n  onPointerLeave,\n  style,\n  ...props\n}: TiltCardProps) {\n  const ref = useRef<HTMLDivElement>(null);\n  const reduceMotion = useReducedMotion();\n  const move = (event: PointerEvent<HTMLDivElement>) => {\n    onPointerMove?.(event);\n    if (disabled || reduceMotion || event.pointerType !== \"mouse\" || !ref.current) return;\n    const rect = event.currentTarget.getBoundingClientRect();\n    const x = (event.clientX - rect.left) / rect.width - 0.5;\n    const y = (event.clientY - rect.top) / rect.height - 0.5;\n    ref.current.style.transform = `perspective(${perspective}px) rotateX(${-y * intensity}deg) rotateY(${x * intensity}deg) scale(${scale})`;\n  };\n  const reset = (event: PointerEvent<HTMLDivElement>) => {\n    onPointerLeave?.(event);\n    if (ref.current)\n      ref.current.style.transform = \"perspective(900px) rotateX(0) rotateY(0) scale(1)\";\n  };\n  return (\n    <div\n      {...props}\n      ref={ref}\n      onPointerMove={move}\n      onPointerLeave={reset}\n      style={{\n        transformStyle: \"preserve-3d\",\n        transition: \"transform 180ms cubic-bezier(.22,1,.36,1)\",\n        ...style,\n      }}\n    >\n      {children}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/tilt-card.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

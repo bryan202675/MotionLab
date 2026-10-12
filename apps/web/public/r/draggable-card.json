@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "draggable-card",
+  "title": "DraggableCard",
+  "description": "A pointer and touch draggable surface with elastic bounds and arrow-key movement.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/draggable-card.tsx",
+      "content": "\"use client\";\n\nimport { useMotionValue } from \"motion/react\";\nimport type { CSSProperties, KeyboardEvent, ReactNode } from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\n\nexport interface DraggableCardProps {\n  children: ReactNode;\n  bounds?: number;\n  axis?: \"x\" | \"y\" | \"both\";\n  className?: string;\n  style?: CSSProperties;\n  label?: string;\n  onPositionChange?: (x: number, y: number) => void;\n}\n\nexport function DraggableCard({\n  children,\n  bounds = 100,\n  axis = \"both\",\n  className,\n  style,\n  label = \"Draggable card\",\n  onPositionChange,\n}: DraggableCardProps) {\n  const x = useMotionValue(0);\n  const y = useMotionValue(0);\n  const reduceMotion = useReducedMotion();\n  const keyboardMove = (event: KeyboardEvent<HTMLDivElement>) => {\n    const step = event.shiftKey ? 20 : 8;\n    let changed = true;\n    if (event.key === \"ArrowRight\" && axis !== \"y\") x.set(Math.min(bounds, x.get() + step));\n    else if (event.key === \"ArrowLeft\" && axis !== \"y\") x.set(Math.max(-bounds, x.get() - step));\n    else if (event.key === \"ArrowDown\" && axis !== \"x\") y.set(Math.min(bounds, y.get() + step));\n    else if (event.key === \"ArrowUp\" && axis !== \"x\") y.set(Math.max(-bounds, y.get() - step));\n    else changed = false;\n    if (changed) {\n      event.preventDefault();\n      onPositionChange?.(x.get(), y.get());\n    }\n  };\n  return (\n    <motion.div\n      drag={axis === \"both\" ? true : axis}\n      dragConstraints={{ top: -bounds, right: bounds, bottom: bounds, left: -bounds }}\n      dragElastic={0.18}\n      dragMomentum={!reduceMotion}\n      onDragEnd={() => onPositionChange?.(x.get(), y.get())}\n      onKeyDown={keyboardMove}\n      tabIndex={0}\n      aria-roledescription=\"draggable card\"\n      role=\"group\"\n      aria-label={label}\n      className={className}\n      style={{\n        x,\n        y,\n        touchAction: axis === \"x\" ? \"pan-y\" : axis === \"y\" ? \"pan-x\" : \"none\",\n        cursor: \"grab\",\n        ...style,\n      }}\n      whileDrag={{ cursor: \"grabbing\", scale: 1.02 }}\n    >\n      {children}\n    </motion.div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/draggable-card.tsx"
+    }
+  ],
+  "type": "registry:component"
+}
