@@ -87,7 +87,7 @@ The component metadata in `apps/web/src/lib/component-registry.ts` feeds the cat
 
 ## Quality and release
 
-GitHub Actions runs install, lint, strict type checking, unit tests, registry validation, production build, and browser tests. To prepare a deployment, set `NEXT_PUBLIC_SITE_URL` to the public URL and deploy the Next.js app from `apps/web` with the monorepo root available to the build. Check that `/r/registry.json` and `/r/magnetic-button.json` return JSON before sharing the registry URL.
+GitHub Actions runs install, lint, strict type checking, unit tests, registry validation, production build, and browser tests. Merging or pushing to `main` also builds a static export and deploys it to GitHub Pages. The Pages workflow sets the project base path, canonical site URL, and repository link from GitHub's workflow context. Check that `/r/registry.json` and `/r/magnetic-button.json` return JSON on the published site before sharing install commands.
 
 ## Roadmap
 

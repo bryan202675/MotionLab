@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight, Command, Moon, Search, Sun } from "lucide-react";
 import { RevealMenu } from "@motionlab/ui/reveal-menu";
 import { componentRegistry } from "@/lib/component-registry";
-import { repositoryUrl } from "@/lib/site-config";
+import { basePath, repositoryUrl } from "@/lib/site-config";
 import { useTheme } from "./theme-provider";
 
 const links = [
@@ -53,6 +53,9 @@ export function SiteHeader() {
         )
         .slice(0, 6)
     : [];
+  const mobileLinks = basePath
+    ? links.map((link) => ({ ...link, href: `${basePath}${link.href}` }))
+    : links;
 
   return (
     <>
@@ -102,13 +105,13 @@ export function SiteHeader() {
             <span className="github-link is-unpublished">LOCAL SOURCE</span>
           )}
           <div className="mobile-menu">
-            <RevealMenu items={links} />
+            <RevealMenu items={mobileLinks} />
           </div>
         </div>
       </header>
-      <a href="/components" className="header-cta">
+      <Link href="/components" className="header-cta">
         EXPLORE COMPONENTS <ArrowUpRight size={15} />
-      </a>
+      </Link>
       <dialog
         className="command-dialog"
         onClose={() => setSearchOpen(false)}

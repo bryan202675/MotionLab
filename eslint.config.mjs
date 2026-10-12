@@ -10,7 +10,15 @@ const config = [
       "@next/next/no-html-link-for-pages": "off",
     },
   },
-  globalIgnores(["**/.next/**", "**/node_modules/**", "**/coverage/**", "**/dist/**"]),
+  globalIgnores([
+    "**/.next/**",
+    "**/node_modules/**",
+    "**/coverage/**",
+    "**/dist/**",
+    "apps/web/out/**",
+    "**/playwright-report/**",
+    "**/test-results/**",
+  ]),
 ];
 
 export default config;

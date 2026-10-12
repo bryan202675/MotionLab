@@ -16,12 +16,12 @@ export const metadata: Metadata = {
     type: "website",
     title: "MotionLab — Make it move.",
     description: "A collection of unapologetically animated React components.",
-    images: ["/opengraph-image"],
+    images: [`${siteUrl}/opengraph-image`],
   },
   twitter: {
     card: "summary_large_image",
     title: "MotionLab — Make it move.",
-    images: ["/opengraph-image"],
+    images: [`${siteUrl}/opengraph-image`],
   },
 };
 

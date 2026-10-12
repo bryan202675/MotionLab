@@ -3,7 +3,7 @@ import { componentRegistry } from "@/lib/component-registry";
 import { docsNavigation } from "@/lib/docs";
 import { canonicalSiteUrl } from "@/lib/site-config";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = canonicalSiteUrl;
