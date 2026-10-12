@@ -4,7 +4,7 @@
 
 MotionLab is an open-source library of original, interactive React components, with a live catalog, a prop playground, implementation notes, and a shadcn-compatible source registry.
 
-> Repository status: the source and registry are prepared locally. No remote repository or live deployment has been created yet.
+> Repository status: the source is published in a public GitHub repository. Pushing to `main` builds and deploys the site to GitHub Pages.
 
 ![MotionLab component library home page](docs/assets/motionlab-home.png)
 
@@ -89,10 +89,10 @@ The component metadata in `apps/web/src/lib/component-registry.ts` feeds the cat
 
 GitHub Actions runs install, lint, strict type checking, unit tests, registry validation, production build, and browser tests. Merging or pushing to `main` also builds a static export and deploys it to GitHub Pages. The Pages workflow sets the project base path, canonical site URL, and repository link from GitHub's workflow context. Check that `/r/registry.json` and `/r/magnetic-button.json` return JSON on the published site before sharing install commands.
 
+After the first successful Pages deployment, the component detail pages provide install commands that point to the hosted registry.
+
 ## Roadmap
 
-- Publish the source and validate the public registry URL.
-- Deploy the documentation site and add its canonical URL.
 - Expand component-level keyboard and reduced-motion coverage as the library grows.
 
 ## Contributing
