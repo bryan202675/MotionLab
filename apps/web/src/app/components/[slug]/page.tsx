@@ -78,8 +78,8 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             <CopyButton value={install} className="copy-button" label="Copy install command" />
           </div>
           <p className="detail-note">
-            This command uses the MotionLab registry URL. Start the site locally before installing,
-            or set NEXT_PUBLIC_SITE_URL to its public address before deployment.
+            This command points to MotionLab&apos;s published registry. Start the site locally to
+            install from your local registry.
           </p>
           <div className="source-panel">
             <div className="code-panel-head mono">

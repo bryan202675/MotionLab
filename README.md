@@ -89,7 +89,7 @@ The component metadata in `apps/web/src/lib/component-registry.ts` feeds the cat
 
 GitHub Actions runs install, lint, strict type checking, unit tests, registry validation, production build, and browser tests. Merging or pushing to `main` also builds a static export and deploys it to GitHub Pages. The Pages workflow sets the project base path, canonical site URL, and repository link from GitHub's workflow context. Check that `/r/registry.json` and `/r/magnetic-button.json` return JSON on the published site before sharing install commands.
 
-After the first successful Pages deployment, the component detail pages provide install commands that point to the hosted registry.
+After a successful Pages deployment, the component detail pages provide install commands that point to the hosted registry.
 
 ## Roadmap
 

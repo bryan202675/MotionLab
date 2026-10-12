@@ -255,7 +255,7 @@ export default function HomePage() {
           </h2>
           <p>
             Install individual components as source from this registry. Run MotionLab locally to use
-            the command below, or configure its public site URL after deployment.
+            the command below, or set NEXT_PUBLIC_SITE_URL to its public address before building.
           </p>
           <Link className="text-link" href="/docs/installation">
             HOW INSTALLATION WORKS <ArrowRight size={14} />
