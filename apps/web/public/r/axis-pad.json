@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "axis-pad",
+  "title": "AxisPad",
+  "description": "A paired, keyboard-operable X and Y control surface for tuning a two-dimensional motion value.",
+  "files": [
+    {
+      "path": "packages/ui/src/components/axis-pad.tsx",
+      "content": "\"use client\";\n\nimport type { CSSProperties, HTMLAttributes } from \"react\";\n\nexport interface AxisValue {\n  x: number;\n  y: number;\n}\n\nexport interface AxisPadProps extends Omit<HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value: AxisValue;\n  onValueChange: (value: AxisValue) => void;\n  label?: string;\n  min?: number;\n  max?: number;\n  step?: number;\n  accent?: string;\n}\n\nexport function AxisPad({\n  value,\n  onValueChange,\n  label = \"Position controls\",\n  min = -100,\n  max = 100,\n  step = 1,\n  accent = \"var(--electric, #5038ff)\",\n  style,\n  ...props\n}: AxisPadProps) {\n  const inputStyle: CSSProperties = { width: \"100%\", accentColor: accent, cursor: \"ew-resize\" };\n  return (\n    <div\n      {...props}\n      role=\"group\"\n      aria-label={label}\n      style={{\n        display: \"grid\",\n        gap: 12,\n        width: \"min(100%, 300px)\",\n        padding: 16,\n        border: \"1px solid rgba(16,16,16,.2)\",\n        background: \"var(--paper, #f4f2ec)\",\n        color: \"var(--ink, #101010)\",\n        ...style,\n      }}\n    >\n      {([\"x\", \"y\"] as const).map((axis) => (\n        <label\n          key={axis}\n          style={{\n            display: \"grid\",\n            gridTemplateColumns: \"20px 1fr 42px\",\n            alignItems: \"center\",\n            gap: 10,\n            font: \"700 11px var(--font-mono, monospace)\",\n            textTransform: \"uppercase\",\n          }}\n        >\n          <span>{axis}</span>\n          <input\n            type=\"range\"\n            min={min}\n            max={max}\n            step={step}\n            value={value[axis]}\n            aria-label={`${label} ${axis.toUpperCase()}`}\n            onChange={(event) =>\n              onValueChange({ ...value, [axis]: Number(event.currentTarget.value) })\n            }\n            style={inputStyle}\n          />\n          <output style={{ textAlign: \"right\", fontVariantNumeric: \"tabular-nums\" }}>\n            {value[axis]}\n          </output>\n        </label>\n      ))}\n      <div aria-hidden=\"true\" style={{ height: 1, background: \"rgba(16,16,16,.12)\" }} />\n      <p style={{ margin: 0, font: \"10px var(--font-mono, monospace)\", opacity: 0.65 }}>\n        X {value.x} / Y {value.y}\n      </p>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/axis-pad.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

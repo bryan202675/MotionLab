@@ -686,13 +686,13 @@ button {
   align-self: center;
   min-width: 0;
   border: 2px solid var(--ink);
-  background: var(--ink);
-  color: var(--paper);
-  box-shadow: 7px 7px 0 var(--acid);
+  background: #121210 !important;
+  color: #f5f4ee !important;
+  box-shadow: 6px 6px 0 var(--acid);
 }
 .install-panel .code-panel-head {
-  border-bottom-color: #666;
-  color: #c3c1ba;
+  border-bottom-color: #333330;
+  color: #a6a49d;
   font-size: 9px;
 }
 .install-code {
@@ -703,13 +703,15 @@ button {
   padding: 18px;
   overflow-x: auto;
   font-size: 12px;
+  color: #f5f4ee;
 }
 .install-code code {
   white-space: nowrap;
   font: 11px var(--font-mono);
+  color: #f5f4ee;
 }
 .code-prompt {
-  color: var(--acid);
+  color: var(--acid) !important;
   font: 15px var(--font-mono);
 }
 .copy-button {
@@ -728,6 +730,20 @@ button {
 .copy-button:hover {
   background: var(--acid);
   color: #101010;
+}
+.install-panel .copy-button {
+  color: #f5f4ee !important;
+  border-color: #555550 !important;
+}
+.install-panel .copy-button * {
+  color: #f5f4ee !important;
+}
+.install-panel .copy-button:hover {
+  background: var(--acid) !important;
+  color: #101010 !important;
+}
+.install-panel .copy-button:hover * {
+  color: #101010 !important;
 }
 .install-panel hr {
   height: 1px;
@@ -2347,7 +2363,8 @@ button {
   .brand-version,
   .desktop-nav,
   .search-trigger > span,
-  .search-trigger kbd {
+  .search-trigger kbd,
+  .theme-indicator {
     display: none;
   }
   .header-actions {
@@ -2378,12 +2395,12 @@ button {
   }
   .hero-layout {
     grid-template-columns: 1fr;
-    gap: 34px;
-    padding-top: 42px;
+    gap: 28px;
+    padding-top: 32px;
   }
   .hero-title {
-    font-size: clamp(6rem, 25vw, 11rem);
-    line-height: 0.72;
+    font-size: clamp(4.8rem, 20vw, 8.5rem);
+    line-height: 0.74;
   }
   .hero-side {
     top: -23px;
@@ -2391,10 +2408,12 @@ button {
     writing-mode: initial;
   }
   .hero-stamp {
-    right: 6%;
-    bottom: -24px;
-    transform: rotate(3deg) scale(0.85);
-    transform-origin: right;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin-top: 14px;
+    transform: rotate(-1.5deg);
+    max-width: 190px;
   }
   .hero-aside {
     display: grid;
@@ -2406,7 +2425,7 @@ button {
   .hero-asterisk {
     grid-row: span 2;
     margin: -5px 0 0;
-    font-size: 41px;
+    font-size: 38px;
   }
   .hero-aside > p {
     font-size: 14px;
@@ -2965,3 +2984,121 @@ button {
     transform: none;
   }
 }
+
+/* ==========================================================================
+   LANDSCAPE & SCREEN ROTATION HANDLING ("EL GIRO")
+   ========================================================================== */
+@media (orientation: landscape) and (max-height: 580px) {
+  .header-cta {
+    display: none;
+  }
+  .site-header {
+    min-height: 48px;
+    padding-block: 6px;
+  }
+  .hero {
+    padding-top: 10px;
+    padding-bottom: 36px;
+  }
+  .hero-meta {
+    font-size: 7px;
+    gap: 12px;
+  }
+  .hero-layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 20px;
+    padding-top: 12px;
+    align-items: center;
+  }
+  .hero-title {
+    font-size: clamp(2.8rem, 13vh, 4.6rem);
+    line-height: 0.82;
+  }
+  .hero-stamp {
+    display: none;
+  }
+  .hero-side {
+    display: none;
+  }
+  .hero-aside {
+    padding-top: 0;
+  }
+  .hero-aside > p {
+    font-size: 13px;
+    line-height: 1.4;
+    max-width: 290px;
+  }
+  .hero-actions {
+    margin-top: 12px;
+    gap: 12px;
+  }
+  .hero-live {
+    margin-top: 10px;
+  }
+  .hero-live-stage {
+    min-height: 90px;
+    padding: 14px;
+  }
+  .scroll-note {
+    display: none;
+  }
+  .command-dialog {
+    top: 5vh;
+    max-height: 90vh;
+  }
+}
+
+/* ==========================================================================
+   HIGH-CONTRAST ACCESSIBILITY & IMPECCABLE SKIN HARMONIZATION
+   ========================================================================== */
+.button-acid,
+.button-acid *,
+.strip-cell-acid,
+.strip-cell-acid *,
+.header-cta,
+.header-cta * {
+  color: var(--acid-ink, #101010) !important;
+}
+
+[data-theme="dark"] .featured-card-1 .featured-preview,
+[data-theme="dark"] .featured-card-1 .featured-preview *,
+[data-theme="dark"] .featured-card-1 .preview-index {
+  color: #101010 !important;
+}
+
+[data-theme="dark"] .featured-card-3 .featured-preview {
+  background: var(--electric);
+  color: #ffffff;
+}
+
+.component-preview.is-background {
+  background: var(--paper);
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--ink) 14%, transparent) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.docs-sidebar nav a[aria-current="page"] > span {
+  color: var(--ink) !important;
+}
+
+.component-card:hover {
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+[data-theme="dark"] .component-card:hover {
+  box-shadow: 4px 4px 0 #000000, 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.stage-corner {
+  position: absolute;
+  font: 700 10px var(--font-mono);
+  color: var(--muted);
+  opacity: 0.5;
+  pointer-events: none;
+  user-select: none;
+}
+.stage-corner-tl { top: 6px; left: 8px; }
+.stage-corner-tr { top: 6px; right: 8px; }
+.stage-corner-bl { bottom: 6px; left: 8px; }
+.stage-corner-br { bottom: 6px; right: 8px; }

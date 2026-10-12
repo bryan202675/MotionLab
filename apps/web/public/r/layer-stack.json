@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "layer-stack",
+  "title": "LayerStack",
+  "description": "An indexed layer inspector that pairs a selectable stack with the active layer content.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/layer-stack.tsx",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport type { HTMLAttributes, ReactNode } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface LayerStackItem {\n  id: string;\n  label: string;\n  content: ReactNode;\n}\n\nexport interface LayerStackProps extends Omit<HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  items: LayerStackItem[];\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (id: string) => void;\n}\n\nexport function LayerStack({\n  items,\n  value,\n  defaultValue,\n  onValueChange,\n  style,\n  ...props\n}: LayerStackProps) {\n  const [internalValue, setInternalValue] = useState(defaultValue ?? items[0]?.id ?? \"\");\n  const selectedId = value ?? internalValue;\n  const selectedIndex = items.findIndex((item) => item.id === selectedId);\n  const selected = items[selectedIndex];\n  const reduceMotion = useReducedMotion();\n  const select = (id: string) => {\n    if (value === undefined) setInternalValue(id);\n    onValueChange?.(id);\n  };\n\n  return (\n    <div {...props} style={{ width: \"min(100%, 360px)\", color: \"var(--ink, #101010)\", ...style }}>\n      <div\n        role=\"group\"\n        aria-label=\"Choose a layer\"\n        style={{ display: \"grid\", gap: 5, marginBottom: 10 }}\n      >\n        {items.map((item, index) => {\n          const active = item.id === selectedId;\n          const offset = Math.abs(index - selectedIndex);\n          return (\n            <button\n              key={item.id}\n              type=\"button\"\n              aria-pressed={active}\n              onClick={() => select(item.id)}\n              style={{\n                display: \"flex\",\n                alignItems: \"center\",\n                gap: 10,\n                width: \"100%\",\n                padding: \"9px 11px\",\n                transform: reduceMotion ? \"none\" : `translateX(${Math.min(offset, 4) * 3}px)`,\n                transition: reduceMotion\n                  ? \"none\"\n                  : \"transform 180ms ease, background-color 180ms ease\",\n                border: `1px solid ${active ? \"var(--ink, #101010)\" : \"rgba(16,16,16,.18)\"}`,\n                background: active ? \"var(--acid, #dfff00)\" : \"var(--paper, #f4f2ec)\",\n                color: \"inherit\",\n                textAlign: \"left\",\n                font: \"700 10px var(--font-mono, monospace)\",\n                textTransform: \"uppercase\",\n                cursor: \"pointer\",\n              }}\n            >\n              <span aria-hidden=\"true\" style={{ opacity: 0.55 }}>\n                {String(index + 1).padStart(2, \"0\")}\n              </span>\n              {item.label}\n            </button>\n          );\n        })}\n      </div>\n      <div\n        role=\"region\"\n        aria-label={selected ? `${selected.label} layer` : \"Selected layer\"}\n        style={{\n          minHeight: 92,\n          padding: 16,\n          border: \"2px solid var(--ink, #101010)\",\n          background: \"var(--paper, #f4f2ec)\",\n          boxShadow: \"5px 5px 0 var(--ink, #101010)\",\n        }}\n      >\n        {selected?.content}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/layer-stack.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useState } from "react";
 import type { ComponentType } from "react";
 
 export interface DemoProps {
@@ -62,6 +63,7 @@ const Magnetic = dynamic<DemoProps>(() =>
           padding: "14px 20px",
           border: "2px solid #101010",
           background: accent,
+          color: "#101010",
           fontWeight: 800,
           cursor: "pointer",
         }}
@@ -74,7 +76,7 @@ const Magnetic = dynamic<DemoProps>(() =>
 const Pressable = dynamic<DemoProps>(() =>
   import("@motionlab/ui/pressable-button").then(({ PressableButton }) => ({
     default: ({ label, accent }) => (
-      <PressableButton variant="acid" style={{ background: accent }}>
+      <PressableButton variant="acid" style={{ background: accent, color: "#101010" }}>
         {label}
       </PressableButton>
     ),
@@ -88,7 +90,7 @@ const Glitch = dynamic<DemoProps>(() =>
 const Ripple = dynamic<DemoProps>(() =>
   import("@motionlab/ui/ripple-button").then(({ RippleButton }) => ({
     default: ({ label, accent }) => (
-      <RippleButton style={{ background: accent }}>{label}</RippleButton>
+      <RippleButton style={{ background: accent, color: "#101010" }}>{label}</RippleButton>
     ),
   })),
 );
@@ -112,6 +114,7 @@ const Tilt = dynamic<DemoProps>(() =>
           width: 220,
           minHeight: 130,
           background: accent,
+          color: "#101010",
           border: "2px solid #101010",
           boxShadow: "6px 6px #101010",
         }}
@@ -130,7 +133,7 @@ const Spotlight = dynamic<DemoProps>(() =>
           width: 230,
           minHeight: 132,
           padding: 24,
-          color: "white",
+          color: "var(--ink, #101010)",
           border: "2px solid #101010",
         }}
       >
@@ -156,6 +159,7 @@ const Draggable = dynamic<DemoProps>(() =>
         style={{
           padding: 24,
           background: accent,
+          color: "#101010",
           border: "2px solid #101010",
           boxShadow: "5px 5px #101010",
         }}
@@ -185,21 +189,35 @@ const Tabs = dynamic<DemoProps>(() =>
 const Accordion = dynamic<DemoProps>(() =>
   import("@motionlab/ui/brutalist-accordion").then(({ BrutalistAccordion }) => ({
     default: ({ label }) => (
-      <BrutalistAccordion
-        items={[{ id: "motion", title: label, content: <p>Precise motion, useful by default.</p> }]}
-      />
+      <div style={{ width: "min(100%, 320px)" }}>
+        <BrutalistAccordion
+          items={[
+            {
+              id: "item-1",
+              title: label,
+              content: "Spring-backed accordion designed with tactile resistance.",
+            },
+            {
+              id: "item-2",
+              title: "Source first",
+              content: "Own the component. Adapt it to your design tokens.",
+            },
+          ]}
+        />
+      </div>
     ),
   })),
 );
 const Dock = dynamic<DemoProps>(() =>
   import("@motionlab/ui/motion-dock").then(({ MotionDock }) => ({
-    default: ({ label }) => (
+    default: () => (
       <MotionDock
-        label="Experiment shortcuts"
+        label="Workspace dock"
         items={[
-          { id: "a", label, icon: "↗", href: "#components" },
-          { id: "b", label: "Open docs", icon: "⌘", href: "/docs" },
-          { id: "c", label: "Playground", icon: "✳", href: "/playground" },
+          { id: "1", label: "Play", icon: "▶" },
+          { id: "2", label: "Pause", icon: "⏸" },
+          { id: "3", label: "Stop", icon: "⏹" },
+          { id: "4", label: "Loop", icon: "↺" },
         ]}
       />
     ),
@@ -207,12 +225,12 @@ const Dock = dynamic<DemoProps>(() =>
 );
 const Menu = dynamic<DemoProps>(() =>
   import("@motionlab/ui/reveal-menu").then(({ RevealMenu }) => ({
-    default: ({ label }) => (
+    default: () => (
       <RevealMenu
         items={[
-          { label, href: "/components" },
+          { label: "Components", href: "/components" },
           { label: "Playground", href: "/playground" },
-          { label: "Docs", href: "/docs" },
+          { label: "Manual", href: "/docs" },
         ]}
       />
     ),
@@ -247,6 +265,79 @@ const Grain = dynamic<DemoProps>(() =>
   })),
 );
 
+const MetricDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/metric-counter").then(({ MetricCounter }) => ({
+    default: () => <MetricCounter value={98.6} label="Frame stability" decimals={1} suffix="%" style={{ fontSize: 34, fontWeight: 800 }} />,
+  })),
+);
+const ShortcutDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/shortcut-hint").then(({ ShortcutHint }) => ({
+    default: () => <ShortcutHint keys={["mod", "shift", "p"]} label="Open command panel" />,
+  })),
+);
+const ModeDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/mode-selector").then(({ ModeSelector }) => ({
+    default: () => <ModeSelector label="Preview mode" options={[{ value: "edit", label: "Edit" }, { value: "play", label: "Play" }, { value: "inspect", label: "Inspect" }]} />,
+  })),
+);
+const RunDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/run-control").then(({ RunControl }) => ({ default: () => <RunControl /> })),
+);
+const HoldDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/hold-to-run").then(({ HoldToRun }) => ({ default: () => <HoldToRun /> })),
+);
+const AxisDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/axis-pad").then(({ AxisPad }) => ({
+    default: function AxisPreview({ accent }: DemoProps) {
+      const [value, setValue] = useState({ x: 24, y: -18 });
+      return <AxisPad value={value} onValueChange={setValue} accent={accent} />;
+    },
+  })),
+);
+const EasingDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/easing-curve").then(({ EasingCurve }) => ({
+    default: () => <EasingCurve name="Overshoot" values={[0.2, 0.9, 0.25, 1]} duration={0.72} />,
+  })),
+);
+const PresetsDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/motion-presets").then(({ MotionPresets }) => ({
+    default: () => <MotionPresets presets={[{ id: "quiet", label: "Quiet", duration: 180, easing: "ease-out" }, { id: "balanced", label: "Balanced", duration: 360, easing: "cubic-bezier(.2,.8,.2,1)" }, { id: "overshoot", label: "Overshoot", duration: 520, easing: "cubic-bezier(.34,1.56,.64,1)" }]} />,
+  })),
+);
+const PhaseDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/phase-rail").then(({ PhaseRail }) => ({
+    default: () => <PhaseRail items={[{ id: "scope", label: "Scope", description: "Define the motion objective." }, { id: "shape", label: "Shape", description: "Tune the timing and response." }, { id: "ship", label: "Ship", description: "Carry the selected behavior into your interface." }]} />,
+  })),
+);
+const LayerDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/layer-stack").then(({ LayerStack }) => ({
+    default: () => <LayerStack items={[{ id: "surface", label: "Surface", content: <strong>Paper layer / z 01</strong> }, { id: "signal", label: "Signal", content: <strong>Signal layer / z 02</strong> }, { id: "type", label: "Typography", content: <strong>Type layer / z 03</strong> }]} />,
+  })),
+);
+const SpecimenDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/specimen-frame").then(({ SpecimenFrame }) => ({
+    default: ({ label }) => <SpecimenFrame index="014" title="Elastic response" category="Interaction" status="Stable"><p style={{ margin: 0 }}>{label}</p></SpecimenFrame>,
+  })),
+);
+const ViewportDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/viewport-frame").then(({ ViewportFrame }) => ({
+    default: ({ label }) => <ViewportFrame><div style={{ display: "grid", placeItems: "center", height: "100%", font: "700 12px var(--font-mono, monospace)" }}>{label}</div></ViewportFrame>,
+  })),
+);
+const TimelineDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/timeline-scrubber").then(({ TimelineScrubber }) => ({
+    default: function TimelinePreview() {
+      const [value, setValue] = useState(3.4);
+      return <TimelineScrubber value={value} max={8} step={0.1} markers={[{ value: 1.2, label: "Intro" }, { value: 5.6, label: "Peak" }]} onValueChange={setValue} />;
+    },
+  })),
+);
+const ScopeDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/signal-scope").then(({ SignalScope }) => ({
+    default: () => <SignalScope label="Impact envelope" samples={[0, 0.1, 0.24, 0.18, -0.15, -0.42, -0.12, 0.36, 0.62, 0.28, -0.08, -0.2, 0.12, 0.4, 0.12, 0]} />,
+  })),
+);
+
 const demos: Record<string, ComponentType<DemoProps>> = {
   "kinetic-headline": Kinetic,
   "split-reveal": Split,
@@ -272,6 +363,21 @@ const demos: Record<string, ComponentType<DemoProps>> = {
   "grid-warp": Grid,
   "cursor-trail": Trail,
   "grain-field": Grain,
+
+  "metric-counter": MetricDemo,
+  "shortcut-hint": ShortcutDemo,
+  "mode-selector": ModeDemo,
+  "run-control": RunDemo,
+  "hold-to-run": HoldDemo,
+  "axis-pad": AxisDemo,
+  "easing-curve": EasingDemo,
+  "motion-presets": PresetsDemo,
+  "phase-rail": PhaseDemo,
+  "layer-stack": LayerDemo,
+  "specimen-frame": SpecimenDemo,
+  "viewport-frame": ViewportDemo,
+  "timeline-scrubber": TimelineDemo,
+  "signal-scope": ScopeDemo,
 };
 
 export const defaultDemoProps: DemoProps = {

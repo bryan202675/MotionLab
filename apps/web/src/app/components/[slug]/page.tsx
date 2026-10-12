@@ -48,7 +48,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
       <div className="detail-heading">
         <div>
           <span className="section-kicker">
-            {component.category} / {String(index).padStart(2, "0")} OF 24
+            {component.category} / {String(index).padStart(2, "0")} OF {componentRegistry.length}
           </span>
           <h1 className="display">{component.name.replace(/([A-Z])/g, " $1").toUpperCase()}</h1>
           <p>{component.description}</p>
@@ -130,8 +130,16 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           <div className="tech-notes">
             <span className="mono">ENGINEERING NOTES</span>
             <ul>
-              <li>Reduced motion is respected through Motion’s user preference hook.</li>
-              <li>Only the animation primitive needed by this component is imported.</li>
+              {component.dependencies.includes("motion") ? (
+                <li>Motion&apos;s reduced-motion preference is respected where this component animates.</li>
+              ) : (
+                <li>No animation runtime dependency is required by this component.</li>
+              )}
+              <li>
+                {component.dependencies.length
+                  ? `Direct runtime dependencies: ${component.dependencies.join(", ")}.`
+                  : "The component uses native React and browser primitives."}
+              </li>
               <li>Source can be edited after installation; no runtime service is required.</li>
             </ul>
           </div>

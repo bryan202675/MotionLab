@@ -18,6 +18,15 @@ export default function ChangelogPage() {
         </h1>
         <p className="docs-lede">A factual record of the work shipped to this repository.</p>
         <section className="docs-section">
+          <span>0.2.0 / MOTION STUDY TOOLKIT</span>
+          <h2>More ways to shape a system.</h2>
+          <ul>
+            <li>Added 14 original MotionLab controls, timing references, and preview utilities.</li>
+            <li>Added keyboard and reduced-motion support to the new interactive studies.</li>
+            <li>Expanded the component catalog and generated install registry to 38 items.</li>
+          </ul>
+        </section>
+        <section className="docs-section">
           <span>0.1.0 / FIRST WORKING EDITION</span>
           <h2>The lab is open.</h2>
           <ul>

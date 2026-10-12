@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { ComponentCatalog } from "@/components/component-catalog";
+import { componentRegistry } from "@/lib/component-registry";
 
 export const metadata: Metadata = {
   title: "Component Index",
-  description: "Browse 24 original, interactive React motion components.",
+  description: `Browse ${componentRegistry.length} original, interactive React motion components.`,
 };
 
 export default function ComponentsPage() {

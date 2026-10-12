@@ -126,6 +126,20 @@ function buildCode(settings: PlaygroundSettings) {
     "grid-warp": `<GridWarp color={${quote(`${settings.accent}66`)}} intensity={${intensity}} />`,
     "cursor-trail": `<CursorTrail color={${accent}} particleCount={22} />`,
     "grain-field": `<GrainField opacity={0.08} />`,
+    "metric-counter": `<MetricCounter value={98.6} label="Frame stability" decimals={1} suffix="%" />`,
+    "shortcut-hint": `<ShortcutHint keys={["mod", "shift", "p"]} label="Open command panel" />`,
+    "mode-selector": `<ModeSelector label="Preview mode" options={[{ value: "edit", label: "Edit" }, { value: "play", label: "Play" }]} />`,
+    "run-control": `<RunControl onRunningChange={setRunning} />`,
+    "hold-to-run": `<HoldToRun duration={900} onComplete={startSequence} />`,
+    "axis-pad": `<AxisPad value={point} onValueChange={setPoint} />`,
+    "easing-curve": `<EasingCurve name="Overshoot" values={[0.2, 0.9, 0.25, 1]} duration={0.72} />`,
+    "motion-presets": `<MotionPresets presets={[{ id: "quiet", label: "Quiet", duration: 180, easing: "ease-out" }]} />`,
+    "phase-rail": `<PhaseRail items={[{ id: "scope", label: "Scope" }, { id: "shape", label: "Shape" }, { id: "ship", label: "Ship" }]} />`,
+    "layer-stack": `<LayerStack items={[{ id: "surface", label: "Surface", content: <p>Paper layer</p> }]} />`,
+    "specimen-frame": `<SpecimenFrame index="014" title="Elastic response"><p>{${label}}</p></SpecimenFrame>`,
+    "viewport-frame": `<ViewportFrame><Preview /></ViewportFrame>`,
+    "timeline-scrubber": `<TimelineScrubber value={time} max={8} onValueChange={setTime} />`,
+    "signal-scope": `<SignalScope label="Impact envelope" samples={[0, 0.2, -0.4, 0.6, 0]} />`,
   };
   return `import { ${entry.name} } from "@/components/ui/${entry.slug}";\n\nexport function Experiment() {\n  return (\n    ${examples[entry.slug] ?? entry.example}\n  );\n}`;
 }

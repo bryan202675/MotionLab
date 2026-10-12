@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "specimen-frame",
+  "title": "SpecimenFrame",
+  "description": "An editorial specimen card with an index, category, status, and a content slot.",
+  "files": [
+    {
+      "path": "packages/ui/src/components/specimen-frame.tsx",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport interface SpecimenFrameProps extends HTMLAttributes<HTMLElement> {\n  index: string;\n  title: string;\n  category?: string;\n  status?: string;\n  children: ReactNode;\n}\n\nexport function SpecimenFrame({\n  index,\n  title,\n  category = \"Motion study\",\n  status = \"Ready\",\n  children,\n  style,\n  ...props\n}: SpecimenFrameProps) {\n  return (\n    <article\n      {...props}\n      style={{\n        display: \"grid\",\n        gap: 16,\n        width: \"min(100%, 440px)\",\n        padding: 18,\n        border: \"2px solid var(--ink, #101010)\",\n        background: \"var(--paper, #f4f2ec)\",\n        color: \"var(--ink, #101010)\",\n        boxShadow: \"6px 6px 0 var(--ink, #101010)\",\n        ...style,\n      }}\n    >\n      <header\n        style={{\n          display: \"flex\",\n          alignItems: \"start\",\n          justifyContent: \"space-between\",\n          gap: 16,\n          borderBottom: \"1px solid rgba(16,16,16,.2)\",\n          paddingBottom: 12,\n        }}\n      >\n        <div>\n          <p\n            style={{\n              margin: 0,\n              font: \"600 9px var(--font-mono, monospace)\",\n              letterSpacing: \".12em\",\n              textTransform: \"uppercase\",\n              opacity: 0.6,\n            }}\n          >\n            {category} / {index}\n          </p>\n          <h3\n            style={{\n              margin: \"6px 0 0\",\n              font: \"800 18px/1.1 var(--font-display, sans-serif)\",\n              letterSpacing: \"-.03em\",\n            }}\n          >\n            {title}\n          </h3>\n        </div>\n        <span\n          style={{\n            flexShrink: 0,\n            padding: \"4px 6px\",\n            background: \"var(--acid, #dfff00)\",\n            font: \"700 9px var(--font-mono, monospace)\",\n            textTransform: \"uppercase\",\n          }}\n        >\n          {status}\n        </span>\n      </header>\n      <div>{children}</div>\n      <footer\n        style={{\n          display: \"flex\",\n          justifyContent: \"space-between\",\n          gap: 12,\n          font: \"9px var(--font-mono, monospace)\",\n          textTransform: \"uppercase\",\n          opacity: 0.55,\n        }}\n      >\n        <span>MotionLab / specimen</span>\n        <span aria-hidden=\"true\">↗</span>\n      </footer>\n    </article>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/specimen-frame.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "easing-curve",
+  "title": "EasingCurve",
+  "description": "A labeled cubic-bezier plot for documenting and comparing a motion timing curve.",
+  "files": [
+    {
+      "path": "packages/ui/src/components/easing-curve.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface EasingCurveProps extends HTMLAttributes<HTMLDivElement> {\n  name: string;\n  values: [number, number, number, number];\n  duration?: number;\n  accent?: string;\n}\n\nexport function EasingCurve({\n  name,\n  values,\n  duration = 0.6,\n  accent = \"var(--acid, #dfff00)\",\n  style,\n  ...props\n}: EasingCurveProps) {\n  const [x1, y1, x2, y2] = values;\n  const path = `M 0 100 C ${x1 * 100} ${100 - y1 * 100}, ${x2 * 100} ${100 - y2 * 100}, 100 0`;\n  return (\n    <div\n      {...props}\n      style={{\n        display: \"grid\",\n        gridTemplateColumns: \"1fr auto\",\n        alignItems: \"center\",\n        gap: 16,\n        width: \"min(100%, 360px)\",\n        padding: 16,\n        border: \"1px solid rgba(16,16,16,.2)\",\n        background: \"var(--paper, #f4f2ec)\",\n        color: \"var(--ink, #101010)\",\n        ...style,\n      }}\n    >\n      <div>\n        <strong\n          style={{\n            display: \"block\",\n            marginBottom: 5,\n            font: \"700 12px var(--font-mono, monospace)\",\n            textTransform: \"uppercase\",\n          }}\n        >\n          {name}\n        </strong>\n        <code style={{ font: \"10px var(--font-mono, monospace)\", opacity: 0.65 }}>\n          cubic-bezier({values.map((item) => Number(item.toFixed(2))).join(\", \")}) · {duration}s\n        </code>\n      </div>\n      <svg\n        aria-label={`${name} easing curve`}\n        role=\"img\"\n        viewBox=\"0 0 100 100\"\n        width=\"60\"\n        height=\"60\"\n        style={{ overflow: \"visible\" }}\n      >\n        <path\n          d=\"M 0 100 H 100 M 0 100 V 0\"\n          fill=\"none\"\n          stroke=\"rgba(16,16,16,.2)\"\n          strokeDasharray=\"2 3\"\n        />\n        <path d={path} fill=\"none\" stroke={accent} strokeWidth=\"5\" strokeLinecap=\"square\" />\n        <circle cx={x1 * 100} cy={100 - y1 * 100} r=\"3\" fill=\"var(--ink, #101010)\" />\n        <circle cx={x2 * 100} cy={100 - y2 * 100} r=\"3\" fill=\"var(--ink, #101010)\" />\n      </svg>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/easing-curve.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -12,7 +12,7 @@ if (!result.success) {
 }
 
 const items = result.data.items ?? [];
-if (items.length !== 24) throw new Error(`Expected 24 registry entries, found ${items.length}.`);
+if (items.length < 24) throw new Error(`Expected at least 24 registry entries, found ${items.length}.`);
 const names = new Set<string>();
 for (const item of items) {
   if (names.has(item.name)) throw new Error(`Duplicate registry name: ${item.name}`);

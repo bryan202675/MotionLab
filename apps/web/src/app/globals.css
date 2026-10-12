@@ -9,10 +9,12 @@
   --paper: #f4f2ec;
   --ink: #101010;
   --acid: #dfff00;
-  --electric: #5038ff;
+  --acid-ink: #101010;
+  --electric: #4c32e8;
   --signal: #ff5638;
   --white: #fff;
-  --muted: #6c6b65;
+  --muted: #57564f;
+  --card-bg: #ffffff;
   --line: 2px solid var(--ink);
   --font-display: "Space Grotesk Variable", "Arial Black", sans-serif;
   --font-interface: "Inter Variable", Arial, sans-serif;
@@ -32,6 +34,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-interface);
+  -webkit-font-smoothing: antialiased;
 }
 button,
 input,
@@ -55,14 +58,18 @@ select:focus-visible {
 }
 ::selection {
   background: var(--acid);
-  color: var(--ink);
+  color: var(--acid-ink);
 }
 [data-theme="dark"] {
-  --paper: #11110f;
-  --ink: #f4f2ec;
-  --white: #1b1b18;
-  --muted: #aaa9a1;
+  --paper: #0e0e0d;
+  --ink: #f5f4ee;
+  --white: #181816;
+  --muted: #a8a69d;
+  --electric: #9888ff;
+  --signal: #ff684d;
+  --card-bg: #151513;
   --line: 2px solid var(--ink);
+  --acid-ink: #101010;
 }
 
 .mono {
@@ -86,7 +93,10 @@ select:focus-visible {
   margin: 0;
 }
 .hard-shadow {
-  box-shadow: 6px 6px 0 var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+[data-theme="dark"] .hard-shadow {
+  box-shadow: 4px 4px 0 #000000, 0 0 0 1px rgba(255, 255, 255, 0.16);
 }
 .section-kicker {
   display: flex;

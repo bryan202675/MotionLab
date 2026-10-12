@@ -380,6 +380,206 @@
         }
       ],
       "type": "registry:component"
+    },
+    {
+      "name": "metric-counter",
+      "title": "MetricCounter",
+      "description": "A labeled instrument readout that interpolates changing values and settles cleanly for reduced motion.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/metric-counter.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/metric-counter.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "shortcut-hint",
+      "title": "ShortcutHint",
+      "description": "A compact, screen-reader-labeled key sequence for documenting keyboard actions.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/shortcut-hint.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/shortcut-hint.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "mode-selector",
+      "title": "ModeSelector",
+      "description": "A controlled or self-managed segmented control for switching between named work modes.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/mode-selector.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/mode-selector.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "run-control",
+      "title": "RunControl",
+      "description": "A stateful start and stop action with an explicit pressed state and controlled mode support.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/run-control.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/run-control.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "hold-to-run",
+      "title": "HoldToRun",
+      "description": "A deliberate press-and-hold action with pointer cancellation, keyboard support, and visible progress.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/hold-to-run.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/hold-to-run.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "axis-pad",
+      "title": "AxisPad",
+      "description": "A paired, keyboard-operable X and Y control surface for tuning a two-dimensional motion value.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/axis-pad.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/axis-pad.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "easing-curve",
+      "title": "EasingCurve",
+      "description": "A labeled cubic-bezier plot for documenting and comparing a motion timing curve.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/easing-curve.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/easing-curve.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "motion-presets",
+      "title": "MotionPresets",
+      "description": "A small preset picker that returns a named duration and easing recipe for an experiment.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/motion-presets.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/motion-presets.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "phase-rail",
+      "title": "PhaseRail",
+      "description": "A compact experiment stepper with explicit current-step semantics and optional phase notes.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/phase-rail.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/phase-rail.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "layer-stack",
+      "title": "LayerStack",
+      "description": "An indexed layer inspector that pairs a selectable stack with the active layer content.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/layer-stack.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/layer-stack.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "specimen-frame",
+      "title": "SpecimenFrame",
+      "description": "An editorial specimen card with an index, category, status, and a content slot.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/specimen-frame.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/specimen-frame.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "viewport-frame",
+      "title": "ViewportFrame",
+      "description": "A responsive preview frame with wide, square, and portrait aspect presets.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/viewport-frame.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/viewport-frame.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "timeline-scrubber",
+      "title": "TimelineScrubber",
+      "description": "A keyboard-accessible timeline range with labeled markers and a live time readout.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/timeline-scrubber.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/timeline-scrubber.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "signal-scope",
+      "title": "SignalScope",
+      "description": "A compact SVG signal plot for showing sampled experiment data on a calibrated grid.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/signal-scope.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/signal-scope.tsx"
+        }
+      ],
+      "type": "registry:component"
     }
   ]
 }

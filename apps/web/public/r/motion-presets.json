@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "motion-presets",
+  "title": "MotionPresets",
+  "description": "A small preset picker that returns a named duration and easing recipe for an experiment.",
+  "files": [
+    {
+      "path": "packages/ui/src/components/motion-presets.tsx",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport type { HTMLAttributes } from \"react\";\n\nexport interface MotionPreset {\n  id: string;\n  label: string;\n  duration: number;\n  easing: string;\n}\n\nexport interface MotionPresetsProps extends Omit<HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  presets: MotionPreset[];\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (preset: MotionPreset) => void;\n}\n\nexport function MotionPresets({\n  presets,\n  value,\n  defaultValue,\n  onValueChange,\n  style,\n  ...props\n}: MotionPresetsProps) {\n  const [internalValue, setInternalValue] = useState(defaultValue ?? presets[0]?.id ?? \"\");\n  const selectedId = value ?? internalValue;\n  const selected = presets.find((preset) => preset.id === selectedId);\n  const choose = (preset: MotionPreset) => {\n    if (value === undefined) setInternalValue(preset.id);\n    onValueChange?.(preset);\n  };\n\n  return (\n    <div\n      {...props}\n      style={{\n        width: \"min(100%, 370px)\",\n        padding: 14,\n        border: \"1px solid rgba(16,16,16,.2)\",\n        background: \"var(--paper, #f4f2ec)\",\n        color: \"var(--ink, #101010)\",\n        ...style,\n      }}\n    >\n      <div\n        role=\"group\"\n        aria-label=\"Motion presets\"\n        style={{ display: \"flex\", flexWrap: \"wrap\", gap: 6 }}\n      >\n        {presets.map((preset) => {\n          const active = selectedId === preset.id;\n          return (\n            <button\n              key={preset.id}\n              type=\"button\"\n              aria-pressed={active}\n              onClick={() => choose(preset)}\n              style={{\n                padding: \"7px 10px\",\n                border: `1px solid ${active ? \"var(--ink, #101010)\" : \"rgba(16,16,16,.18)\"}`,\n                background: active ? \"var(--acid, #dfff00)\" : \"transparent\",\n                color: \"inherit\",\n                font: \"700 10px var(--font-mono, monospace)\",\n                textTransform: \"uppercase\",\n                cursor: \"pointer\",\n              }}\n            >\n              {preset.label}\n            </button>\n          );\n        })}\n      </div>\n      {selected && (\n        <p\n          aria-live=\"polite\"\n          style={{\n            margin: \"12px 0 0\",\n            font: \"10px/1.6 var(--font-mono, monospace)\",\n            overflowWrap: \"anywhere\",\n          }}\n        >\n          {selected.duration}ms · {selected.easing}\n        </p>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/motion-presets.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -111,7 +111,7 @@ export function ComponentCatalog() {
           </h1>
         </div>
         <p>
-          24 original studies, ready to pull apart. Search the source by name, category,
+          {componentRegistry.length} original studies, ready to pull apart. Search the source by name, category,
           description, or tag.
         </p>
       </div>
@@ -169,7 +169,7 @@ export function ComponentCatalog() {
         </div>
       </div>
       <div className="catalog-summary">
-        <span className="mono">{String(results.length).padStart(2, "0")} / 24 STUDIES</span>
+        <span className="mono">{String(results.length).padStart(2, "0")} / {componentRegistry.length} STUDIES</span>
         <span className="mono">SORTED BY INDEX</span>
       </div>
       {results.length ? (
@@ -181,6 +181,10 @@ export function ComponentCatalog() {
                 <div
                   className={`component-preview ${entry.category.startsWith("Backgrounds") ? "is-background" : ""}`}
                 >
+                  <span className="stage-corner stage-corner-tl" aria-hidden="true">+</span>
+                  <span className="stage-corner stage-corner-tr" aria-hidden="true">+</span>
+                  <span className="stage-corner stage-corner-bl" aria-hidden="true">+</span>
+                  <span className="stage-corner stage-corner-br" aria-hidden="true">+</span>
                   <span className="component-index mono">
                     {String(componentRegistry.indexOf(entry) + 1).padStart(2, "0")}
                   </span>
@@ -209,7 +213,7 @@ export function ComponentCatalog() {
                   <div className="component-card-meta">
                     <span className="mono">{entry.category}</span>
                     <span className="mono">
-                      {String(componentRegistry.indexOf(entry) + 1).padStart(2, "0")} / 24
+                      {String(componentRegistry.indexOf(entry) + 1).padStart(2, "0")} / {componentRegistry.length}
                     </span>
                   </div>
                   <h2>{entry.name}</h2>

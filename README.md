@@ -16,7 +16,7 @@ MotionLab is an open-source library of original, interactive React components, w
 
 ## Explore
 
-- **24 components** across text, interaction, cards, navigation, and backgrounds.
+- **38 original components** across text, interaction, cards, navigation, and backgrounds.
 - **Own the source:** install individual components and edit them in your application.
 - **Live documentation:** demos, API props, examples, and accessibility notes.
 - **Playground:** adjust real props, persist locally, share a URL, and copy generated TSX.

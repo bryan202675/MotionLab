@@ -78,7 +78,7 @@ export default function HomePage() {
               </div>
               <div className="hero-live-bottom mono">
                 <span>SCRAMBLE / TEXT</span>
-                <span>01—24</span>
+                <span>01—{componentRegistry.length}</span>
               </div>
             </div>
           </div>
@@ -284,7 +284,7 @@ export default function HomePage() {
       </section>
 
       <section className="closing-cta page-wrap">
-        <span className="mono">24 STUDIES / OPEN SOURCE / MIT</span>
+        <span className="mono">{componentRegistry.length} STUDIES / OPEN SOURCE / MIT</span>
         <p className="display">
           GO BUILD
           <br />

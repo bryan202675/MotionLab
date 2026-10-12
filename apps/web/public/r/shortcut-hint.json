@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "shortcut-hint",
+  "title": "ShortcutHint",
+  "description": "A compact, screen-reader-labeled key sequence for documenting keyboard actions.",
+  "files": [
+    {
+      "path": "packages/ui/src/components/shortcut-hint.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface ShortcutHintProps extends HTMLAttributes<HTMLSpanElement> {\n  keys: string[];\n  label?: string;\n  platform?: \"mac\" | \"windows\";\n}\n\nconst platformKeys: Record<string, string> = {\n  shift: \"⇧\",\n  alt: \"⌥\",\n  enter: \"↵\",\n  escape: \"esc\",\n  space: \"space\",\n  arrowup: \"↑\",\n  arrowdown: \"↓\",\n  arrowleft: \"←\",\n  arrowright: \"→\",\n};\n\nexport function ShortcutHint({\n  keys,\n  label,\n  platform = \"mac\",\n  style,\n  ...props\n}: ShortcutHintProps) {\n  const spokenKeys = keys.join(\" + \");\n  return (\n    <span\n      {...props}\n      aria-label={label ? `${label}: ${spokenKeys}` : spokenKeys}\n      style={{ display: \"inline-flex\", alignItems: \"center\", gap: 5, ...style }}\n    >\n      {keys.map((key, index) => {\n        const normalized = key.toLowerCase();\n        const display =\n          normalized === \"mod\"\n            ? platform === \"mac\"\n              ? \"⌘\"\n              : \"Ctrl\"\n            : (platformKeys[normalized] ?? key);\n        return (\n          <span\n            key={`${key}-${index}`}\n            style={{ display: \"inline-flex\", alignItems: \"center\", gap: 5 }}\n          >\n            {index > 0 && (\n              <span aria-hidden=\"true\" style={{ opacity: 0.45 }}>\n                +\n              </span>\n            )}\n            <kbd\n              aria-hidden=\"true\"\n              style={{\n                minWidth: 22,\n                padding: \"4px 6px\",\n                border: \"1px solid rgba(16,16,16,.2)\",\n                boxShadow: \"0 2px 0 rgba(16,16,16,.16)\",\n                background: \"var(--paper, #f4f2ec)\",\n                color: \"var(--ink, #101010)\",\n                font: \"600 11px/1 var(--font-mono, monospace)\",\n                textAlign: \"center\",\n                textTransform: \"uppercase\",\n              }}\n            >\n              {display}\n            </kbd>\n          </span>\n        );\n      })}\n    </span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/shortcut-hint.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

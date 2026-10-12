@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "metric-counter",
+  "title": "MetricCounter",
+  "description": "A labeled instrument readout that interpolates changing values and settles cleanly for reduced motion.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/metric-counter.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, useState } from \"react\";\nimport type { HTMLAttributes } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface MetricCounterProps extends HTMLAttributes<HTMLSpanElement> {\n  value: number;\n  label: string;\n  prefix?: string;\n  suffix?: string;\n  decimals?: number;\n  duration?: number;\n}\n\nexport function MetricCounter({\n  value,\n  label,\n  prefix = \"\",\n  suffix = \"\",\n  decimals = 0,\n  duration = 900,\n  style,\n  ...props\n}: MetricCounterProps) {\n  const [displayed, setDisplayed] = useState(value);\n  const displayedRef = useRef(value);\n  const reduceMotion = useReducedMotion();\n  const safeDuration = Number.isFinite(duration) ? duration : 0;\n  const precision = Number.isFinite(decimals) ? Math.min(20, Math.max(0, Math.floor(decimals))) : 0;\n\n  useEffect(() => {\n    if (!Number.isFinite(value)) return;\n    if (reduceMotion || safeDuration <= 0) {\n      displayedRef.current = value;\n      return;\n    }\n\n    const start = displayedRef.current;\n    const startedAt = performance.now();\n    let frame = 0;\n    const tick = (now: number) => {\n      const progress = Math.min(1, (now - startedAt) / safeDuration);\n      const eased = 1 - (1 - progress) ** 3;\n      const next = start + (value - start) * eased;\n      displayedRef.current = next;\n      setDisplayed(next);\n      if (progress < 1) frame = requestAnimationFrame(tick);\n    };\n    frame = requestAnimationFrame(tick);\n    return () => cancelAnimationFrame(frame);\n  }, [reduceMotion, safeDuration, value]);\n\n  const visibleValue = reduceMotion || safeDuration <= 0 ? value : displayed;\n  const formatted = visibleValue.toLocaleString(undefined, {\n    minimumFractionDigits: precision,\n    maximumFractionDigits: precision,\n  });\n  const finalValue = value.toLocaleString(undefined, {\n    minimumFractionDigits: precision,\n    maximumFractionDigits: precision,\n  });\n\n  return (\n    <span {...props} style={{ display: \"inline-grid\", gap: 4, ...style }}>\n      <span aria-hidden=\"true\" style={{ fontVariantNumeric: \"tabular-nums\" }}>\n        {prefix}\n        {formatted}\n        {suffix}\n      </span>\n      <span className=\"sr-only\" aria-live=\"polite\">\n        {label}: {prefix}\n        {finalValue}\n        {suffix}\n      </span>\n      <span\n        aria-hidden=\"true\"\n        style={{\n          font: \"600 10px/1.2 var(--font-mono, monospace)\",\n          letterSpacing: \".12em\",\n          textTransform: \"uppercase\",\n          opacity: 0.65,\n        }}\n      >\n        {label}\n      </span>\n    </span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/metric-counter.tsx"
+    }
+  ],
+  "type": "registry:component"
+}
