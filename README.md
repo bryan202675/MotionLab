@@ -16,7 +16,7 @@ MotionLab is an open-source library of original, interactive React components, w
 
 ## Explore
 
-- **38 original components** across text, interaction, cards, navigation, and backgrounds.
+- **102 original components** across text, interaction, cards, navigation, and backgrounds.
 - **Own the source:** install individual components and edit them in your application.
 - **Live documentation:** demos, API props, examples, and accessibility notes.
 - **Playground:** adjust real props, persist locally, share a URL, and copy generated TSX.
@@ -83,7 +83,7 @@ scripts/                   Registry generation and schema validation
 registry.json              Root shadcn registry manifest
 ```
 
-The component metadata in `apps/web/src/lib/component-registry.ts` feeds the catalog, detail pages, examples, and registry generator. Component source lives in one file per component under `packages/ui/src/components/`.
+The component metadata in `apps/web/src/lib/component-registry.ts` feeds the catalog, detail pages, examples, and registry generator. The original-study descriptors live in `apps/web/src/lib/original-studies.ts`; `pnpm registry:build` generates their one-file wrappers and includes the shared family source in each install payload.
 
 ## Quality and release
 

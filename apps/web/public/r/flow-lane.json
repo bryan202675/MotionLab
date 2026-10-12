@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "flow-lane",
+  "title": "FlowLane",
+  "description": "A lane of connected phases uses a moving marker to show current flow.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/flow-lane.tsx",
+      "content": "\"use client\";\n\nimport { LayoutStudy, type LayoutStudyProps } from \"./studies/layout-study\";\n\nexport type FlowLaneProps = Omit<LayoutStudyProps, \"variant\">;\n\nexport function FlowLane(props: FlowLaneProps) {\n  return <LayoutStudy variant=\"flow-lane\" {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/flow-lane.tsx"
+    },
+    {
+      "path": "packages/ui/src/components/studies/layout-study.tsx",
+      "content": "\"use client\";\n\nimport { useId, useState } from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\n\nexport const layoutStudyVariants = [\n  \"step-track\", \"focus-rail\", \"folder-tabs\", \"menu-matrix\", \"progress-path\", \"split-stage\",\n  \"sequence-grid\", \"scroll-chapter\", \"switchboard\", \"stage-selector\", \"flow-lane\",\n  \"chapter-marker\", \"pane-snap\",\n] as const;\nexport type LayoutStudyVariant = (typeof layoutStudyVariants)[number];\n\nexport interface LayoutStudyProps {\n  label?: string;\n  accent?: string;\n  intensity?: number;\n  pace?: number;\n  variant: LayoutStudyVariant;\n}\n\nexport function LayoutStudy({\n  label = \"Choose a frame\",\n  accent = \"var(--electric, #5038ff)\",\n  intensity = 12,\n  pace = 1,\n  variant,\n}: LayoutStudyProps) {\n  const [active, setActive] = useState(0);\n  const id = useId();\n  const reduceMotion = useReducedMotion() ?? false;\n  const labels = variant === \"folder-tabs\" ? [\"LAYERS\", \"TIMING\", \"OUTPUT\"] : [\"FRAME 01\", \"FRAME 02\", \"FRAME 03\"];\n  const vertical = variant === \"focus-rail\" || variant === \"chapter-marker\";\n  const compact = variant === \"menu-matrix\" || variant === \"sequence-grid\";\n  const spring = reduceMotion ? { duration: 0 } : { type: \"spring\" as const, stiffness: 320 * pace, damping: 26 };\n  const itemStyle = { position: \"relative\" as const, border: \"1px solid currentColor\", background: \"transparent\", color: \"var(--ink, #101010)\", padding: compact ? \"10px\" : \"9px 12px\", minWidth: compact ? 72 : undefined, textAlign: \"left\" as const, font: \"700 10px var(--font-mono, monospace)\", cursor: \"pointer\" };\n\n  return (\n    <section aria-label={label} style={{ display: \"grid\", gap: 12, width: \"min(100%, 350px)\", color: \"var(--ink, #101010)\" }}>\n      <div role=\"tablist\" aria-label={label} style={{ display: \"flex\", flexDirection: vertical ? \"column\" : \"row\", flexWrap: \"wrap\", gap: 6, alignItems: \"stretch\" }}>\n        {labels.map((item, index) => (\n          <button key={item} id={`${id}-tab-${index}`} type=\"button\" role=\"tab\" aria-controls={`${id}-panel`} aria-selected={active === index} onClick={() => setActive(index)} style={{ ...itemStyle, flex: compact ? \"0 1 30%\" : 1, borderColor: active === index ? accent : \"currentColor\", background: active === index ? accent : \"transparent\", boxShadow: active === index ? `${Math.min(5, intensity / 3)}px ${Math.min(5, intensity / 3)}px currentColor` : \"none\" }}>\n            <span style={{ position: \"relative\", zIndex: 1 }}>{item}</span>\n            {active === index && !reduceMotion ? <motion.span aria-hidden=\"true\" layoutId={`layout-study-${variant}`} transition={spring} style={{ position: \"absolute\", inset: 0, background: accent, zIndex: 0 }} /> : null}\n          </button>\n        ))}\n      </div>\n      <motion.div key={active} id={`${id}-panel`} role=\"tabpanel\" aria-labelledby={`${id}-tab-${active}`} initial={reduceMotion ? false : { opacity: 0, x: variant === \"pane-snap\" ? 10 : 0, y: variant === \"pane-snap\" ? 0 : 6 }} animate={{ opacity: 1, x: 0, y: 0 }} transition={spring} style={{ minHeight: 54, borderTop: \"2px solid currentColor\", padding: \"12px 2px\", display: \"grid\", gridTemplateColumns: \"auto 1fr\", alignItems: \"center\", gap: 12 }}>\n        <span style={{ color: accent, font: \"800 22px var(--font-mono, monospace)\" }}>0{active + 1}</span>\n        <span style={{ font: \"700 12px var(--font-mono, monospace)\" }}>{active === 0 ? label : `${labels[active]} / READY`}</span>\n      </motion.div>\n    </section>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/studies/layout-study.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

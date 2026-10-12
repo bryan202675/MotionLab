@@ -945,6 +945,16 @@ button {
   padding-block: 16px 11px;
   font-size: 8px;
 }
+.catalog-load-more {
+  display: flex;
+  margin: 24px auto 0;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.catalog-load-more span {
+  color: inherit;
+  opacity: 0.68;
+}
 .component-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

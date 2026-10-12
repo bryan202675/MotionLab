@@ -62,6 +62,11 @@ export function ComponentCatalog() {
   const favorites = useMemo(() => parseFavorites(favoritesSnapshot), [favoritesSnapshot]);
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [layout, setLayout] = useState<"grid" | "list">("grid");
+  const [visibleState, setVisibleState] = useState({ key: "", count: 24 });
+  const catalogIndex = useMemo(
+    () => new Map(componentRegistry.map((entry, index) => [entry.slug, index + 1])),
+    [],
+  );
 
   const updateFilters = (next: { q?: string; category?: string }) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -98,6 +103,9 @@ export function ComponentCatalog() {
       return matchesQuery && matchesCategory && matchesFavorites;
     });
   }, [category, favorites, favoritesOnly, query]);
+  const filterKey = `${query}\u0000${category}\u0000${favoritesOnly}\u0000${favoritesSnapshot}`;
+  const visibleCount = visibleState.key === filterKey ? visibleState.count : 24;
+  const visibleResults = results.slice(0, visibleCount);
 
   return (
     <section className="catalog-shell page-wrap">
@@ -169,13 +177,14 @@ export function ComponentCatalog() {
         </div>
       </div>
       <div className="catalog-summary">
-        <span className="mono">{String(results.length).padStart(2, "0")} / {componentRegistry.length} STUDIES</span>
+        <span className="mono">{String(visibleResults.length).padStart(2, "0")} SHOWN / {results.length} MATCHES</span>
         <span className="mono">SORTED BY INDEX</span>
       </div>
       {results.length ? (
         <div className={`component-grid ${layout === "list" ? "is-list" : ""}`}>
-          {results.map((entry) => {
+          {visibleResults.map((entry) => {
             const favorite = favorites.includes(entry.slug);
+            const index = catalogIndex.get(entry.slug) ?? 0;
             return (
               <article className="component-card" key={entry.slug}>
                 <div
@@ -186,7 +195,7 @@ export function ComponentCatalog() {
                   <span className="stage-corner stage-corner-bl" aria-hidden="true">+</span>
                   <span className="stage-corner stage-corner-br" aria-hidden="true">+</span>
                   <span className="component-index mono">
-                    {String(componentRegistry.indexOf(entry) + 1).padStart(2, "0")}
+                    {String(index).padStart(2, "0")}
                   </span>
                   <button
                     type="button"
@@ -213,7 +222,7 @@ export function ComponentCatalog() {
                   <div className="component-card-meta">
                     <span className="mono">{entry.category}</span>
                     <span className="mono">
-                      {String(componentRegistry.indexOf(entry) + 1).padStart(2, "0")} / {componentRegistry.length}
+                      {String(index).padStart(2, "0")} / {componentRegistry.length}
                     </span>
                   </div>
                   <h2>{entry.name}</h2>
@@ -250,6 +259,11 @@ export function ComponentCatalog() {
           </button>
         </div>
       )}
+      {visibleCount < results.length ? (
+        <button className="button button-ink catalog-load-more" type="button" onClick={() => setVisibleState({ key: filterKey, count: visibleCount + 24 })}>
+          LOAD MORE STUDIES <span className="mono">{Math.min(24, results.length - visibleCount)} LEFT IN THIS SET</span>
+        </button>
+      ) : null}
     </section>
   );
 }

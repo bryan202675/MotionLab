@@ -580,6 +580,1350 @@
         }
       ],
       "type": "registry:component"
+    },
+    {
+      "name": "rivet-title",
+      "title": "RivetTitle",
+      "description": "A compact wordmark lands in offset layers with a measured, letter-by-letter settle.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/rivet-title.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/rivet-title.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "foldline",
+      "title": "Foldline",
+      "description": "Lines of copy hinge open from a shared baseline, like a sheet unfolding on a table.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/foldline.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/foldline.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "echo-stack",
+      "title": "EchoStack",
+      "description": "A short sequence of ghosted glyphs tightens into a crisp headline.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/echo-stack.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/echo-stack.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "glyph-climb",
+      "title": "GlyphClimb",
+      "description": "Characters rise in a compact register with alternating micro-rotation.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/glyph-climb.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/glyph-climb.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "stencil-shift",
+      "title": "StencilShift",
+      "description": "Paired text fragments slide from opposite edges and lock into one title.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/stencil-shift.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/stencil-shift.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "word-steps",
+      "title": "WordSteps",
+      "description": "Words enter on a deliberate vertical cadence for short editorial statements.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/word-steps.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/word-steps.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "vertical-flip",
+      "title": "VerticalFlip",
+      "description": "A title turns forward around its center line, with reduced motion respected.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/vertical-flip.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/vertical-flip.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "ink-wash",
+      "title": "InkWash",
+      "description": "A soft-focus phrase resolves into sharp type without moving the surrounding layout.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ink-wash.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/ink-wash.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "axis-caption",
+      "title": "AxisCaption",
+      "description": "Caption glyphs expand from a narrow measurement line into readable type.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/axis-caption.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/axis-caption.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "type-pulse",
+      "title": "TypePulse",
+      "description": "A restrained baseline pulse keeps a short status phrase visibly alive.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/type-pulse.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/type-pulse.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "letter-wave",
+      "title": "LetterWave",
+      "description": "A low-amplitude wave passes through a label while preserving its line box.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/letter-wave.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/letter-wave.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "baseline-drift",
+      "title": "BaselineDrift",
+      "description": "Letters drift around a steady typographic baseline for a quiet ambient accent.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/baseline-drift.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/baseline-drift.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "counterwheel",
+      "title": "Counterwheel",
+      "description": "A glyph wheel turns each character into place for compact changing labels.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/counterwheel.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/counterwheel.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/text-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/text-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "step-dial",
+      "title": "StepDial",
+      "description": "A keyboard-friendly increment dial with explicit one-step controls and a live value.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/step-dial.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/step-dial.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "snap-range",
+      "title": "SnapRange",
+      "description": "A native range input that moves through clear, repeatable intervals.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/snap-range.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/snap-range.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "pulse-switch",
+      "title": "PulseSwitch",
+      "description": "A binary control gives a brief visual pulse when its state changes.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/pulse-switch.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/pulse-switch.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "pressure-pad",
+      "title": "PressurePad",
+      "description": "A broad press target responds to pointer contact and remains a semantic button.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/pressure-pad.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/pressure-pad.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "sequence-key",
+      "title": "SequenceKey",
+      "description": "A single action control makes an active sequence state clear at a glance.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/sequence-key.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/sequence-key.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "hold-meter",
+      "title": "HoldMeter",
+      "description": "A hold action fills its track while the pointer or activation key stays down.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/hold-meter.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/hold-meter.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "angle-controller",
+      "title": "AngleController",
+      "description": "A range control presents its value as a normalized angle.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/angle-controller.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/angle-controller.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "velocity-handle",
+      "title": "VelocityHandle",
+      "description": "A fine-grain slider reports a stable scalar for tuning motion response.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/velocity-handle.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/velocity-handle.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "latch-action",
+      "title": "LatchAction",
+      "description": "A persistent action latch exposes its state through both color and pressed semantics.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/latch-action.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/latch-action.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "orbit-choice",
+      "title": "OrbitChoice",
+      "description": "A compact set of discrete choices can be selected without pointer-only gestures.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/orbit-choice.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/orbit-choice.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "repeat-button",
+      "title": "RepeatButton",
+      "description": "An increment action animates each new value while keeping the number readable.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/repeat-button.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/repeat-button.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "scrub-rail",
+      "title": "ScrubRail",
+      "description": "A broad native slider turns continuous input into a clear position readout.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/scrub-rail.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/scrub-rail.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "range-duo",
+      "title": "RangeDuo",
+      "description": "Two coordinated range inputs define a low and high boundary.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/range-duo.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/range-duo.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/control-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/control-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "tilt-pane",
+      "title": "TiltPane",
+      "description": "A framed surface tilts toward the pointer and resets cleanly on exit.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/tilt-pane.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/tilt-pane.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "flip-panel",
+      "title": "FlipPanel",
+      "description": "A keyboard-operable panel turns to reveal a second face.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/flip-panel.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/flip-panel.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "peel-surface",
+      "title": "PeelSurface",
+      "description": "A printed panel lifts from one edge to suggest a tactile sheet.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/peel-surface.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/peel-surface.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "stacked-deck",
+      "title": "StackedDeck",
+      "description": "Three layered specimens separate just enough to communicate their depth order.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/stacked-deck.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/stacked-deck.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "spring-carousel",
+      "title": "SpringCarousel",
+      "description": "A single-frame carousel advances through content with direct previous and next controls.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/spring-carousel.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/spring-carousel.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "depth-shelf",
+      "title": "DepthShelf",
+      "description": "A shelf-like preview gains perspective and lifts its focal object on hover.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/depth-shelf.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/depth-shelf.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "gallery-frame",
+      "title": "GalleryFrame",
+      "description": "A bold mat and registration marks frame a media specimen.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/gallery-frame.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/gallery-frame.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "perspective-window",
+      "title": "PerspectiveWindow",
+      "description": "A viewport panel leans through a bounded perspective response.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/perspective-window.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/perspective-window.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "focus-tile",
+      "title": "FocusTile",
+      "description": "A selectable tile enlarges its own signal without shifting adjacent content.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/focus-tile.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/focus-tile.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "overlap-editor",
+      "title": "OverlapEditor",
+      "description": "A small card deck exposes its top layer while preserving the stack beneath it.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/overlap-editor.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/overlap-editor.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "follow-card",
+      "title": "FollowCard",
+      "description": "A surface follows the pointer through spring values instead of React frame state.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/follow-card.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/follow-card.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "bounce-gallery",
+      "title": "BounceGallery",
+      "description": "Gallery artwork rises and settles with a bounded press and hover response.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/bounce-gallery.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/bounce-gallery.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "drift-panel",
+      "title": "DriftPanel",
+      "description": "A light panel floats a few pixels to mark a featured motion specimen.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/drift-panel.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/drift-panel.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/surface-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/surface-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "step-track",
+      "title": "StepTrack",
+      "description": "A compact progression bar links named stages to an animated detail panel.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/step-track.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/step-track.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "focus-rail",
+      "title": "FocusRail",
+      "description": "A vertical choice rail keeps its active destination and supporting copy in view.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/focus-rail.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/focus-rail.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "folder-tabs",
+      "title": "FolderTabs",
+      "description": "Tabbed panels use a folder-like edge treatment and native button semantics.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/folder-tabs.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/folder-tabs.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "menu-matrix",
+      "title": "MenuMatrix",
+      "description": "A small grid of destinations adapts without hiding keyboard focus.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/menu-matrix.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/menu-matrix.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "progress-path",
+      "title": "ProgressPath",
+      "description": "A three-point path shows the selected stage and its neighboring steps.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/progress-path.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/progress-path.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "split-stage",
+      "title": "SplitStage",
+      "description": "A two-part layout keeps navigation and changing stage content in balance.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/split-stage.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/split-stage.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "sequence-grid",
+      "title": "SequenceGrid",
+      "description": "Numbered cells provide direct access to a short sequence of scenes.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/sequence-grid.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/sequence-grid.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "scroll-chapter",
+      "title": "ScrollChapter",
+      "description": "Chapter markers expose a concise, directly selectable reading sequence.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/scroll-chapter.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/scroll-chapter.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "switchboard",
+      "title": "Switchboard",
+      "description": "A three-position switchboard makes the current workspace mode explicit.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/switchboard.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/switchboard.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "stage-selector",
+      "title": "StageSelector",
+      "description": "A horizontal stage selector pairs a live index with its active title.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/stage-selector.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/stage-selector.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "flow-lane",
+      "title": "FlowLane",
+      "description": "A lane of connected phases uses a moving marker to show current flow.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/flow-lane.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/flow-lane.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "chapter-marker",
+      "title": "ChapterMarker",
+      "description": "A narrow vertical index offers direct access to named sections.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/chapter-marker.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/chapter-marker.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "pane-snap",
+      "title": "PaneSnap",
+      "description": "A panel switch uses a short directional handoff between adjacent views.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/pane-snap.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/pane-snap.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/layout-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/layout-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "orbit-field",
+      "title": "OrbitField",
+      "description": "An orbital diagram layers slowly rotating tracks and low-key signal points.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/orbit-field.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/orbit-field.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "contour-paper",
+      "title": "ContourPaper",
+      "description": "Fine contour paths drift over the canvas like a measured elevation drawing.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/contour-paper.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/contour-paper.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "scan-matrix",
+      "title": "ScanMatrix",
+      "description": "A technical scan line crosses a quiet matrix of calibration marks.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/scan-matrix.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/scan-matrix.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "ripple-grid",
+      "title": "RippleGrid",
+      "description": "Circular pulses travel through a loose grid without blocking page interaction.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ripple-grid.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/ripple-grid.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "spark-cloud",
+      "title": "SparkCloud",
+      "description": "A sparse field of flecks wanders at different speeds across a surface.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/spark-cloud.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/spark-cloud.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "ribbon-vector",
+      "title": "RibbonVector",
+      "description": "Fine vector strands weave across the frame in a restrained looping pattern.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ribbon-vector.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/ribbon-vector.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "chromatic-fan",
+      "title": "ChromaticFan",
+      "description": "A fan of translucent rays rotates around a fixed optical center.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/chromatic-fan.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/chromatic-fan.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "star-chart",
+      "title": "StarChart",
+      "description": "Orbit paths and signal nodes assemble into a navigational star chart.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/star-chart.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/star-chart.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "line-topography",
+      "title": "LineTopography",
+      "description": "Nested paths create a living contour map from a small set of vector strokes.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/line-topography.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/line-topography.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "signal-horizon",
+      "title": "SignalHorizon",
+      "description": "A horizon trace and scanning beam suggest a live instrument display.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/signal-horizon.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/signal-horizon.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "color-loom",
+      "title": "ColorLoom",
+      "description": "Crossing threads breathe in and out like a woven color study.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/color-loom.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/color-loom.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "shard-field",
+      "title": "ShardField",
+      "description": "Outlined geometric shards shift by a few pixels to form an angular backdrop.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/shard-field.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/shard-field.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/studies/field-study.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/studies/field-study.tsx"
+        }
+      ],
+      "type": "registry:component"
     }
   ]
 }
