@@ -1,11 +1,16 @@
 "use client";
 
-import { useRef } from "react";
+import { useId, useRef } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
+import { getFieldStudyAddition, isAddedFieldStudyVariant } from "./field-study-additions";
 
 export const fieldStudyVariants = [
   "orbit-field", "contour-paper", "scan-matrix", "ripple-grid", "spark-cloud", "ribbon-vector",
   "chromatic-fan", "star-chart", "line-topography", "signal-horizon", "color-loom", "shard-field",
+  "ribbon-mesh", "wave-grid", "radial-loom", "dot-migration", "moire-window", "orbit-lattice",
+  "beacon-sweep", "ripple-basin", "wireframe-hills", "particle-drift", "raster-rain", "lens-rings",
+  "crosshair-field", "folded-grid", "petal-array", "signal-constellation", "soft-gridlight", "contour-drift",
+  "angular-flow", "orbit-clock",
 ] as const;
 export type FieldStudyVariant = (typeof fieldStudyVariants)[number];
 
@@ -19,15 +24,25 @@ export interface FieldStudyProps {
 
 export function FieldStudy({ accent = "var(--electric, #5038ff)", intensity = 12, pace = 1, variant }: FieldStudyProps) {
   const rootRef = useRef<SVGSVGElement>(null);
+  const additionRef = useRef<HTMLDivElement>(null);
+  const instanceId = useId().replaceAll(":", "");
   const isInView = useInView(rootRef, { amount: 0.1 });
+  const isAdditionInView = useInView(additionRef, { amount: 0.1 });
   const reduceMotion = useReducedMotion() ?? false;
-  const animate = !reduceMotion && isInView;
+  const animate = !reduceMotion && (isInView || isAdditionInView);
   const duration = Math.max(2.5, 9 / Math.max(0.25, pace));
   const strength = Math.max(0.15, Math.min(1, intensity / 16));
   const lines = Array.from({ length: 9 }, (_, index) => index);
   const rootStyle = { width: "100%", height: 180, display: "block", position: "relative" as const, opacity: strength };
 
-  if (variant === "orbit-field" || variant === "star-chart") {
+  if (isAddedFieldStudyVariant(variant)) {
+    return <div ref={additionRef} style={{ width: "100%", height: 180, position: "relative" }}>{getFieldStudyAddition({ accent, animate, duration, instanceId, rootStyle, variant })}</div>;
+  }
+
+  if (variant === "orbit-field" || variant === "star-chart" || variant === "orbit-lattice" || variant === "orbit-clock") {
+    if (variant === "orbit-clock") {
+      return <svg ref={rootRef} aria-hidden="true" viewBox="0 0 320 160" preserveAspectRatio="xMidYMid meet" style={rootStyle}><circle cx="160" cy="80" r="58" fill="none" stroke={accent} strokeOpacity=".35" /><circle cx="160" cy="80" r="3" fill={accent} />{[0, 1, 2].map((index) => <motion.line key={index} x1="160" y1="80" x2="160" y2={index === 0 ? 28 : index === 1 ? 40 : 54} stroke={accent} strokeWidth={index === 0 ? 2 : 1} style={{ transformOrigin: "160px 80px" }} animate={animate ? { rotate: 360 } : undefined} transition={{ duration: duration * (index + 1), repeat: Infinity, ease: "linear" }} />)}<motion.circle cx="160" cy="80" r="72" fill="none" stroke={accent} strokeDasharray="2 6" animate={animate ? { rotate: -360 } : undefined} transition={{ duration: duration * 2, repeat: Infinity, ease: "linear" }} style={{ transformOrigin: "160px 80px" }} /></svg>;
+    }
     return (
       <svg ref={rootRef} aria-hidden="true" viewBox="0 0 320 160" preserveAspectRatio="none" style={rootStyle}>
         <g fill="none" stroke={accent} strokeWidth="1">

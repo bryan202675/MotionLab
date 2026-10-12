@@ -840,7 +840,10 @@ export const componentRegistry: ComponentEntry[] = [
     dependencies: ["motion"],
     props: studyProps,
     example: `<${study.name} label="Make it move." />`,
-    sourceFiles: [`packages/ui/src/components/studies/${study.family}-study.tsx`],
+    sourceFiles: [
+      `packages/ui/src/components/studies/${study.family}-study.tsx`,
+      ...(study.family === "field" ? ["packages/ui/src/components/studies/field-study-additions.tsx"] : []),
+    ],
     study: { family: study.family, variant: study.variant },
   })),
 ];
