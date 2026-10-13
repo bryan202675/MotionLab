@@ -75,3 +75,38 @@ export { TimelineScrubber } from "./components/timeline-scrubber";
 export type { TimelineMarker, TimelineScrubberProps } from "./components/timeline-scrubber";
 export { SignalScope } from "./components/signal-scope";
 export type { SignalScopeProps } from "./components/signal-scope";
+
+export { Particles } from "./components/particles";
+export type { ParticlesProps } from "./components/particles";
+export { Aurora } from "./components/aurora";
+export type { AuroraProps } from "./components/aurora";
+export { Hyperspeed } from "./components/hyperspeed";
+export type { HyperspeedProps } from "./components/hyperspeed";
+export { Squares } from "./components/squares";
+export type { SquaresProps } from "./components/squares";
+export { Waves } from "./components/waves";
+export type { WavesProps } from "./components/waves";
+export { ShinyButton } from "./components/shiny-button";
+export type { ShinyButtonProps } from "./components/shiny-button";
+export { StarBorder } from "./components/star-border";
+export type { StarBorderProps } from "./components/star-border";
+export { ClickSpark } from "./components/click-spark";
+export type { ClickSparkProps } from "./components/click-spark";
+export { BlurText } from "./components/blur-text";
+export type { BlurTextProps } from "./components/blur-text";
+export { DecryptedText } from "./components/decrypted-text";
+export type { DecryptedTextProps } from "./components/decrypted-text";
+export { RotatingText } from "./components/rotating-text";
+export type { RotatingTextProps } from "./components/rotating-text";
+export { CountUp } from "./components/count-up";
+export type { CountUpProps } from "./components/count-up";
+export { PixelCard } from "./components/pixel-card";
+export type { PixelCardProps } from "./components/pixel-card";
+export { BorderGlow } from "./components/border-glow";
+export type { BorderGlowProps } from "./components/border-glow";
+export { SoftScroll, useSoftScroll } from "./components/soft-scroll";
+export type {
+  SoftScrollProps,
+  SoftScrollRef,
+  SoftScrollContextValue,
+} from "./components/soft-scroll";

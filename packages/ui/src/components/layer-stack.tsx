@@ -63,7 +63,7 @@ export function LayerStack({
                   : "transform 180ms ease, background-color 180ms ease",
                 border: `1px solid ${active ? "var(--ink, #101010)" : "rgba(16,16,16,.18)"}`,
                 background: active ? "var(--acid, #dfff00)" : "var(--paper, #f4f2ec)",
-                color: "inherit",
+                color: active ? "var(--acid-ink, #101010)" : "inherit",
                 textAlign: "left",
                 font: "700 10px var(--font-mono, monospace)",
                 textTransform: "uppercase",

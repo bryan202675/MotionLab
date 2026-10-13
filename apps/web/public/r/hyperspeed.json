@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hyperspeed",
+  "title": "Hyperspeed",
+  "description": "High-octane sci-fi light speed warp effect with 3D star streak perspective simulation.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/hyperspeed.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef } from \"react\";\nimport type { HTMLAttributes } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface HyperspeedProps extends HTMLAttributes<HTMLCanvasElement> {\n  starCount?: number;\n  speed?: number;\n  color?: string;\n}\n\nexport function Hyperspeed({\n  starCount = 180,\n  speed = 4,\n  color = \"#dfff00\",\n  style,\n  ...props\n}: HyperspeedProps) {\n  const canvasRef = useRef<HTMLCanvasElement>(null);\n  const reduceMotion = useReducedMotion();\n\n  useEffect(() => {\n    const canvas = canvasRef.current;\n    if (!canvas) return;\n    const ctx = canvas.getContext(\"2d\");\n    if (!ctx) return;\n\n    let width = (canvas.width = canvas.parentElement?.clientWidth || window.innerWidth);\n    let height = (canvas.height = canvas.parentElement?.clientHeight || window.innerHeight);\n\n    interface Star {\n      x: number;\n      y: number;\n      z: number;\n      pz: number;\n    }\n\n    const stars: Star[] = Array.from({ length: starCount }, () => ({\n      x: (Math.random() - 0.5) * width * 2,\n      y: (Math.random() - 0.5) * height * 2,\n      z: Math.random() * width,\n      pz: Math.random() * width,\n    }));\n\n    let animationId: number;\n\n    const resize = () => {\n      if (!canvas.parentElement) return;\n      width = canvas.width = canvas.parentElement.clientWidth;\n      height = canvas.height = canvas.parentElement.clientHeight;\n    };\n    window.addEventListener(\"resize\", resize);\n\n    const cx = width / 2;\n    const cy = height / 2;\n\n    const draw = () => {\n      ctx.fillStyle = \"rgba(16, 16, 16, 0.35)\";\n      ctx.fillRect(0, 0, width, height);\n\n      const currentSpeed = reduceMotion ? 0.4 : speed;\n\n      for (const s of stars) {\n        s.pz = s.z;\n        s.z -= currentSpeed * 2;\n\n        if (s.z <= 0) {\n          s.z = width;\n          s.pz = width;\n          s.x = (Math.random() - 0.5) * width * 2;\n          s.y = (Math.random() - 0.5) * height * 2;\n        }\n\n        const k = 250 / s.z;\n        const px = s.x * k + cx;\n        const py = s.y * k + cy;\n\n        const pk = 250 / s.pz;\n        const ppx = s.x * pk + cx;\n        const ppy = s.y * pk + cy;\n\n        if (px >= 0 && px <= width && py >= 0 && py <= height) {\n          const alpha = Math.min(1, (1 - s.z / width) * 1.5);\n          ctx.beginPath();\n          ctx.moveTo(ppx, ppy);\n          ctx.lineTo(px, py);\n          ctx.strokeStyle = color;\n          ctx.lineWidth = Math.max(1, (1 - s.z / width) * 3);\n          ctx.globalAlpha = alpha;\n          ctx.stroke();\n        }\n      }\n\n      animationId = requestAnimationFrame(draw);\n    };\n\n    draw();\n\n    return () => {\n      cancelAnimationFrame(animationId);\n      window.removeEventListener(\"resize\", resize);\n    };\n  }, [starCount, speed, color, reduceMotion]);\n\n  return (\n    <canvas\n      ref={canvasRef}\n      style={{\n        width: \"100%\",\n        height: \"100%\",\n        display: \"block\",\n        pointerEvents: \"none\",\n        ...style,\n      }}\n      {...props}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/hyperspeed.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

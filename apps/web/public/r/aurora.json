@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aurora",
+  "title": "Aurora",
+  "description": "Fluid Northern Lights ambient gradient glow canvas mesh with harmonic movement.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/aurora.tsx",
+      "content": "\"use client\";\n\nimport type { HTMLAttributes } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface AuroraProps extends HTMLAttributes<HTMLDivElement> {\n  colorStops?: string[];\n  amplitude?: number;\n  blend?: number;\n  speed?: number;\n}\n\nexport function Aurora({\n  colorStops = [\"#5038ff\", \"#dfff00\", \"#ff5638\"],\n  amplitude = 1.2,\n  blend = 0.65,\n  speed = 12,\n  style,\n  ...props\n}: AuroraProps) {\n  const reduceMotion = useReducedMotion();\n\n  const c1 = colorStops[0] ?? \"#5038ff\";\n  const c2 = colorStops[1] ?? \"#dfff00\";\n  const c3 = colorStops[2] ?? \"#ff5638\";\n\n  return (\n    <div\n      aria-hidden=\"true\"\n      style={{\n        position: \"relative\",\n        width: \"100%\",\n        height: \"100%\",\n        overflow: \"hidden\",\n        backgroundColor: \"transparent\",\n        ...style,\n      }}\n      {...props}\n    >\n      <div\n        style={{\n          position: \"absolute\",\n          inset: \"-50%\",\n          width: \"200%\",\n          height: \"200%\",\n          backgroundImage: `\n            radial-gradient(ellipse 60% 45% at 20% 30%, ${c1} 0%, transparent 60%),\n            radial-gradient(ellipse 50% 50% at 75% 65%, ${c2} 0%, transparent 60%),\n            radial-gradient(ellipse 70% 35% at 50% 85%, ${c3} 0%, transparent 60%)\n          `,\n          filter: `blur(${40 * amplitude}px)`,\n          opacity: blend,\n          animation: reduceMotion ? \"none\" : `aurora-spin ${speed}s ease-in-out infinite alternate`,\n          pointerEvents: \"none\",\n        }}\n      />\n      <style>{`\n        @keyframes aurora-spin {\n          0% {\n            transform: translate3d(-4%, -6%, 0) rotate(0deg) scale(1);\n          }\n          50% {\n            transform: translate3d(5%, 3%, 0) rotate(12deg) scale(1.08);\n          }\n          100% {\n            transform: translate3d(-3%, 7%, 0) rotate(-10deg) scale(0.95);\n          }\n        }\n      `}</style>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/aurora.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

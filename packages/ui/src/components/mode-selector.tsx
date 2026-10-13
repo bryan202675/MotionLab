@@ -62,7 +62,7 @@ export function ModeSelector({
               border: "1px solid",
               borderColor: active ? "var(--ink, #101010)" : "transparent",
               background: active ? "var(--acid, #dfff00)" : "transparent",
-              color: "var(--ink, #101010)",
+              color: active ? "var(--acid-ink, #101010)" : "var(--ink, #101010)",
               font: "700 11px var(--font-mono, monospace)",
               textTransform: "uppercase",
               cursor: "pointer",

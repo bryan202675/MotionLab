@@ -69,6 +69,7 @@ export function SpecimenFrame({
             flexShrink: 0,
             padding: "4px 6px",
             background: "var(--acid, #dfff00)",
+            color: "var(--acid-ink, #101010)",
             font: "700 9px var(--font-mono, monospace)",
             textTransform: "uppercase",
           }}

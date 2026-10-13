@@ -61,7 +61,7 @@ export function ViewportFrame({
               padding: "5px 8px",
               border: `1px solid ${selected === item.id ? "var(--ink, #101010)" : "rgba(16,16,16,.2)"}`,
               background: selected === item.id ? "var(--acid, #dfff00)" : "var(--paper, #f4f2ec)",
-              color: "var(--ink, #101010)",
+              color: selected === item.id ? "var(--acid-ink, #101010)" : "var(--ink, #101010)",
               font: "700 9px var(--font-mono, monospace)",
               cursor: "pointer",
             }}

@@ -91,7 +91,7 @@ export function HoldToRun({
         padding: "13px 18px",
         border: "2px solid var(--ink, #101010)",
         background: "var(--paper, #f4f2ec)",
-        color: "var(--ink, #101010)",
+        color: holding || complete ? "var(--acid-ink, #101010)" : "var(--ink, #101010)",
         boxShadow: "4px 4px 0 var(--ink, #101010)",
         font: "700 11px var(--font-mono, monospace)",
         textTransform: "uppercase",

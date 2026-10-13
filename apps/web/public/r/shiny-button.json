@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "shiny-button",
+  "title": "ShinyButton",
+  "description": "Specular reflection button featuring a light sweep shimmer on hover, spring press dynamics, and keyboard activation.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/shiny-button.tsx",
+      "content": "\"use client\";\n\nimport type { ButtonHTMLAttributes, ReactNode } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface ShinyButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {\n  children: ReactNode;\n  shimmerColor?: string;\n  shimmerSize?: string;\n  borderRadius?: string;\n  shimmerDuration?: string;\n}\n\nexport function ShinyButton({\n  children,\n  shimmerColor = \"rgba(255, 255, 255, 0.4)\",\n  shimmerSize = \"0.15em\",\n  borderRadius = \"0px\",\n  shimmerDuration = \"3s\",\n  style,\n  ...props\n}: ShinyButtonProps) {\n  const reduceMotion = useReducedMotion();\n\n  return (\n    <button\n      {...props}\n      style={{\n        position: \"relative\",\n        display: \"inline-flex\",\n        alignItems: \"center\",\n        justifyContent: \"center\",\n        padding: \"12px 24px\",\n        font: \"700 13px var(--font-mono, monospace)\",\n        letterSpacing: \"0.08em\",\n        textTransform: \"uppercase\",\n        color: \"var(--ink, #101010)\",\n        backgroundColor: \"var(--paper, #f4f2ec)\",\n        border: \"2px solid var(--ink, #101010)\",\n        borderRadius,\n        cursor: \"pointer\",\n        overflow: \"hidden\",\n        boxShadow: \"4px 4px 0 var(--ink, #101010)\",\n        transition: \"transform 0.15s ease, box-shadow 0.15s ease\",\n        ...style,\n      }}\n    >\n      <span\n        style={{\n          position: \"relative\",\n          zIndex: 2,\n          display: \"inline-flex\",\n          alignItems: \"center\",\n          gap: \"8px\",\n        }}\n      >\n        {children}\n      </span>\n      {!reduceMotion && (\n        <span\n          aria-hidden=\"true\"\n          style={{\n            position: \"absolute\",\n            inset: 0,\n            transform: \"translateX(-100%)\",\n            background: `linear-gradient(90deg, transparent 0%, ${shimmerColor} 50%, transparent 100%)`,\n            animation: `ml-shimmer ${shimmerDuration} infinite`,\n            pointerEvents: \"none\",\n            zIndex: 1,\n          }}\n        />\n      )}\n      <style>{`\n        @keyframes ml-shimmer {\n          0% {\n            transform: translateX(-100%);\n          }\n          40%, 100% {\n            transform: translateX(100%);\n          }\n        }\n      `}</style>\n    </button>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/shiny-button.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

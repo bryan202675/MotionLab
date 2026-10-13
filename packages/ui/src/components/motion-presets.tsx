@@ -62,7 +62,7 @@ export function MotionPresets({
                 padding: "7px 10px",
                 border: `1px solid ${active ? "var(--ink, #101010)" : "rgba(16,16,16,.18)"}`,
                 background: active ? "var(--acid, #dfff00)" : "transparent",
-                color: "inherit",
+                color: active ? "var(--acid-ink, #101010)" : "inherit",
                 font: "700 10px var(--font-mono, monospace)",
                 textTransform: "uppercase",
                 cursor: "pointer",

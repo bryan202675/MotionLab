@@ -82,6 +82,7 @@ export function PhaseRail({
                     height: 23,
                     border: "1px solid var(--ink, #101010)",
                     background: active || complete ? "var(--acid, #dfff00)" : "transparent",
+                    color: active || complete ? "var(--acid-ink, #101010)" : "inherit",
                     font: "700 10px var(--font-mono, monospace)",
                     transition: reduceMotion ? "none" : "background-color 160ms ease",
                   }}

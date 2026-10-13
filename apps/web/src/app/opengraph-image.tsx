@@ -66,7 +66,7 @@ export default function OpenGraphImage() {
           letterSpacing: 2,
         }}
       >
-        <span>OPEN SOURCE / MIT / VOL. 001</span>
+        <span>OPEN SOURCE / MIT</span>
         <span>BUILT TO EXPERIMENT. READY TO SHIP.</span>
       </div>
     </div>,

@@ -11,6 +11,7 @@ export interface InfiniteMarqueeProps {
   gap?: number;
   pauseOnHover?: boolean;
   className?: string;
+  repeat?: number;
 }
 
 export function InfiniteMarquee({
@@ -20,6 +21,7 @@ export function InfiniteMarquee({
   gap = 48,
   pauseOnHover = true,
   className,
+  repeat = 4,
 }: InfiniteMarqueeProps) {
   const reduceMotion = useReducedMotion();
   const [paused, setPaused] = useState(false);
@@ -30,7 +32,7 @@ export function InfiniteMarquee({
   return (
     <div
       className={className}
-      style={{ overflow: "hidden" }}
+      style={{ overflow: "hidden", maxWidth: "100%" }}
       onMouseEnter={() => pauseOnHover && setPaused(true)}
       onMouseLeave={() => pauseOnHover && setPaused(false)}
       onFocusCapture={(event) => toggleFocus(event, true)}
@@ -45,15 +47,22 @@ export function InfiniteMarquee({
         transition={{ duration, ease: "linear", repeat: Infinity }}
         style={{ display: "flex", width: "max-content", gap, willChange: "transform" }}
       >
-        {[0, 1].map((copy) => (
-          <span
-            key={copy}
-            aria-hidden={copy > 0}
-            inert={copy > 0}
+        {[0, 1].map((half) => (
+          <div
+            key={half}
+            aria-hidden={half > 0}
+            inert={half > 0}
             style={{ display: "flex", gap, flexShrink: 0 }}
           >
-            {children}
-          </span>
+            {Array.from({ length: Math.max(1, repeat) }).map((_, i) => (
+              <span
+                key={i}
+                style={{ display: "inline-flex", gap, alignItems: "center", flexShrink: 0 }}
+              >
+                {children}
+              </span>
+            ))}
+          </div>
         ))}
       </motion.div>
     </div>

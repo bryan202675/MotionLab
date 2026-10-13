@@ -6,6 +6,7 @@ import { useMemo, useState, useSyncExternalStore } from "react";
 import { ArrowUpRight, Grid2X2, List, Search, Star, X } from "lucide-react";
 import { ComponentDemo } from "./component-demo";
 import { categories, componentRegistry } from "@/lib/component-registry";
+import { useLanguage } from "./language-provider";
 
 const FAVORITES_KEY = "motionlab-favorites";
 const FAVORITES_EVENT = "motionlab-favorites-change";
@@ -52,6 +53,7 @@ export function ComponentCatalog() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { t, language } = useLanguage();
   const query = searchParams.get("q") ?? "";
   const category = searchParams.get("category") ?? "all";
   const favoritesSnapshot = useSyncExternalStore(
@@ -103,16 +105,27 @@ export function ComponentCatalog() {
     <section className="catalog-shell page-wrap">
       <div className="catalog-intro">
         <div>
-          <span className="section-kicker">VOL. 001 / THE COMPONENT INDEX</span>
+          <span className="section-kicker">{t.catalog.kicker}</span>
           <h1 className="display">
-            FIND YOUR
-            <br />
-            <span>NEW MOVE.</span>
+            {language === "es" ? (
+              <>
+                ENCUENTRA TU
+                <br />
+                <span>NUEVO MOVIMIENTO.</span>
+              </>
+            ) : (
+              <>
+                FIND YOUR
+                <br />
+                <span>NEW MOVE.</span>
+              </>
+            )}
           </h1>
         </div>
         <p>
-          {componentRegistry.length} original studies, ready to pull apart. Search the source by name, category,
-          description, or tag.
+          {language === "es"
+            ? `${componentRegistry.length} estudios originales listos para implementar. Busca por nombre, categoría, descripción o etiqueta.`
+            : `${componentRegistry.length} original studies, ready to pull apart. Search the source by name, category, description, or tag.`}
         </p>
       </div>
       <div className="catalog-toolbar">
@@ -122,21 +135,21 @@ export function ComponentCatalog() {
           <input
             value={query}
             onChange={(event) => updateFilters({ q: event.target.value })}
-            placeholder="Search the index…"
+            placeholder={t.catalog.searchPlaceholder}
           />
           <kbd>⌘ K</kbd>
         </label>
         <label className="catalog-select-label">
-          <span className="mono">CATEGORY</span>
+          <span className="mono">{t.catalog.categoryLabel.toUpperCase()}</span>
           <select
             aria-label="Filter by category"
             value={category}
             onChange={(event) => updateFilters({ category: event.target.value })}
           >
-            <option value="all">All categories</option>
+            <option value="all">{t.catalog.allCategories}</option>
             {categories.map((item) => (
               <option key={item} value={item}>
-                {item}
+                {t.categories[item] ?? item}
               </option>
             ))}
           </select>
@@ -147,7 +160,7 @@ export function ComponentCatalog() {
           aria-pressed={favoritesOnly}
           onClick={() => setFavoritesOnly((active) => !active)}
         >
-          <Star size={15} fill={favoritesOnly ? "currentColor" : "none"} /> FAVORITES
+          <Star size={15} fill={favoritesOnly ? "currentColor" : "none"} /> {t.catalog.favorites.toUpperCase()}
         </button>
         <div className="view-toggle" aria-label="Catalog layout">
           <button
@@ -169,8 +182,8 @@ export function ComponentCatalog() {
         </div>
       </div>
       <div className="catalog-summary">
-        <span className="mono">{String(results.length).padStart(2, "0")} / {componentRegistry.length} STUDIES</span>
-        <span className="mono">SORTED BY INDEX</span>
+        <span className="mono">{String(results.length).padStart(2, "0")} / {componentRegistry.length} {t.catalog.studiesCount}</span>
+        <span className="mono">{t.catalog.sortedByIndex}</span>
       </div>
       {results.length ? (
         <div className={`component-grid ${layout === "list" ? "is-list" : ""}`}>
@@ -211,13 +224,13 @@ export function ComponentCatalog() {
                 </div>
                 <div className="component-card-info">
                   <div className="component-card-meta">
-                    <span className="mono">{entry.category}</span>
+                    <span className="mono">{t.categories[entry.category] ?? entry.category}</span>
                     <span className="mono">
                       {String(componentRegistry.indexOf(entry) + 1).padStart(2, "0")} / {componentRegistry.length}
                     </span>
                   </div>
                   <h2>{entry.name}</h2>
-                  <p>{entry.description}</p>
+                  <p>{(language === "es" && t.componentDescriptions[entry.slug]) || entry.description}</p>
                   <div className="component-card-bottom">
                     <div className="tag-list">
                       {entry.tags.slice(0, 2).map((tag) => (
@@ -236,8 +249,8 @@ export function ComponentCatalog() {
       ) : (
         <div className="empty-state">
           <div className="empty-mark">∅</div>
-          <h2 className="display">NO SIGNAL.</h2>
-          <p>No components match those filters. Clear one or search a different motion study.</p>
+          <h2 className="display">{t.catalog.emptyTitle.toUpperCase()}</h2>
+          <p>{t.catalog.emptyDesc}</p>
           <button
             className="button button-ink"
             type="button"
@@ -246,7 +259,7 @@ export function ComponentCatalog() {
               setFavoritesOnly(false);
             }}
           >
-            CLEAR FILTERS <X size={14} />
+            {t.catalog.resetFilters.toUpperCase()} <X size={14} />
           </button>
         </div>
       )}

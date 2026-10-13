@@ -45,7 +45,7 @@ export function RunControl({
         padding: "12px 16px",
         border: "2px solid var(--ink, #101010)",
         background: isRunning ? "var(--signal, #ff5638)" : "var(--acid, #dfff00)",
-        color: "var(--ink, #101010)",
+        color: "var(--acid-ink, #101010)",
         boxShadow: "4px 4px 0 var(--ink, #101010)",
         font: "700 12px var(--font-mono, monospace)",
         textTransform: "uppercase",

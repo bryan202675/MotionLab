@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
+import { useLanguage } from "./language-provider";
 
 type CopyStatus = "idle" | "pending" | "success" | "error";
 
@@ -15,6 +16,7 @@ export function CopyButton({
   className?: string;
 }) {
   const [status, setStatus] = useState<CopyStatus>("idle");
+  const { language } = useLanguage();
   const copy = async () => {
     setStatus("pending");
     try {
@@ -36,18 +38,28 @@ export function CopyButton({
       {status === "success" ? <Check size={15} /> : <Copy size={15} />}
       <span>
         {status === "pending"
-          ? "COPYING"
+          ? language === "es"
+            ? "COPIANDO"
+            : "COPYING"
           : status === "success"
-            ? "COPIED"
+            ? language === "es"
+              ? "COPIADO"
+              : "COPIED"
             : status === "error"
-              ? "FAILED"
+              ? language === "es"
+                ? "ERROR"
+                : "FAILED"
               : label.toUpperCase()}
       </span>
       <span className="sr-only" role="status">
         {status === "success"
-          ? "Code copied."
+          ? language === "es"
+            ? "Código copiado."
+            : "Code copied."
           : status === "error"
-            ? "Could not copy. Check clipboard permission."
+            ? language === "es"
+              ? "No se pudo copiar. Verifica los permisos del portapapeles."
+              : "Could not copy. Check clipboard permission."
             : ""}
       </span>
     </button>

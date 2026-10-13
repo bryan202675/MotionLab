@@ -6,6 +6,7 @@ import { ArrowUpRight, Download, Pause, Play, RotateCcw, Share2 } from "lucide-r
 import { categories, componentRegistry, getComponent } from "@/lib/component-registry";
 import { ComponentDemo } from "./component-demo";
 import { CopyButton } from "./copy-button";
+import { useLanguage } from "./language-provider";
 
 interface PlaygroundSettings {
   component: string;
@@ -145,6 +146,7 @@ function buildCode(settings: PlaygroundSettings) {
 }
 
 export function ComponentPlayground() {
+  const { t, language } = useLanguage();
   const settingsSnapshot = useSyncExternalStore(
     subscribePlayground,
     getPlaygroundSnapshot,
@@ -197,7 +199,7 @@ export function ComponentPlayground() {
     window.dispatchEvent(new Event(PLAYGROUND_EVENT));
     try {
       await navigator.clipboard.writeText(url);
-      setMessage("Configuration link copied.");
+      setMessage(t.playground.linkCopied);
     } catch {
       setMessage("Share link is in the address bar. Clipboard permission was unavailable.");
     }
@@ -227,25 +229,32 @@ export function ComponentPlayground() {
   return (
     <div className="playground page-wrap">
       <div className="playground-heading">
-        <span className="section-kicker">BREAK IT. TUNE IT. SHIP IT.</span>
+        <span className="section-kicker">{t.playground.kicker}</span>
         <h1 className="display">
-          THE
-          <br />
-          <span>MOTION LAB.</span>
+          {language === "es" ? (
+            <>
+              EL
+              <br />
+              <span>LABORATORIO.</span>
+            </>
+          ) : (
+            <>
+              THE
+              <br />
+              <span>MOTION LAB.</span>
+            </>
+          )}
         </h1>
-        <p>
-          A controlled sandbox. Change a real prop, watch the real component, take the code with
-          you.
-        </p>
+        <p>{t.playground.desc}</p>
       </div>
       <div className="playground-toolbar">
         <span className="mono">
-          <i className="status-dot" /> LIVE SESSION / LOCAL SAVE
+          <i className="status-dot" /> {language === "es" ? "SESIÓN EN VIVO / GUARDADO LOCAL" : "LIVE SESSION / LOCAL SAVE"}
         </span>
         <div>
           <button type="button" onClick={() => setPaused((value) => !value)} aria-pressed={paused}>
             {paused ? <Play size={14} /> : <Pause size={14} />}
-            {paused ? "RESUME" : "PAUSE"}
+            {paused ? t.playground.resume : t.playground.pause}
           </button>
           <button
             type="button"
@@ -253,27 +262,27 @@ export function ComponentPlayground() {
               updateSettings(defaults);
               setPaused(false);
               setRevision((value) => value + 1);
-              setMessage("Defaults restored.");
+              setMessage(t.playground.defaultsRestored);
             }}
           >
-            <RotateCcw size={14} /> RESET
+            <RotateCcw size={14} /> {t.playground.reset}
           </button>
           <button type="button" onClick={share}>
-            <Share2 size={14} /> SHARE
+            <Share2 size={14} /> {t.playground.share}
           </button>
           <button type="button" onClick={exportJson}>
-            <Download size={14} /> EXPORT JSON
+            <Download size={14} /> {t.playground.exportJson}
           </button>
         </div>
       </div>
       <div className="playground-workspace">
-        <aside className="playground-list">
+        <aside className="playground-list" data-lenis-prevent>
           <div className="panel-label mono">
-            COMPONENTS <span>{String(componentRegistry.length).padStart(2, "0")}</span>
+            {t.playground.components} <span>{String(componentRegistry.length).padStart(2, "0")}</span>
           </div>
           {categories.map((category) => (
             <section key={category}>
-              <h2 className="mono">{category}</h2>
+              <h2 className="mono">{t.categories[category] ?? category}</h2>
               {componentRegistry
                 .filter((item) => item.category === category)
                 .map((item) => (
@@ -296,7 +305,7 @@ export function ComponentPlayground() {
         </aside>
         <section className="playground-main" aria-label="Component preview and generated code">
           <div className="canvas-toolbar">
-            <span className="mono">PREVIEW / {selected.slug.toUpperCase()}</span>
+            <span className="mono">{t.playground.preview} / {selected.slug.toUpperCase()}</span>
             <div>
               {(["wide", "tablet", "mobile"] as const).map((value) => (
                 <button
@@ -310,14 +319,13 @@ export function ComponentPlayground() {
               ))}
             </div>
           </div>
-          <div className="playground-canvas-scroll">
+          <div className="playground-canvas-scroll" data-lenis-prevent>
             <div
               className={`playground-canvas is-${canvas}`}
-              style={{ background: settings.accent }}
               key={`${selected.slug}-${revision}`}
             >
               {paused ? (
-                <p className="mono">PREVIEW PAUSED / RESUME TO CONTINUE</p>
+                <p className="mono">{t.playground.previewPaused}</p>
               ) : (
                 <ComponentDemo
                   slug={selected.slug}
@@ -329,34 +337,35 @@ export function ComponentPlayground() {
               )}
             </div>
           </div>
-          <div className="generated-code">
+          <div className="generated-code" data-lenis-prevent>
             <div className="code-panel-head mono">
-              <span>GENERATED JSX / TSX</span>
-              <CopyButton value={code} label="Copy generated code" className="copy-button" />
+              <span>{t.playground.generatedCode}</span>
+              <CopyButton value={code} label={t.playground.copyCode} className="copy-button" />
             </div>
             <pre>
               <code>{code}</code>
             </pre>
           </div>
         </section>
-        <aside className="property-inspector">
+        <aside className="property-inspector" data-lenis-prevent>
           <div className="panel-label mono">
-            PROPERTY INSPECTOR <span>03</span>
+            {t.playground.inspector} <span>03</span>
           </div>
           <div className="selected-component">
-            <span className="mono">{selected.category}</span>
+            <span className="mono">{t.categories[selected.category] ?? selected.category}</span>
             <h2>{selected.name}</h2>
-            <p>{selected.description}</p>
+            <p>{(language === "es" && t.componentDescriptions[selected.slug]) || selected.description}</p>
             <Link href={`/components/${selected.slug}`}>
-              OPEN API REFERENCE <ArrowUpRight size={13} />
+              {language === "es" ? "VER DOCUMENTACIÓN API" : "OPEN API REFERENCE"} <ArrowUpRight size={13} />
             </Link>
           </div>
           <label className="inspector-control">
             <span>
-              <span className="mono">DEMO COPY</span>
+              <span className="mono">{t.playground.demoCopy}</span>
               <small>{settings.label.length}/44</small>
             </span>
             <input
+              aria-label={t.playground.demoCopy}
               value={settings.label}
               maxLength={44}
               onChange={(event) => setValue("label", event.target.value)}
@@ -381,7 +390,7 @@ export function ComponentPlayground() {
           {(supported("intensity") || supported("strength") || supported("radius")) && (
             <label className="inspector-control">
               <span>
-                <span className="mono">RESPONSE</span>
+                <span className="mono">{t.playground.response}</span>
                 <small>{settings.intensity}</small>
               </span>
               <input
@@ -395,7 +404,7 @@ export function ComponentPlayground() {
             </label>
           )}
           <fieldset className="inspector-control">
-            <legend className="mono">CANVAS / ACCENT</legend>
+            <legend className="mono">{t.playground.componentAccent}</legend>
             <div className="color-swatches">
               {["#dfff00", "#5038ff", "#ff5638", "#f4f2ec"].map((color) => (
                 <button
@@ -410,7 +419,7 @@ export function ComponentPlayground() {
             </div>
           </fieldset>
           <div className="property-list">
-            <span className="mono">EXPOSED PROPS</span>
+            <span className="mono">{t.playground.exposedProps}</span>
             {selected.props.map((prop) => (
               <div key={prop.name}>
                 <code>{prop.name}</code>

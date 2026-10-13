@@ -13,9 +13,15 @@ export interface RevealMenuProps {
   items: RevealMenuItem[];
   label?: string;
   className?: string;
+  onSelect?: (href: string) => void;
 }
 
-export function RevealMenu({ items, label = "Open navigation menu", className }: RevealMenuProps) {
+export function RevealMenu({
+  items,
+  label = "Open navigation menu",
+  className,
+  onSelect,
+}: RevealMenuProps) {
   const [open, setOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -112,8 +118,16 @@ export function RevealMenu({ items, label = "Open navigation menu", className }:
               {items.map((item, index) => (
                 <a
                   key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
+                  href={item.href.startsWith("#") ? item.href : `#${item.href.replace(/^\//, "")}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setOpen(false);
+                    if (onSelect) {
+                      onSelect(item.href);
+                    } else {
+                      window.location.href = item.href;
+                    }
+                  }}
                   style={{
                     fontSize: "clamp(2.8rem, 9vw, 8rem)",
                     fontWeight: 900,

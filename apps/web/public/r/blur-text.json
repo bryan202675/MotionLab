@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "blur-text",
+  "title": "BlurText",
+  "description": "Editorial typography reveal where words or letters transition smoothly from a soft Gaussian blur to crisp focus.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/blur-text.tsx",
+      "content": "\"use client\";\n\nimport { motion } from \"motion/react\";\nimport type { HTMLAttributes } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface BlurTextProps extends HTMLAttributes<HTMLHeadingElement> {\n  text: string;\n  delay?: number;\n  animateBy?: \"words\" | \"letters\";\n  direction?: \"top\" | \"bottom\";\n  className?: string;\n}\n\nexport function BlurText({\n  text,\n  delay = 0.04,\n  animateBy = \"words\",\n  direction = \"top\",\n  className = \"\",\n  style,\n  ...props\n}: BlurTextProps) {\n  const reduceMotion = useReducedMotion();\n  const elements = animateBy === \"words\" ? text.split(\" \") : text.split(\"\");\n\n  const defaultFrom =\n    direction === \"top\"\n      ? { filter: \"blur(12px)\", opacity: 0, y: -20 }\n      : { filter: \"blur(12px)\", opacity: 0, y: 20 };\n\n  const defaultTo = { filter: \"blur(0px)\", opacity: 1, y: 0 };\n\n  return (\n    <span\n      className={className}\n      style={{\n        display: \"inline-flex\",\n        flexWrap: \"wrap\",\n        gap: animateBy === \"words\" ? \"0.3em\" : \"0.02em\",\n        ...style,\n      }}\n      {...props}\n    >\n      {elements.map((el, i) => (\n        <motion.span\n          key={`${el}-${i}`}\n          initial={reduceMotion ? { opacity: 1 } : defaultFrom}\n          animate={defaultTo}\n          transition={{\n            duration: 0.6,\n            delay: i * delay,\n            ease: [0.25, 0.1, 0.25, 1],\n          }}\n          style={{ display: \"inline-block\", willChange: \"transform, filter, opacity\" }}\n        >\n          {el === \" \" ? \"\\u00A0\" : el}\n        </motion.span>\n      ))}\n    </span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/blur-text.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

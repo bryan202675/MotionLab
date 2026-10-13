@@ -3,6 +3,7 @@
 @import "@fontsource-variable/inter";
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "@fontsource/ibm-plex-mono/500.css";
+@import "lenis/dist/lenis.css";
 @import "./site.css";
 
 :root {
@@ -28,6 +29,7 @@
 }
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 body {
   margin: 0;
@@ -35,6 +37,8 @@ body {
   color: var(--ink);
   font-family: var(--font-interface);
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  max-width: 100vw;
 }
 button,
 input,
@@ -84,7 +88,11 @@ select:focus-visible {
   line-height: 0.79;
 }
 .page-wrap {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
   padding-inline: var(--space-page);
+  box-sizing: border-box;
 }
 .rule {
   height: 2px;

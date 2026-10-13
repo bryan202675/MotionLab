@@ -14,7 +14,7 @@ export interface DocPage {
   sections: DocSection[];
 }
 
-export const docsNavigation = [
+export const docsNavigationEn = [
   { slug: "installation", title: "Installation" },
   { slug: "quick-start", title: "Quick start" },
   { slug: "customization", title: "Customization" },
@@ -24,7 +24,19 @@ export const docsNavigation = [
   { slug: "contributing", title: "Contributing" },
 ] as const;
 
-export const docsPages: DocPage[] = [
+export const docsNavigationEs = [
+  { slug: "installation", title: "Instalación" },
+  { slug: "quick-start", title: "Inicio rápido" },
+  { slug: "customization", title: "Personalización" },
+  { slug: "animation", title: "Animación" },
+  { slug: "accessibility", title: "Accesibilidad" },
+  { slug: "performance", title: "Rendimiento" },
+  { slug: "contributing", title: "Contribuir" },
+] as const;
+
+export const docsNavigation = docsNavigationEn;
+
+export const docsPagesEn: DocPage[] = [
   {
     slug: "installation",
     title: "Install the source.",
@@ -247,7 +259,7 @@ export const docsPages: DocPage[] = [
         paragraphs: [
           "Run lint, typecheck, component tests, production build, registry validation, and the relevant Playwright flow. Include a reduced-motion check and mobile screenshots for visual changes.",
         ],
-        code: "pnpm lint\npnpm typecheck\npnpm test\npnpm build\npnpm registry:check\npnpm test:e2e",
+        code: "pnpm lint\npnpm typecheck\npnpm test\npnpm build\npnpm test:e2e",
       },
       {
         id: "license",
@@ -260,6 +272,245 @@ export const docsPages: DocPage[] = [
   },
 ];
 
-export function getDoc(slug: string) {
-  return docsPages.find((page) => page.slug === slug);
+export const docsPagesEs: DocPage[] = [
+  {
+    slug: "installation",
+    title: "Instala el código fuente.",
+    eyebrow: "EMPIEZA AQUÍ / 01",
+    description: "Añade un componente individual de MotionLab a tu proyecto React y hazlo tuyo.",
+    sections: [
+      {
+        id: "requirements",
+        title: "Antes de comenzar",
+        paragraphs: [
+          "Los componentes de MotionLab son archivos fuente en React y TypeScript. Usan Motion para React cuando una animación requiere un motor de cinemática; los patrones basados solo en CSS no tienen dependencias adicionales.",
+        ],
+        bullets: [
+          "React 18.2 o superior",
+          "Un proyecto configurado con TypeScript",
+          "Motion instalado para componentes animados: pnpm add motion",
+        ],
+      },
+      {
+        id: "registry",
+        title: "Instalación desde el registro",
+        paragraphs: [
+          "MotionLab incluye un registro compatible con Shadcn CLI. Ejecuta el sitio localmente o usa su URL pública para instalar un componente individual.",
+        ],
+        code: "pnpm dlx shadcn@latest add http://localhost:3000/r/magnetic-button.json",
+        bullets: [
+          "Inicia MotionLab con pnpm dev antes de ejecutar la instalación local.",
+          "La CLI copia el código fuente en tu directorio de componentes configurado.",
+          "Revisa el archivo generado e instala las dependencias declaradas.",
+          "Configura NEXT_PUBLIC_SITE_URL antes del despliegue para usar la URL pública del registro.",
+        ],
+      },
+      {
+        id: "local",
+        title: "Uso local del código",
+        paragraphs: [
+          "Durante el desarrollo de MotionLab, puedes importar directamente desde el paquete del workspace.",
+        ],
+        code: 'import { MagneticButton } from "@motionlab/ui/magnetic-button";\n\n<MagneticButton>Explorar componentes ↗</MagneticButton>',
+      },
+      {
+        id: "next",
+        title: "Notas para Next.js",
+        paragraphs: [
+          "Los componentes animados son Client Components e incluyen su propia directiva 'use client'. Mantén la sección interactiva dentro de un límite de cliente al pasar manejadores de eventos o estado controlado.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "quick-start",
+    title: "Da el primer paso.",
+    eyebrow: "EMPIEZA AQUÍ / 02",
+    description: "El camino más corto desde un componente instalado hasta una interacción en funcionamiento.",
+    sections: [
+      {
+        id: "install",
+        title: "Instala Motion",
+        paragraphs: ["Los componentes animados importan desde el punto de entrada público motion/react."],
+        code: "pnpm add motion",
+      },
+      {
+        id: "import",
+        title: "Importa un componente",
+        paragraphs: [
+          "La compilación del workspace expone cada componente como un subpath independiente para que tu empaquetador cargue únicamente lo que la pantalla necesita.",
+        ],
+        code: 'import { KineticHeadline } from "@motionlab/ui/kinetic-headline";\n\nexport function Hero() {\n  return <KineticHeadline text="Make it move." />;\n}',
+      },
+      {
+        id: "tune",
+        title: "Ajusta la entrada",
+        paragraphs: [
+          "Usa las propiedades del componente para calibrar el ritmo y la distancia. Respeta el comportamiento predeterminado de movimiento reducido a menos que tu producto requiera una alternativa específica.",
+        ],
+        code: '<KineticHeadline text="Make it move." stagger={0.06} distance={18} />',
+      },
+    ],
+  },
+  {
+    slug: "customization",
+    title: "Hazlo totalmente tuyo.",
+    eyebrow: "EL MANUAL / 03",
+    description: "Cada componente es código fuente que puedes editar, componer y reestilizar libremente.",
+    sections: [
+      {
+        id: "props",
+        title: "Comienza con las propiedades",
+        paragraphs: [
+          "La API del componente expone comportamientos ajustables: distancia, temporización, color, límites y estado controlado. Consulta la tabla de API en la página de cada componente.",
+        ],
+      },
+      {
+        id: "styles",
+        title: "Estiliza la superficie",
+        paragraphs: [
+          "Los componentes aceptan className o style donde corresponde y evitan sistemas de diseño ocultos. Usa los tokens de color y tipografía de tu propio proyecto.",
+        ],
+      },
+      {
+        id: "ownership",
+        title: "Sé dueño del código fuente",
+        paragraphs: [
+          "La instalación por registro deposita archivos TSX editables directamente en tu proyecto. Modifica el marcado o la animación según los requerimientos de tu producto.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "animation",
+    title: "Movimiento con intención.",
+    eyebrow: "EL MANUAL / 04",
+    description: "Elige una animación porque explica, guía o recompensa una interacción, nunca como relleno decorativo.",
+    sections: [
+      {
+        id: "tokens",
+        title: "Tiempos y resortes",
+        paragraphs: [
+          "Usa duraciones cortas para retroalimentación y resortes para asentamiento espacial. Evita bucles decorativos cuando la sección está fuera de pantalla.",
+        ],
+      },
+      {
+        id: "reduced",
+        title: "Movimiento reducido",
+        paragraphs: [
+          "Los componentes animados comprueban la preferencia de movimiento reducido del sistema operativo para eliminar o simplificar el movimiento automáticamente.",
+        ],
+      },
+      {
+        id: "states",
+        title: "Transiciones de estado",
+        paragraphs: [
+          "Vincula la animación a un cambio de estado real: presionado, seleccionado, expandido, copiado o cargado. No animes un control que no realiza ninguna acción.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "accessibility",
+    title: "La accesibilidad es parte del movimiento.",
+    eyebrow: "EL MANUAL / 05",
+    description: "Controles semánticos, foco visible y una alternativa serena son el estándar fundamental de MotionLab.",
+    sections: [
+      {
+        id: "semantic",
+        title: "Usa el elemento correcto",
+        paragraphs: [
+          "Los botones son botones reales, los switches exponen role y checked, las pestañas admiten teclas de flecha y los acordeones exponen expanded y un aria-controls nombrado.",
+        ],
+      },
+      {
+        id: "keyboard",
+        title: "Comportamiento del teclado",
+        paragraphs: [
+          "Navega con Tab y Shift+Tab. SlidingTabs admite flechas, Inicio y Fin. RevealMenu contiene el foco mientras está abierto y se cierra con Escape.",
+        ],
+      },
+      {
+        id: "motion",
+        title: "Movimiento reducido",
+        paragraphs: [
+          "Los componentes verifican la preferencia del sistema operativo. El contenido permanece 100% visible y utilizable cuando se desactiva el movimiento.",
+        ],
+      },
+      {
+        id: "contrast",
+        title: "Contraste y etiquetas",
+        paragraphs: [
+          "Proporciona etiquetas accesibles para switches, pestañas, docks y acciones de solo icono. No dependas únicamente del color de acento para indicar estado.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "performance",
+    title: "Gestiona los fotogramas con rigor.",
+    eyebrow: "EL MANUAL / 06",
+    description:
+      "MotionLab mantiene las operaciones de puntero fuera del estado de React y pausa efectos costosos fuera de pantalla.",
+    sections: [
+      {
+        id: "pointer",
+        title: "Efectos de puntero",
+        paragraphs: [
+          "TiltCard y SpotlightCard actualizan variables CSS o estilos directamente sin provocar re-renders de React en cada movimiento del puntero.",
+        ],
+      },
+      {
+        id: "canvas",
+        title: "Ciclo de vida en Canvas",
+        paragraphs: [
+          "CursorTrail limita el pixel ratio del dispositivo y las partículas activas, observa la visibilidad y desconecta eventos y requestAnimationFrame al desmontarse.",
+        ],
+      },
+      {
+        id: "bundle",
+        title: "Carga solo lo que usas",
+        paragraphs: [
+          "Cada módulo es importable independientemente y la instalación por registro copia solo el componente seleccionado. Las vistas previas del laboratorio se cargan dinámicamente.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "contributing",
+    title: "Contribuye con intención.",
+    eyebrow: "EL MANUAL / 07",
+    description: "Mantén los experimentos originales, pequeños, accesibles y útiles más allá de la galería.",
+    sections: [
+      {
+        id: "changes",
+        title: "Propón un cambio",
+        paragraphs: [
+          "Abre un issue antes de una funcionalidad grande para discutir la interacción, API y accesibilidad. Las correcciones pequeñas pueden comenzar con un pull request.",
+        ],
+      },
+      {
+        id: "quality",
+        title: "Antes de enviar un pull request",
+        paragraphs: [
+          "Ejecuta lint, typecheck, tests unitarios, build de producción y pruebas e2e de Playwright. Incluye verificación de movimiento reducido.",
+        ],
+        code: "pnpm lint\npnpm typecheck\npnpm test\npnpm build\npnpm test:e2e",
+      },
+      {
+        id: "license",
+        title: "Licencia y originalidad",
+        paragraphs: [
+          "Las contribuciones se publican bajo la licencia MIT del proyecto. No portes ni empaquetes código de librerías cuya licencia prohíba la redistribución.",
+        ],
+      },
+    ],
+  },
+];
+
+export const docsPages = docsPagesEn;
+
+export function getDoc(slug: string, lang: "es" | "en" = "en") {
+  const pages = lang === "es" ? docsPagesEs : docsPagesEn;
+  return pages.find((page) => page.slug === slug);
 }

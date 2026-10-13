@@ -7,7 +7,7 @@ export default function ChangelogPage() {
     <article className="docs-layout page-wrap">
       <div className="docs-sidebar">
         <span className="mono">RELEASE NOTES</span>
-        <p>VOL. 001 / PRE-RELEASE</p>
+        <p>PRE-RELEASE</p>
       </div>
       <div className="docs-article">
         <span className="section-kicker">CHANGELOG / 2026</span>

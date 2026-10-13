@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "count-up",
+  "title": "CountUp",
+  "description": "Smooth easing numeric ticker with custom prefixes, suffixes, separator formatting, and view trigger.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/count-up.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, useState } from \"react\";\nimport type { HTMLAttributes } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface CountUpProps extends HTMLAttributes<HTMLSpanElement> {\n  to: number;\n  from?: number;\n  duration?: number;\n  prefix?: string;\n  suffix?: string;\n  decimals?: number;\n}\n\nexport function CountUp({\n  to,\n  from = 0,\n  duration = 1.8,\n  prefix = \"\",\n  suffix = \"\",\n  decimals = 0,\n  style,\n  ...props\n}: CountUpProps) {\n  const [value, setValue] = useState(from);\n  const reduceMotion = useReducedMotion();\n  const ref = useRef<HTMLSpanElement>(null);\n\n  useEffect(() => {\n    if (reduceMotion) {\n      setValue(to);\n      return;\n    }\n\n    let startTime: number | null = null;\n    let frameId: number;\n\n    const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));\n\n    const step = (timestamp: number) => {\n      if (!startTime) startTime = timestamp;\n      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);\n      const easedProgress = easeOutExpo(progress);\n      const current = from + (to - from) * easedProgress;\n\n      setValue(current);\n\n      if (progress < 1) {\n        frameId = requestAnimationFrame(step);\n      } else {\n        setValue(to);\n      }\n    };\n\n    frameId = requestAnimationFrame(step);\n\n    return () => cancelAnimationFrame(frameId);\n  }, [to, from, duration, reduceMotion]);\n\n  return (\n    <span\n      ref={ref}\n      style={{\n        display: \"inline-block\",\n        fontVariantNumeric: \"tabular-nums\",\n        fontFamily: \"var(--font-mono, monospace)\",\n        ...style,\n      }}\n      {...props}\n    >\n      {prefix}\n      {value.toFixed(decimals)}\n      {suffix}\n    </span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/count-up.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "border-glow",
+  "title": "BorderGlow",
+  "description": "Cursor-tracking spotlight glow illuminating container borders with precision radial gradients.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/border-glow.tsx",
+      "content": "\"use client\";\n\nimport { useRef } from \"react\";\nimport type { HTMLAttributes, PointerEvent, ReactNode } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface BorderGlowProps extends HTMLAttributes<HTMLDivElement> {\n  children: ReactNode;\n  glowColor?: string;\n  glowSize?: number;\n  borderRadius?: string;\n}\n\nexport function BorderGlow({\n  children,\n  glowColor = \"#5038ff\",\n  glowSize = 250,\n  borderRadius = \"0px\",\n  style,\n  onPointerMove,\n  onPointerLeave,\n  ...props\n}: BorderGlowProps) {\n  const containerRef = useRef<HTMLDivElement>(null);\n  const glowRef = useRef<HTMLDivElement>(null);\n  const reduceMotion = useReducedMotion();\n\n  const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {\n    onPointerMove?.(e);\n    if (reduceMotion || !containerRef.current || !glowRef.current) return;\n\n    const rect = containerRef.current.getBoundingClientRect();\n    const x = e.clientX - rect.left;\n    const y = e.clientY - rect.top;\n\n    glowRef.current.style.opacity = \"1\";\n    glowRef.current.style.transform = `translate(${x - glowSize / 2}px, ${y - glowSize / 2}px)`;\n  };\n\n  const handlePointerLeave = (e: PointerEvent<HTMLDivElement>) => {\n    onPointerLeave?.(e);\n    if (glowRef.current) {\n      glowRef.current.style.opacity = \"0\";\n    }\n  };\n\n  return (\n    <div\n      {...props}\n      ref={containerRef}\n      onPointerMove={handlePointerMove}\n      onPointerLeave={handlePointerLeave}\n      style={{\n        position: \"relative\",\n        padding: \"2px\",\n        overflow: \"hidden\",\n        borderRadius,\n        backgroundColor: \"var(--ink, #101010)\",\n        ...style,\n      }}\n    >\n      {!reduceMotion && (\n        <div\n          ref={glowRef}\n          aria-hidden=\"true\"\n          style={{\n            position: \"absolute\",\n            top: 0,\n            left: 0,\n            width: `${glowSize}px`,\n            height: `${glowSize}px`,\n            background: `radial-gradient(circle, ${glowColor} 0%, transparent 70%)`,\n            opacity: 0,\n            transition: \"opacity 0.25s ease\",\n            pointerEvents: \"none\",\n            zIndex: 0,\n          }}\n        />\n      )}\n      <div\n        style={{\n          position: \"relative\",\n          zIndex: 1,\n          width: \"100%\",\n          height: \"100%\",\n          backgroundColor: \"var(--paper, #f4f2ec)\",\n          color: \"var(--ink, #101010)\",\n          borderRadius: borderRadius !== \"0px\" ? `calc(${borderRadius} - 2px)` : \"0px\",\n        }}\n      >\n        {children}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/border-glow.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

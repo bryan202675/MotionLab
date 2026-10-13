@@ -580,6 +580,240 @@
         }
       ],
       "type": "registry:component"
+    },
+    {
+      "name": "particles",
+      "title": "Particles",
+      "description": "Interactive canvas particle network with proximity node connections, mouse physics, and custom velocity.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/particles.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/particles.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "aurora",
+      "title": "Aurora",
+      "description": "Fluid Northern Lights ambient gradient glow canvas mesh with harmonic movement.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/aurora.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/aurora.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "hyperspeed",
+      "title": "Hyperspeed",
+      "description": "High-octane sci-fi light speed warp effect with 3D star streak perspective simulation.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/hyperspeed.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/hyperspeed.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "squares",
+      "title": "Squares",
+      "description": "Tactile square grid canvas background that highlights cells and trails cursor hover with decay.",
+      "files": [
+        {
+          "path": "packages/ui/src/components/squares.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/squares.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "waves",
+      "title": "Waves",
+      "description": "Oscillating sine wave lines canvas background with configurable line count, amplitude, and wave tension.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/waves.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/waves.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "shiny-button",
+      "title": "ShinyButton",
+      "description": "Specular reflection button featuring a light sweep shimmer on hover, spring press dynamics, and keyboard activation.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/shiny-button.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/shiny-button.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "star-border",
+      "title": "StarBorder",
+      "description": "High-contrast card or button wrapper bounded by an orbiting conic-gradient star flare.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/star-border.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/star-border.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "click-spark",
+      "title": "ClickSpark",
+      "description": "Wrapper component emitting tactile radial sparks and particles on pointer clicks.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/click-spark.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/click-spark.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "blur-text",
+      "title": "BlurText",
+      "description": "Editorial typography reveal where words or letters transition smoothly from a soft Gaussian blur to crisp focus.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/blur-text.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/blur-text.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "decrypted-text",
+      "title": "DecryptedText",
+      "description": "Cyberpunk cipher decoder typography scrambling through random alphanumeric characters until settling on the target text.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/decrypted-text.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/decrypted-text.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "rotating-text",
+      "title": "RotatingText",
+      "description": "Dynamic rotating typography cycle smoothly tumbling between alternating terms with 3D perspective roll.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/rotating-text.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/rotating-text.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "count-up",
+      "title": "CountUp",
+      "description": "Smooth easing numeric ticker with custom prefixes, suffixes, separator formatting, and view trigger.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/count-up.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/count-up.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "pixel-card",
+      "title": "PixelCard",
+      "description": "Brutalist card container that manifests an interactive animated retro pixel grid canvas on cursor hover.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/pixel-card.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/pixel-card.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "border-glow",
+      "title": "BorderGlow",
+      "description": "Cursor-tracking spotlight glow illuminating container borders with precision radial gradients.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/border-glow.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/border-glow.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "soft-scroll",
+      "title": "SoftScroll",
+      "description": "Luxurious momentum-based smooth inertia scrolling wrapper powered by Lenis with WCAG accessibility support.",
+      "dependencies": [
+        "lenis"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/soft-scroll.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/soft-scroll.tsx"
+        }
+      ],
+      "type": "registry:component"
     }
   ]
 }

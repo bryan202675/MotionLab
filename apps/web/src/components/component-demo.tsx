@@ -19,7 +19,9 @@ const Kinetic = dynamic<DemoProps>(() =>
 const Split = dynamic<DemoProps>(() =>
   import("@motionlab/ui/split-reveal").then(({ SplitReveal }) => ({
     default: ({ label, pace }) => (
-      <SplitReveal text={label.replaceAll(" ", "\n")} stagger={0.12 / pace} />
+      <div style={{ textAlign: "center", font: "800 22px var(--font-display, sans-serif)", color: "var(--ink, #101010)", lineHeight: 1.15 }}>
+        <SplitReveal text={label.replaceAll(" ", "\n")} stagger={0.12 / pace} />
+      </div>
     ),
   })),
 );
@@ -338,6 +340,187 @@ const ScopeDemo = dynamic<DemoProps>(() =>
   })),
 );
 
+const ParticlesDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/particles").then(({ Particles }) => ({
+    default: ({ accent }) => (
+      <div style={{ position: "relative", width: "100%", height: 200, background: "#0c0c0b", overflow: "hidden" }}>
+        <Particles particleColors={[accent, "#9888ff"]} particleCount={35} />
+      </div>
+    ),
+  })),
+);
+
+const AuroraDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/aurora").then(({ Aurora }) => ({
+    default: () => (
+      <div style={{ position: "relative", width: "100%", height: 200, background: "#0c0c0b", overflow: "hidden" }}>
+        <Aurora />
+      </div>
+    ),
+  })),
+);
+
+const HyperspeedDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/hyperspeed").then(({ Hyperspeed }) => ({
+    default: () => (
+      <div style={{ position: "relative", width: "100%", height: 200, background: "#0c0c0b", overflow: "hidden" }}>
+        <Hyperspeed />
+      </div>
+    ),
+  })),
+);
+
+const SquaresDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/squares").then(({ Squares }) => ({
+    default: ({ accent }) => (
+      <div style={{ position: "relative", width: "100%", height: 200, background: "#0c0c0b", overflow: "hidden" }}>
+        <Squares borderColor={accent} />
+      </div>
+    ),
+  })),
+);
+
+const WavesDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/waves").then(({ Waves }) => ({
+    default: ({ accent }) => (
+      <div style={{ position: "relative", width: "100%", height: 200, background: "#0c0c0b", overflow: "hidden" }}>
+        <Waves lineColor={accent} />
+      </div>
+    ),
+  })),
+);
+
+const ShinyBtnDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/shiny-button").then(({ ShinyButton }) => ({
+    default: ({ label }) => <ShinyButton>{label}</ShinyButton>,
+  })),
+);
+
+const StarBorderDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/star-border").then(({ StarBorder }) => ({
+    default: ({ label, accent }) => (
+      <StarBorder color={accent}>
+        <div style={{ padding: "12px 24px", fontWeight: 700 }}>{label}</div>
+      </StarBorder>
+    ),
+  })),
+);
+
+const ClickSparkDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/click-spark").then(({ ClickSpark }) => ({
+    default: ({ label, accent }) => (
+      <ClickSpark sparkColor={accent}>
+        <button
+          type="button"
+          style={{
+            padding: "14px 28px",
+            border: "2px solid #101010",
+            background: accent,
+            color: "#101010",
+            fontWeight: 800,
+            cursor: "pointer",
+          }}
+        >
+          {label} (CLICK ME)
+        </button>
+      </ClickSpark>
+    ),
+  })),
+);
+
+const BlurTextDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/blur-text").then(({ BlurText }) => ({
+    default: ({ label }) => (
+      <div style={{ fontSize: 24, fontWeight: 800, textAlign: "center" }}>
+        <BlurText text={label} />
+      </div>
+    ),
+  })),
+);
+
+const DecryptedTextDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/decrypted-text").then(({ DecryptedText }) => ({
+    default: ({ label }) => (
+      <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "var(--font-mono, monospace)" }}>
+        <DecryptedText text={label} trigger="hover" />
+      </div>
+    ),
+  })),
+);
+
+const RotatingTextDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/rotating-text").then(({ RotatingText }) => ({
+    default: ({ label, accent }) => (
+      <div style={{ fontSize: 24, fontWeight: 800, display: "flex", gap: 8 }}>
+        <span>LAB:</span>
+        <RotatingText words={[label, "EXPERIMENT", "DEPLOY", "REPEAT"]} color={accent} />
+      </div>
+    ),
+  })),
+);
+
+const CountUpDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/count-up").then(({ CountUp }) => ({
+    default: () => (
+      <div style={{ fontSize: 48, fontWeight: 900, fontFamily: "var(--font-mono, monospace)" }}>
+        <CountUp to={9840} prefix="$" suffix="+" duration={2} />
+      </div>
+    ),
+  })),
+);
+
+const PixelCardDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/pixel-card").then(({ PixelCard }) => ({
+    default: ({ label, accent }) => (
+      <PixelCard pixelColor={accent} style={{ padding: 24, border: "2px solid #101010", background: "var(--card-bg, #fff)" }}>
+        <h4 style={{ margin: 0, fontWeight: 800 }}>{label}</h4>
+        <p style={{ margin: "8px 0 0", fontSize: 13, color: "var(--muted, #57564f)" }}>Hover cursor to activate retro pixel field.</p>
+      </PixelCard>
+    ),
+  })),
+);
+
+const BorderGlowDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/border-glow").then(({ BorderGlow }) => ({
+    default: ({ label, accent }) => (
+      <BorderGlow glowColor={accent} style={{ padding: 28, background: "var(--card-bg, #fff)" }}>
+        <h4 style={{ margin: 0, fontWeight: 800 }}>{label}</h4>
+        <p style={{ margin: "8px 0 0", fontSize: 13, color: "var(--muted, #57564f)" }}>Track pointer for dynamic radial edge illumination.</p>
+      </BorderGlow>
+    ),
+  })),
+);
+
+const SoftScrollDemo = dynamic<DemoProps>(() =>
+  import("@motionlab/ui/soft-scroll").then(({ SoftScroll }) => ({
+    default: ({ label, accent }) => (
+      <div style={{ width: "100%", maxWidth: 360, margin: "0 auto", border: "2px solid var(--ink, #101010)", background: "var(--card-bg, #fff)", color: "var(--ink, #101010)" }}>
+        <div style={{ padding: "8px 12px", borderBottom: "2px solid var(--ink, #101010)", background: accent, color: "#101010", font: "700 11px var(--font-mono, monospace)", display: "flex", justifyContent: "space-between" }}>
+          <span>SOFT SCROLL / LENIS</span>
+          <span>SMOOTH INERTIA</span>
+        </div>
+        <SoftScroll root={false} style={{ height: 180, padding: 16 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12, color: "var(--ink, #101010)" }}>
+            <p style={{ margin: 0, fontWeight: 700, color: "var(--ink, #101010)" }}>{label}</p>
+            <p style={{ margin: 0, fontSize: 13, opacity: 0.85 }}>
+              Desplázate aquí para probar el deslizamiento con inercia suave (momentum scroll).
+            </p>
+            <div style={{ padding: 12, border: "1px dashed currentColor", borderRadius: 4 }}>
+              <span style={{ fontSize: 11, fontFamily: "var(--font-mono, monospace)", display: "block" }}>LERP: 0.09 • DURATION: 1.2s</span>
+            </div>
+            <p style={{ margin: 0, fontSize: 13, opacity: 0.85 }}>
+              Amortiguación cinemática fluida a 60/120 FPS sin bloqueos en el hilo principal.
+            </p>
+            <p style={{ margin: 0, fontSize: 12, fontWeight: 700, color: "var(--ink, #101010)" }}>
+              FIN DE CONTENIDO DE PRUEBA
+            </p>
+          </div>
+        </SoftScroll>
+      </div>
+    ),
+  })),
+);
+
 const demos: Record<string, ComponentType<DemoProps>> = {
   "kinetic-headline": Kinetic,
   "split-reveal": Split,
@@ -363,6 +546,22 @@ const demos: Record<string, ComponentType<DemoProps>> = {
   "grid-warp": Grid,
   "cursor-trail": Trail,
   "grain-field": Grain,
+
+  "particles": ParticlesDemo,
+  "aurora": AuroraDemo,
+  "hyperspeed": HyperspeedDemo,
+  "squares": SquaresDemo,
+  "waves": WavesDemo,
+  "shiny-button": ShinyBtnDemo,
+  "star-border": StarBorderDemo,
+  "click-spark": ClickSparkDemo,
+  "blur-text": BlurTextDemo,
+  "decrypted-text": DecryptedTextDemo,
+  "rotating-text": RotatingTextDemo,
+  "count-up": CountUpDemo,
+  "pixel-card": PixelCardDemo,
+  "border-glow": BorderGlowDemo,
+  "soft-scroll": SoftScrollDemo,
 
   "metric-counter": MetricDemo,
   "shortcut-hint": ShortcutDemo,

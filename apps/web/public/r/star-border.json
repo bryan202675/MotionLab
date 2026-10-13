@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "star-border",
+  "title": "StarBorder",
+  "description": "High-contrast card or button wrapper bounded by an orbiting conic-gradient star flare.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/star-border.tsx",
+      "content": "\"use client\";\n\nimport type { HTMLAttributes, ReactNode } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface StarBorderProps extends HTMLAttributes<HTMLDivElement> {\n  children: ReactNode;\n  color?: string;\n  speed?: string;\n  thickness?: number;\n}\n\nexport function StarBorder({\n  children,\n  color = \"#5038ff\",\n  speed = \"5s\",\n  thickness = 2,\n  style,\n  ...props\n}: StarBorderProps) {\n  const reduceMotion = useReducedMotion();\n\n  return (\n    <div\n      {...props}\n      style={{\n        position: \"relative\",\n        display: \"inline-block\",\n        padding: `${thickness}px`,\n        overflow: \"hidden\",\n        border: \"1px solid rgba(128, 128, 128, 0.2)\",\n        background: \"transparent\",\n        ...style,\n      }}\n    >\n      {!reduceMotion && (\n        <div\n          aria-hidden=\"true\"\n          style={{\n            position: \"absolute\",\n            width: \"300%\",\n            height: \"300%\",\n            top: \"-100%\",\n            left: \"-100%\",\n            background: `conic-gradient(from 0deg, transparent 0 340deg, ${color} 360deg)`,\n            animation: `ml-star-spin ${speed} linear infinite`,\n            pointerEvents: \"none\",\n            zIndex: 0,\n          }}\n        />\n      )}\n      <div\n        style={{\n          position: \"relative\",\n          zIndex: 1,\n          background: \"var(--paper, #f4f2ec)\",\n          color: \"var(--ink, #101010)\",\n          height: \"100%\",\n          width: \"100%\",\n        }}\n      >\n        {children}\n      </div>\n      <style>{`\n        @keyframes ml-star-spin {\n          from {\n            transform: rotate(0deg);\n          }\n          to {\n            transform: rotate(360deg);\n          }\n        }\n      `}</style>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/star-border.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

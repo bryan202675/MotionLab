@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "waves",
+  "title": "Waves",
+  "description": "Oscillating sine wave lines canvas background with configurable line count, amplitude, and wave tension.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/waves.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef } from \"react\";\nimport type { HTMLAttributes } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface WavesProps extends HTMLAttributes<HTMLCanvasElement> {\n  lineColor?: string;\n  waveCount?: number;\n  waveSpeed?: number;\n  amplitude?: number;\n}\n\nexport function Waves({\n  lineColor = \"rgba(80, 56, 255, 0.3)\",\n  waveCount = 5,\n  waveSpeed = 0.02,\n  amplitude = 25,\n  style,\n  ...props\n}: WavesProps) {\n  const canvasRef = useRef<HTMLCanvasElement>(null);\n  const reduceMotion = useReducedMotion();\n\n  useEffect(() => {\n    const canvas = canvasRef.current;\n    if (!canvas) return;\n    const ctx = canvas.getContext(\"2d\");\n    if (!ctx) return;\n\n    let width = (canvas.width = canvas.parentElement?.clientWidth || window.innerWidth);\n    let height = (canvas.height = canvas.parentElement?.clientHeight || window.innerHeight);\n\n    let step = 0;\n    let animationId: number;\n\n    const resize = () => {\n      if (!canvas.parentElement) return;\n      width = canvas.width = canvas.parentElement.clientWidth;\n      height = canvas.height = canvas.parentElement.clientHeight;\n    };\n    window.addEventListener(\"resize\", resize);\n\n    const draw = () => {\n      ctx.clearRect(0, 0, width, height);\n\n      if (!reduceMotion) step += waveSpeed;\n\n      for (let i = 0; i < waveCount; i++) {\n        ctx.beginPath();\n        ctx.lineWidth = 1.5;\n        ctx.strokeStyle = lineColor;\n\n        const baseHeight = height / 2 + (i - waveCount / 2) * 20;\n\n        for (let x = 0; x < width; x += 4) {\n          const y =\n            baseHeight +\n            Math.sin(x * 0.008 + step + i * 0.5) * amplitude +\n            Math.sin(x * 0.015 + step * 1.5) * (amplitude * 0.3);\n\n          if (x === 0) ctx.moveTo(x, y);\n          else ctx.lineTo(x, y);\n        }\n\n        ctx.stroke();\n      }\n\n      animationId = requestAnimationFrame(draw);\n    };\n\n    draw();\n\n    return () => {\n      cancelAnimationFrame(animationId);\n      window.removeEventListener(\"resize\", resize);\n    };\n  }, [lineColor, waveCount, waveSpeed, amplitude, reduceMotion]);\n\n  return (\n    <canvas\n      ref={canvasRef}\n      style={{\n        width: \"100%\",\n        height: \"100%\",\n        display: \"block\",\n        pointerEvents: \"none\",\n        ...style,\n      }}\n      {...props}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/waves.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

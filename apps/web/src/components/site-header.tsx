@@ -1,24 +1,28 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Command, Moon, Search, Sun } from "lucide-react";
+import { ArrowUpRight, Command, Languages, Moon, Search, Sun } from "lucide-react";
 import { RevealMenu } from "@motionlab/ui/reveal-menu";
 import { componentRegistry } from "@/lib/component-registry";
 import { basePath, repositoryUrl } from "@/lib/site-config";
 import { useTheme } from "./theme-provider";
-
-const links = [
-  { label: "Components", href: "/components" },
-  { label: "Playground", href: "/playground" },
-  { label: "Docs", href: "/docs" },
-  { label: "Showcase", href: "/showcase" },
-];
+import { useLanguage } from "./language-provider";
 
 export function SiteHeader() {
+  const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const { theme, setTheme } = useTheme();
+  const { language, toggleLanguage, t } = useLanguage();
+
+  const links = [
+    { label: t.nav.components, href: "/components" },
+    { label: t.nav.playground, href: "/playground" },
+    { label: t.nav.docs, href: "/docs" },
+    { label: t.nav.showcase, href: "/showcase" },
+  ];
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -32,7 +36,7 @@ export function SiteHeader() {
   }, []);
 
   const themeLabel =
-    theme === "system" ? "System theme" : theme === "dark" ? "Dark theme" : "Light theme";
+    theme === "system" ? t.nav.themeSystem : theme === "dark" ? t.nav.themeDark : t.nav.themeLight;
   const cycleTheme = () =>
     setTheme(theme === "system" ? "dark" : theme === "dark" ? "light" : "system");
   const pages = [
@@ -53,65 +57,84 @@ export function SiteHeader() {
         )
         .slice(0, 6)
     : [];
-  const mobileLinks = basePath
-    ? links.map((link) => ({ ...link, href: `${basePath}${link.href}` }))
-    : links;
 
   return (
     <>
       <header className="site-header">
-        <Link href="/" className="brand-lockup" aria-label="MotionLab home">
-          <span className="brand-name">
-            MOTIONLAB<span className="brand-reg">®</span>
-          </span>
-          <span className="brand-version mono">VOL. 001</span>
-        </Link>
-        <nav aria-label="Main navigation" className="desktop-nav">
-          {links.map((link) => (
-            <Link href={link.href} key={link.href}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="header-actions">
-          <button
-            className="icon-action theme-action"
-            aria-label={`Change theme. Current: ${themeLabel}`}
-            onClick={cycleTheme}
-            type="button"
-          >
-            {theme === "dark" ? <Moon size={16} /> : <Sun size={16} />}
-            <span className="theme-indicator mono">
-              {theme === "system" ? "AUTO" : theme.toUpperCase()}
+        <div className="site-header-inner">
+          <Link href="/" className="brand-lockup" aria-label="MotionLab home">
+            <span className="brand-name">
+              MOTIONLAB<span className="brand-reg">®</span>
             </span>
-          </button>
-          <button
-            className="search-trigger"
-            type="button"
-            onClick={() => setSearchOpen(true)}
-            aria-label="Search MotionLab"
-          >
-            <Search size={16} />
-            <span>Search</span>
-            <kbd>
-              <Command size={11} /> K
-            </kbd>
-          </button>
-          {repositoryUrl ? (
-            <a className="github-link" href={repositoryUrl} target="_blank" rel="noreferrer">
-              GitHub <ArrowUpRight size={14} />
-            </a>
-          ) : (
-            <span className="github-link is-unpublished">LOCAL SOURCE</span>
-          )}
-          <div className="mobile-menu">
-            <RevealMenu items={mobileLinks} />
+          </Link>
+          <nav aria-label="Main navigation" className="desktop-nav">
+            {links.map((link) => (
+              <a
+                href={`#${link.href.replace(/^\//, "")}`}
+                key={link.href}
+                onClick={(event) => {
+                  event.preventDefault();
+                  router.push(link.href);
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <div className="header-actions">
+            <button
+              className="icon-action lang-action"
+              aria-label={t.nav.changeLanguage}
+              onClick={toggleLanguage}
+              type="button"
+            >
+              <Languages size={15} />
+              <span className="lang-indicator mono">{language.toUpperCase()}</span>
+            </button>
+            <button
+              className="icon-action theme-action"
+              aria-label={`Change theme. Current: ${themeLabel}`}
+              onClick={cycleTheme}
+              type="button"
+            >
+              {theme === "dark" ? <Moon size={16} /> : <Sun size={16} />}
+              <span className="theme-indicator mono">
+                {theme === "system" ? "AUTO" : theme.toUpperCase()}
+              </span>
+            </button>
+            <button
+              className="search-trigger"
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search MotionLab"
+            >
+              <Search size={16} />
+              <span>{t.nav.search}</span>
+              <kbd>
+                <Command size={11} /> K
+              </kbd>
+            </button>
+            {repositoryUrl ? (
+              <a className="github-link" href={repositoryUrl} target="_blank" rel="noreferrer">
+                GitHub <ArrowUpRight size={14} />
+              </a>
+            ) : null}
+            <div className="mobile-menu">
+              <RevealMenu items={links} onSelect={(href) => router.push(href)} />
+            </div>
           </div>
         </div>
       </header>
-      <Link href="/components" className="header-cta">
-        EXPLORE COMPONENTS <ArrowUpRight size={15} />
-      </Link>
+      <a
+        href="#components"
+        className="header-cta"
+        onClick={(event) => {
+          event.preventDefault();
+          router.push("/components");
+        }}
+      >
+        {t.hero.exploreBtn} <ArrowUpRight size={15} />
+      </a>
       <dialog
         className="command-dialog"
         onClose={() => setSearchOpen(false)}

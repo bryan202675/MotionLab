@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/components/language-provider";
+import { SoftScrollProvider } from "@/components/soft-scroll-provider";
 import { siteUrl } from "@/lib/site-config";
 import "./globals.css";
 
@@ -23,6 +25,13 @@ export const metadata: Metadata = {
     title: "MotionLab — Make it move.",
     images: [`${siteUrl}/opengraph-image`],
   },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/apple-icon.png",
+  },
 };
 
 const themeScript = `try{const t=localStorage.getItem('motionlab-theme')||'system';const d=t==='system'?matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light':t;document.documentElement.dataset.theme=d}catch{document.documentElement.dataset.theme='light'}`;
@@ -34,11 +43,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <ThemeProvider>
-          <SiteHeader />
-          <main>{children}</main>
-          <SiteFooter />
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <SoftScrollProvider>
+              <SiteHeader />
+              <main>{children}</main>
+              <SiteFooter />
+            </SoftScrollProvider>
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "click-spark",
+  "title": "ClickSpark",
+  "description": "Wrapper component emitting tactile radial sparks and particles on pointer clicks.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/click-spark.tsx",
+      "content": "\"use client\";\n\nimport { useRef } from \"react\";\nimport type { HTMLAttributes, MouseEvent, ReactNode } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface ClickSparkProps extends HTMLAttributes<HTMLDivElement> {\n  children: ReactNode;\n  sparkColor?: string;\n  sparkSize?: number;\n  sparkCount?: number;\n  duration?: number;\n}\n\nexport function ClickSpark({\n  children,\n  sparkColor = \"#dfff00\",\n  sparkSize = 10,\n  sparkCount = 8,\n  duration = 450,\n  style,\n  onClick,\n  ...props\n}: ClickSparkProps) {\n  const containerRef = useRef<HTMLDivElement>(null);\n  const reduceMotion = useReducedMotion();\n\n  const handleClick = (e: MouseEvent<HTMLDivElement>) => {\n    onClick?.(e);\n    if (reduceMotion || !containerRef.current) return;\n\n    const rect = containerRef.current.getBoundingClientRect();\n    const x = e.clientX - rect.left;\n    const y = e.clientY - rect.top;\n\n    for (let i = 0; i < sparkCount; i++) {\n      const spark = document.createElement(\"span\");\n      const angle = (i * 2 * Math.PI) / sparkCount;\n      const distance = 25 + Math.random() * 20;\n      const tx = Math.cos(angle) * distance;\n      const ty = Math.sin(angle) * distance;\n\n      spark.style.position = \"absolute\";\n      spark.style.left = `${x}px`;\n      spark.style.top = `${y}px`;\n      spark.style.width = `${sparkSize}px`;\n      spark.style.height = \"2px\";\n      spark.style.backgroundColor = sparkColor;\n      spark.style.borderRadius = \"1px\";\n      spark.style.pointerEvents = \"none\";\n      spark.style.zIndex = \"999\";\n      spark.style.transformOrigin = \"left center\";\n      spark.style.transform = `rotate(${angle}rad) scaleX(0)`;\n      spark.style.transition = `transform ${duration}ms cubic-bezier(0.1, 1, 0.1, 1), opacity ${duration}ms ease-out`;\n\n      containerRef.current.appendChild(spark);\n\n      requestAnimationFrame(() => {\n        spark.style.transform = `translate(${tx}px, ${ty}px) rotate(${angle}rad) scaleX(1)`;\n        spark.style.opacity = \"0\";\n      });\n\n      setTimeout(() => {\n        spark.remove();\n      }, duration);\n    }\n  };\n\n  return (\n    <div\n      {...props}\n      ref={containerRef}\n      onClick={handleClick}\n      style={{\n        position: \"relative\",\n        display: \"inline-block\",\n        cursor: \"pointer\",\n        ...style,\n      }}\n    >\n      {children}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/click-spark.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

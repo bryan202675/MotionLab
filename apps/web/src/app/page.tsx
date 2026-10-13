@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import { InfiniteMarquee } from "@motionlab/ui/infinite-marquee";
@@ -5,6 +7,7 @@ import { componentRegistry } from "@/lib/component-registry";
 import { ComponentDemo } from "@/components/component-demo";
 import { CopyButton } from "@/components/copy-button";
 import { registryItemUrl } from "@/lib/site-config";
+import { useLanguage } from "@/components/language-provider";
 
 const featured = [
   "kinetic-headline",
@@ -17,31 +20,30 @@ const featured = [
 const installCommand = `pnpm dlx shadcn@latest add ${registryItemUrl("magnetic-button")}`;
 
 export default function HomePage() {
+  const { t } = useLanguage();
+
   return (
     <>
       <section className="hero page-wrap">
         <div className="hero-meta mono">
-          <span>REACT MOTION COMPONENT LIBRARY</span>
-          <span>VOL. 001 — BUILT TO MOVE</span>
+          <span>{t.hero.metaCategory}</span>
+          <span>{t.hero.metaTag}</span>
         </div>
         <div className="hero-layout">
           <div className="hero-title-wrap">
-            <span className="hero-side mono">GOOD INTERFACES MOVE</span>
+            <span className="hero-side mono">{t.hero.sideText}</span>
             <h1 className="hero-title display">
-              <span className="title-line">MAKE</span>
-              <span className="title-line title-it">
-                IT<span className="acid-cut">IT</span>
-              </span>
+              <span className="title-line">{t.hero.make}</span>
+              <span className="title-line title-it">{t.hero.it}</span>
               <span className="title-line title-move">
-                MOVE<span className="hero-period">.</span>
+                {t.hero.move}
+                <span className="hero-period">{t.hero.period}</span>
               </span>
             </h1>
             <div className="hero-stamp mono">
               <span>01</span>
               <span>
-                EXPERIMENT
-                <br />
-                WITH INTENT
+                {t.hero.stampTitle}
               </span>
               <span>↘</span>
             </div>
@@ -50,22 +52,19 @@ export default function HomePage() {
             <div className="hero-asterisk" aria-hidden="true">
               ✳
             </div>
-            <p>
-              A collection of unapologetically animated React components. Built to experiment. Ready
-              to ship.
-            </p>
+            <p>{t.hero.description}</p>
             <div className="hero-actions">
               <Link className="button button-acid hard-shadow" href="/components">
-                EXPLORE COMPONENTS <ArrowUpRight size={15} />
+                {t.hero.exploreBtn} <ArrowUpRight size={15} />
               </Link>
               <Link className="text-link" href="/docs/installation">
-                READ THE MANUAL <ArrowRight size={14} />
+                {t.hero.manualBtn} <ArrowRight size={14} />
               </Link>
             </div>
             <div className="hero-live">
               <div className="hero-live-top mono">
-                <span>LIVE STUDY / 014</span>
-                <span>HOVER TO ALTER</span>
+                <span>{t.hero.liveStudy} / 014</span>
+                <span>{t.hero.hoverAlter}</span>
               </div>
               <div className="hero-live-stage">
                 <ComponentDemo
@@ -84,19 +83,23 @@ export default function HomePage() {
           </div>
         </div>
         <a className="scroll-note mono" href="#index">
-          <span>SCROLL TO EXPLORE</span>
+          <span>{t.hero.scrollToExplore}</span>
           <ArrowDown size={13} />
         </a>
       </section>
 
       <div
         className="manifesto-ticker"
-        aria-label="No boring UI. Built for interaction. Copy, customize, ship. Open source motion."
+        aria-label={t.ticker.join(". ")}
       >
-        <InfiniteMarquee duration={25} pauseOnHover className="ticker-track">
-          <span>
-            NO BORING UI <b>✳</b> BUILT FOR INTERACTION <b>✳</b> COPY. CUSTOMIZE. SHIP. <b>✳</b>{" "}
-            OPEN SOURCE MOTION <b>✳</b>
+        <InfiniteMarquee duration={35} pauseOnHover className="ticker-track" repeat={4} gap={0}>
+          <span className="ticker-segment">
+            {t.ticker.map((item, idx) => (
+              <span key={idx} className="ticker-chunk">
+                <span>{item}</span>
+                <b aria-hidden="true">✳</b>
+              </span>
+            ))}
           </span>
         </InfiniteMarquee>
       </div>
@@ -104,13 +107,12 @@ export default function HomePage() {
       <section id="index" className="featured-section page-wrap">
         <div className="section-heading">
           <div>
-            <span className="section-kicker">THE COMPONENT INDEX</span>
+            <span className="section-kicker">{t.catalog.kicker}</span>
             <h2 className="display">
-              PICK A<br />
-              <span>FEELING.</span>
+              {t.featured.title}
             </h2>
           </div>
-          <p>Twenty-four original motion studies. One source of truth. Every preview is alive.</p>
+          <p>{t.featured.desc}</p>
           <Link
             href="/components"
             className="round-link"
@@ -152,7 +154,7 @@ export default function HomePage() {
                 </Link>
                 <div className="featured-card-info">
                   <div>
-                    <span className="mono">{entry.category}</span>
+                    <span className="mono">{t.categories[entry.category] ?? entry.category}</span>
                     <h3>{entry.name}</h3>
                   </div>
                   <Link href={`/components/${entry.slug}`} aria-label={`View ${entry.name}`}>
@@ -167,42 +169,22 @@ export default function HomePage() {
 
       <section className="manifesto-section page-wrap">
         <div className="manifesto-label mono">
-          <span>OUR MANIFESTO</span>
+          <span>{t.manifesto.kicker}</span>
           <span>02 / 04</span>
         </div>
         <h2 className="manifesto-title display">
-          STATIC
-          <br />
-          IS NOT
-          <br />
-          <span>ENOUGH.</span>
+          {t.manifesto.title}
         </h2>
         <div className="manifesto-bottom">
-          <p>
-            Motion is a material. Use it to direct attention, explain state, and make an interface
-            feel considered.
-          </p>
+          <p>{t.manifesto.desc}</p>
           <div className="principles-grid">
-            <div>
-              <b>01</b>
-              <strong>Expression</strong>
-              <span>Motion with a point of view.</span>
-            </div>
-            <div>
-              <b>02</b>
-              <strong>Performance</strong>
-              <span>Only work that earns its frames.</span>
-            </div>
-            <div>
-              <b>03</b>
-              <strong>Access</strong>
-              <span>Reduced motion is a first-class state.</span>
-            </div>
-            <div>
-              <b>04</b>
-              <strong>Reuse</strong>
-              <span>Source you can own and change.</span>
-            </div>
+            {t.manifesto.principles.map((item) => (
+              <div key={item.num}>
+                <b>{item.num}</b>
+                <strong>{item.title}</strong>
+                <span>{item.desc}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -247,16 +229,11 @@ export default function HomePage() {
 
       <section className="install-section page-wrap">
         <div className="install-copy">
-          <span className="section-kicker">COPY. CUSTOMIZE. SHIP.</span>
+          <span className="section-kicker">{t.install.kicker}</span>
           <h2 className="display">
-            YOUR CODE.
-            <br />
-            <span>YOUR RULES.</span>
+            {t.install.title}
           </h2>
-          <p>
-            Install individual components as source from this registry. Run MotionLab locally to use
-            the command below, or set NEXT_PUBLIC_SITE_URL to its public address before building.
-          </p>
+          <p>{t.install.desc}</p>
           <Link className="text-link" href="/docs/installation">
             HOW INSTALLATION WORKS <ArrowRight size={14} />
           </Link>
@@ -267,11 +244,13 @@ export default function HomePage() {
             <span>SHADCN REGISTRY</span>
           </div>
           <div className="install-code">
-            <span className="code-prompt">$</span>
-            <code>{installCommand}</code>
+            <div className="install-command-wrap">
+              <span className="code-prompt">$</span>
+              <code>{installCommand}</code>
+            </div>
             <CopyButton
               value={installCommand}
-              label="Copy install command"
+              label={t.install.copyCommand}
               className="copy-button"
             />
           </div>
@@ -286,14 +265,10 @@ export default function HomePage() {
       <section className="closing-cta page-wrap">
         <span className="mono">{componentRegistry.length} STUDIES / OPEN SOURCE / MIT</span>
         <p className="display">
-          GO BUILD
-          <br />
-          SOMETHING
-          <br />
-          <span>THAT MOVES.</span>
+          {t.closing.title}
         </p>
         <Link href="/playground" className="button button-ink">
-          BREAK IT. TUNE IT. SHIP IT. <ArrowUpRight size={15} />
+          {t.closing.playgroundBtn} <ArrowUpRight size={15} />
         </Link>
       </section>
     </>

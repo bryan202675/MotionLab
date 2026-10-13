@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pixel-card",
+  "title": "PixelCard",
+  "description": "Brutalist card container that manifests an interactive animated retro pixel grid canvas on cursor hover.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/pixel-card.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, useState } from \"react\";\nimport type { HTMLAttributes, ReactNode } from \"react\";\nimport { useReducedMotion } from \"motion/react\";\n\nexport interface PixelCardProps extends HTMLAttributes<HTMLDivElement> {\n  children: ReactNode;\n  pixelSize?: number;\n  gap?: number;\n  pixelColor?: string;\n  speed?: number;\n}\n\nexport function PixelCard({\n  children,\n  pixelSize = 6,\n  gap = 2,\n  pixelColor = \"#dfff00\",\n  speed = 40,\n  style,\n  onMouseEnter,\n  onMouseLeave,\n  ...props\n}: PixelCardProps) {\n  const containerRef = useRef<HTMLDivElement>(null);\n  const canvasRef = useRef<HTMLCanvasElement>(null);\n  const [isHovered, setIsHovered] = useState(false);\n  const reduceMotion = useReducedMotion();\n\n  useEffect(() => {\n    const canvas = canvasRef.current;\n    if (!canvas || !containerRef.current) return;\n    const ctx = canvas.getContext(\"2d\");\n    if (!ctx) return;\n\n    let width = (canvas.width = containerRef.current.clientWidth);\n    let height = (canvas.height = containerRef.current.clientHeight);\n\n    let intervalId: NodeJS.Timeout | null = null;\n\n    const drawPixels = () => {\n      ctx.clearRect(0, 0, width, height);\n      if (!isHovered || reduceMotion) return;\n\n      const cols = Math.floor(width / (pixelSize + gap));\n      const rows = Math.floor(height / (pixelSize + gap));\n\n      ctx.fillStyle = pixelColor;\n\n      for (let c = 0; c < cols; c++) {\n        for (let r = 0; r < rows; r++) {\n          if (Math.random() < 0.08) {\n            ctx.globalAlpha = Math.random() * 0.7 + 0.2;\n            ctx.fillRect(\n              c * (pixelSize + gap),\n              r * (pixelSize + gap),\n              pixelSize,\n              pixelSize,\n            );\n          }\n        }\n      }\n    };\n\n    if (isHovered && !reduceMotion) {\n      intervalId = setInterval(drawPixels, speed);\n    } else {\n      ctx.clearRect(0, 0, width, height);\n    }\n\n    return () => {\n      if (intervalId) clearInterval(intervalId);\n    };\n  }, [isHovered, pixelSize, gap, pixelColor, speed, reduceMotion]);\n\n  return (\n    <div\n      {...props}\n      ref={containerRef}\n      onMouseEnter={(e) => {\n        setIsHovered(true);\n        onMouseEnter?.(e);\n      }}\n      onMouseLeave={(e) => {\n        setIsHovered(false);\n        onMouseLeave?.(e);\n      }}\n      style={{\n        position: \"relative\",\n        overflow: \"hidden\",\n        border: \"2px solid var(--ink, #101010)\",\n        backgroundColor: \"var(--paper, #f4f2ec)\",\n        ...style,\n      }}\n    >\n      <canvas\n        ref={canvasRef}\n        aria-hidden=\"true\"\n        style={{\n          position: \"absolute\",\n          inset: 0,\n          pointerEvents: \"none\",\n          zIndex: 0,\n        }}\n      />\n      <div style={{ position: \"relative\", zIndex: 1 }}>{children}</div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/ui/pixel-card.tsx"
+    }
+  ],
+  "type": "registry:component"
+}
