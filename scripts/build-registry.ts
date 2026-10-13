@@ -7,7 +7,6 @@ const root = resolve(import.meta.dirname, "..");
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
-const sourcePath = (slug: string) => `packages/ui/src/components/${slug}.tsx`;
 const items = componentRegistry.map((component) => ({
   name: component.slug,
   type: "registry:component" as const,
@@ -15,12 +14,13 @@ const items = componentRegistry.map((component) => ({
   description: component.description,
   ...(component.dependencies.length ? { dependencies: component.dependencies } : {}),
   files: [
-    {
-      path: sourcePath(component.slug),
-      type: "registry:component" as const,
-      target: `@components/ui/${component.slug}.tsx`,
-    },
-  ],
+    `packages/ui/src/components/${component.slug}.tsx`,
+    ...(component.sourceFiles ?? []),
+  ].map((path) => ({
+    path,
+    type: "registry:component" as const,
+    target: `@components/ui/${path.replace("packages/ui/src/components/", "")}`,
+  })),
 }));
 const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",

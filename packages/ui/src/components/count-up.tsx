@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import type { HTMLAttributes } from "react";
 import { useReducedMotion } from "motion/react";
 
@@ -25,13 +25,10 @@ export function CountUp({
 }: CountUpProps) {
   const [value, setValue] = useState(from);
   const reduceMotion = useReducedMotion();
-  const ref = useRef<HTMLSpanElement>(null);
+  const displayValue = reduceMotion ? to : value;
 
   useEffect(() => {
-    if (reduceMotion) {
-      setValue(to);
-      return;
-    }
+    if (reduceMotion) return;
 
     let startTime: number | null = null;
     let frameId: number;
@@ -60,7 +57,6 @@ export function CountUp({
 
   return (
     <span
-      ref={ref}
       style={{
         display: "inline-block",
         fontVariantNumeric: "tabular-nums",
@@ -70,7 +66,7 @@ export function CountUp({
       {...props}
     >
       {prefix}
-      {value.toFixed(decimals)}
+      {displayValue.toFixed(decimals)}
       {suffix}
     </span>
   );

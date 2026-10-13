@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import type { HTMLAttributes } from "react";
 import { useReducedMotion } from "motion/react";
 
@@ -23,11 +23,10 @@ export function DecryptedText({
   ...props
 }: DecryptedTextProps) {
   const [displayText, setDisplayText] = useState(text);
-  const isDecryptedRef = useRef(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const reduceMotion = useReducedMotion();
 
-  const startDecryption = () => {
+  const startDecryption = useCallback(() => {
     if (reduceMotion) {
       setDisplayText(text);
       return;
@@ -54,19 +53,18 @@ export function DecryptedText({
       if (iteration > maxIterations) {
         if (intervalRef.current) clearInterval(intervalRef.current);
         setDisplayText(text);
-        isDecryptedRef.current = true;
       }
     }, speed);
-  };
+  }, [characters, maxIterations, reduceMotion, speed, text]);
 
   useEffect(() => {
-    if (trigger === "mount") {
-      startDecryption();
-    }
+    if (trigger !== "mount" || reduceMotion) return;
+    const timeoutId = window.setTimeout(startDecryption, 0);
     return () => {
+      window.clearTimeout(timeoutId);
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [text, trigger]);
+  }, [reduceMotion, startDecryption, trigger]);
 
   return (
     <span

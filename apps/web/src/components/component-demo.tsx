@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import type { ComponentType } from "react";
+import { getComponent } from "@/lib/component-registry";
+import { StudyPreview } from "./study-preview";
 
 export interface DemoProps {
   label: string;
@@ -588,6 +590,10 @@ export const defaultDemoProps: DemoProps = {
 
 export function ComponentDemo({ slug, ...overrides }: Partial<DemoProps> & { slug: string }) {
   const Demo = demos[slug];
-  if (!Demo) return <p role="status">Preview unavailable for this component.</p>;
+  if (!Demo) {
+    const study = getComponent(slug)?.study;
+    if (study) return <StudyPreview study={study} {...defaultDemoProps} {...overrides} />;
+    return <p role="status">Preview unavailable for this component.</p>;
+  }
   return <Demo {...defaultDemoProps} {...overrides} />;
 }

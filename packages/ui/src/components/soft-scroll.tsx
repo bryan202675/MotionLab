@@ -148,22 +148,20 @@ export const SoftScroll = forwardRef<SoftScrollRef, SoftScrollProps>(function So
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
+  const activeLenisInstance = enabled ? lenisInstance : null;
 
   useImperativeHandle(
     ref,
     () => ({
       wrapper: wrapperRef.current,
       content: contentRef.current,
-      lenis: lenisInstance,
+      lenis: activeLenisInstance,
     }),
-    [lenisInstance],
+    [activeLenisInstance],
   );
 
   useEffect(() => {
-    if (typeof window === "undefined" || !enabled) {
-      setLenisInstance(null);
-      return;
-    }
+    if (typeof window === "undefined" || !enabled) return;
 
     const prefersReducedMotion =
       typeof window.matchMedia === "function"
@@ -213,7 +211,6 @@ export const SoftScroll = forwardRef<SoftScrollRef, SoftScrollProps>(function So
     return () => {
       lenis.off("scroll", handleScroll);
       lenis.destroy();
-      setLenisInstance(null);
     };
   }, [
     root,
@@ -232,11 +229,11 @@ export const SoftScroll = forwardRef<SoftScrollRef, SoftScrollProps>(function So
   ]);
 
   const scrollTo: SoftScrollContextValue["scrollTo"] = (target, options) => {
-    lenisInstance?.scrollTo(target, options);
+    activeLenisInstance?.scrollTo(target, options);
   };
 
   const contextValue: SoftScrollContextValue = {
-    lenis: lenisInstance,
+    lenis: activeLenisInstance,
     scrollTo,
   };
 

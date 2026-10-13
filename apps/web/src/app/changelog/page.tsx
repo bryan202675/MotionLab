@@ -18,6 +18,15 @@ export default function ChangelogPage() {
         </h1>
         <p className="docs-lede">A factual record of the work shipped to this repository.</p>
         <section className="docs-section">
+          <span>0.3.0 / ORIGINAL STUDY INDEX</span>
+          <h2>Two hundred ways to move.</h2>
+          <ul>
+            <li>Added 100 original text, control, card, navigation, and background studies; the catalog and source registry now contain 202 components.</li>
+            <li>Expanded reusable study engines with reduced-motion behavior, accessible input semantics, and downloadable source dependencies.</li>
+            <li>Kept the new implementations original rather than redistributing third-party component code.</li>
+          </ul>
+        </section>
+        <section className="docs-section">
           <span>0.2.0 / MOTION STUDY TOOLKIT</span>
           <h2>More ways to shape a system.</h2>
           <ul>

@@ -34,8 +34,8 @@ export function PixelCard({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let width = (canvas.width = containerRef.current.clientWidth);
-    let height = (canvas.height = containerRef.current.clientHeight);
+    const width = (canvas.width = containerRef.current.clientWidth);
+    const height = (canvas.height = containerRef.current.clientHeight);
 
     let intervalId: NodeJS.Timeout | null = null;
 

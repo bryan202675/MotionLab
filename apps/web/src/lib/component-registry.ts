@@ -1,3 +1,5 @@
+import { originalStudies } from "./original-studies";
+
 export const categories = [
   "Text motion",
   "Interactive elements",
@@ -17,7 +19,16 @@ export interface ComponentEntry {
   dependencies: string[];
   props: { name: string; type: string; defaultValue: string; description: string }[];
   example: string;
+  sourceFiles?: string[];
+  study?: { family: string; variant: string };
 }
+
+const studyProps = [
+  { name: "label", type: "string", defaultValue: '"Motion in progress"', description: "Short content shown in the study." },
+  { name: "accent", type: "string", defaultValue: '"var(--electric)"', description: "Color used for the animated signal." },
+  { name: "intensity", type: "number", defaultValue: "12", description: "Bounded strength for spatial movement or contrast." },
+  { name: "pace", type: "number", defaultValue: "1", description: "Playback multiplier. Reduced motion disables looping movement." },
+];
 
 export const componentRegistry: ComponentEntry[] = [
   {
@@ -1068,6 +1079,21 @@ export const componentRegistry: ComponentEntry[] = [
     ],
     example: '<SoftScroll root lerp={0.1} duration={1.2}>{children}</SoftScroll>',
   },
+  ...originalStudies.map((study) => ({
+    slug: study.slug,
+    name: study.name,
+    category: study.category,
+    description: study.description,
+    tags: study.tags,
+    dependencies: ["motion"],
+    props: studyProps,
+    example: `<${study.name} label="Make it move." />`,
+    sourceFiles: [
+      `packages/ui/src/components/studies/${study.family}-study.tsx`,
+      ...(study.family === "field" ? ["packages/ui/src/components/studies/field-study-additions.tsx"] : []),
+    ],
+    study: { family: study.family, variant: study.variant },
+  })),
 ];
 
 export function getComponent(slug: string): ComponentEntry | undefined {

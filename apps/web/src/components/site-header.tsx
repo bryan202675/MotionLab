@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight, Command, Languages, Moon, Search, Sun } from "lucide-react";
 import { RevealMenu } from "@motionlab/ui/reveal-menu";
 import { componentRegistry } from "@/lib/component-registry";
-import { basePath, repositoryUrl } from "@/lib/site-config";
+import { repositoryUrl } from "@/lib/site-config";
 import { useTheme } from "./theme-provider";
 import { useLanguage } from "./language-provider";
 

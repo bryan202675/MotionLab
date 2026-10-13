@@ -63,7 +63,7 @@ export function ShinyButton({
             position: "absolute",
             inset: 0,
             transform: "translateX(-100%)",
-            background: `linear-gradient(90deg, transparent 0%, ${shimmerColor} 50%, transparent 100%)`,
+            background: `linear-gradient(90deg, transparent 0%, transparent calc(50% - ${shimmerSize}), ${shimmerColor} 50%, transparent calc(50% + ${shimmerSize}), transparent 100%)`,
             animation: `ml-shimmer ${shimmerDuration} infinite`,
             pointerEvents: "none",
             zIndex: 1,
